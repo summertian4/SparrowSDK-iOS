@@ -37,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3F7DD44192989CCDB6C766AF /* SparrowSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; name = SparrowSDK.podspec; path = ../SparrowSDK.podspec; sourceTree = "<group>"; };
+		3F7DD44192989CCDB6C766AF /* SparrowSDK.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = SparrowSDK.podspec; path = ../SparrowSDK.podspec; sourceTree = "<group>"; };
 		4FB9097A52B7412FAD407EDB /* Pods_SparrowSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SparrowSDK_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58A195388D20070C39A /* SparrowSDK_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SparrowSDK_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -61,9 +61,9 @@
 		60E810995AC0BAFEEBBA0861 /* Pods-SparrowSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SparrowSDK_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SparrowSDK_Example/Pods-SparrowSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		71719F9E1E33DC2100824A3D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		873B8AEA1B1F5CCA007FD442 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Main.storyboard; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		92CBB658357ED7117059383E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		92CBB658357ED7117059383E /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		9974A62DBC892D56CF505640 /* Pods_SparrowSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SparrowSDK_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C627700249D4D729565A5B77 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
+		C627700249D4D729565A5B77 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		D2A689D6AF1604790A0E0436 /* Pods-SparrowSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SparrowSDK_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SparrowSDK_Tests/Pods-SparrowSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		E8EC0EAFD8E37B552A4AC2E3 /* Pods-SparrowSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SparrowSDK_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-SparrowSDK_Example/Pods-SparrowSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
 		F1F8E3D7DA1C70854BCF4D2A /* Pods-SparrowSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SparrowSDK_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SparrowSDK_Tests/Pods-SparrowSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -388,11 +388,11 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SparrowSDK_Tests/Pods-SparrowSDK_Tests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/FBSnapshotTestCase/FBSnapshotTestCase.framework",
+				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSnapshotTestCase.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -539,6 +539,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SparrowSDK/SparrowSDK-Prefix.pch";
 				INFOPLIST_FILE = "SparrowSDK/SparrowSDK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -554,6 +555,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SparrowSDK/SparrowSDK-Prefix.pch";
 				INFOPLIST_FILE = "SparrowSDK/SparrowSDK-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MODULE_NAME = ExampleApp;
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";

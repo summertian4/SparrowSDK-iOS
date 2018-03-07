@@ -7,12 +7,14 @@
 //
 
 #import "SPRAppDelegate.h"
+#import "SPRFloatBallWindowManager.h"
 
 @implementation SPRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [SPRFloatBallWindowManager showWindow];
     return YES;
 }
 
