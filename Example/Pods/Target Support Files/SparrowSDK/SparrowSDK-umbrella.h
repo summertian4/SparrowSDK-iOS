@@ -13,8 +13,13 @@
 #import "SPRFloatBall.h"
 #import "SPRFloatBallWindow.h"
 #import "SPRFloatBallWindowManager.h"
+#import "SPRProject.h"
+#import "SPRProjectsData.h"
 #import "SPRLoginViewController.h"
 #import "SPRManagerViewController.h"
+#import "SPRProjectCell.h"
+#import "SPRProjectDetailViewController.h"
+#import "SPRHTTPSessionManager.h"
 #import "SPRURLProtocol.h"
 #import "SPRURLSessionConfiguration.h"
 

@@ -6,10 +6,12 @@
 //
 
 #import "SPRFloatBall.h"
+#import "SPRManagerViewController.h"
 
 @interface SPRFloatBall ()
 
 @property (nonatomic, strong) UIWindow *window;
+@property (nonatomic, assign) BOOL showedManagerVC;
 @end
 
 @implementation SPRFloatBall
@@ -23,8 +25,30 @@
         self.layer.borderColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1].CGColor;
         self.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1];
         self.alpha = 0.2;
+
+        UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
+        singleTapGesture.numberOfTapsRequired = 1;
+        singleTapGesture.numberOfTouchesRequired  = 1;
+        [self addGestureRecognizer:singleTapGesture];
     }
     return self;
+}
+
+-(void)handleSingleTap:(UIGestureRecognizer *)sender {
+    if (self.showedManagerVC == NO) {
+        UIViewController *vc = [[SPRManagerViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        [[UIApplication sharedApplication].keyWindow.rootViewController
+         presentViewController:nav
+         animated:YES
+         completion:nil];
+    } else {
+#pragma mark - TODO
+        [[UIApplication sharedApplication].keyWindow.rootViewController
+         dismissViewControllerAnimated:YES
+         completion:nil];
+    }
+    self.showedManagerVC = !self.showedManagerVC;
 }
 
 + (instancetype)sharedInstance {

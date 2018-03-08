@@ -6,7 +6,5 @@ target 'SparrowSDK_Example' do
   target 'SparrowSDK_Tests' do
     inherit! :search_paths
 
-    pod 'AFNetworking', '~> 3.2.0'
-
   end
 end
