@@ -5,7 +5,7 @@
 //  Created by 周凌宇 on 2018/3/8.
 //
 
-#import "SPRManagerViewController.h"
+#import "SPRProjectListViewController.h"
 #import "SPRLoginViewController.h"
 #import <Masonry/Masonry.h>
 #import "SPRProjectCell.h"
@@ -14,12 +14,12 @@
 #import "SPRHTTPSessionManager.h"
 #import "SPRProjectsData.h"
 
-@interface SPRManagerViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface SPRProjectListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) SPRProjectsData *projectsData;
 @end
 
-@implementation SPRManagerViewController
+@implementation SPRProjectListViewController
 
 #pragma mark - Life Cycle
 
@@ -43,11 +43,13 @@
     __weak __typeof(self)weakSelf = self;
 
     [manager GET:@"/frontend/project/list"
-      parameters:@{@"current_page": @(1), @"limit": @(10)}
+      parameters:@{@"current_page": @(self.projectsData.currentPage + 1), @"limit": @(self.projectsData.limit)}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
-                 strongSelf.projectsData = [[SPRProjectsData alloc] initWithDict:responseObject[@"projects_data"]];
+                 SPRProjectsData *newPorjectsData = [[SPRProjectsData alloc] initWithDict:responseObject[@"projects_data"]];
+                 [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
+                 strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
                  [strongSelf.tableView reloadData];
              }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -66,8 +68,8 @@
     if (cell == nil) {
         cell = [[SPRProjectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SPRProjectCell"];
         cell.backgroundColor = self.view.backgroundColor;
-        cell.model = self.projectsData.projects[indexPath.row];
     }
+    cell.model = self.projectsData.projects[indexPath.row];
     return cell;
 }
 
@@ -75,17 +77,53 @@
     [self.navigationController pushViewController:[SPRProjectDetailViewController new] animated:YES];
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    UIView *footer = [[UIView alloc] init];
+    UIButton *button = [[UIButton alloc] init];
+    button.titleLabel.font = [UIFont systemFontOfSize:13];
+    button.backgroundColor = [UIColor colorWithRed:90/256.0 green:206/256.0 blue:179/256.0 alpha:1];
+    [button setTitle:@"加载更多" forState:UIControlStateNormal];
+    [button setTitle:@"已加载全部" forState:UIControlStateDisabled];
+    [footer addSubview:button];
+    [button mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(footer);
+        make.centerY.equalTo(footer);
+        make.height.equalTo(@(30));
+        make.width.equalTo(@(100));
+    }];
+    [button addTarget:self action:@selector(loadProjects) forControlEvents:UIControlEventTouchUpInside];
+
+    BOOL result = (self.projectsData.currentPage - 1) * self.projectsData.limit < self.projectsData.total;
+    button.enabled = result;
+    return footer;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 45;
+}
+
 #pragma mark - Getter Setter
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] init];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.backgroundColor = self.view.backgroundColor;
         _tableView.rowHeight = 100;
         _tableView.delegate = self;
         _tableView.dataSource = self;
     }
     return _tableView;
+}
+
+- (SPRProjectsData *)projectsData {
+    if (_projectsData == nil) {
+        _projectsData = [[SPRProjectsData alloc] init];
+        _projectsData.currentPage = 0;
+        _projectsData.limit = 10;
+        _projectsData.total = 10;
+        _projectsData.projects = [NSMutableArray array];
+    }
+    return _projectsData;
 }
 
 @end

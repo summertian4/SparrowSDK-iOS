@@ -6,7 +6,7 @@
 //
 
 #import "SPRFloatBall.h"
-#import "SPRManagerViewController.h"
+#import "SPRProjectListViewController.h"
 
 @interface SPRFloatBall ()
 
@@ -36,7 +36,7 @@
 
 -(void)handleSingleTap:(UIGestureRecognizer *)sender {
     if (self.showedManagerVC == NO) {
-        UIViewController *vc = [[SPRManagerViewController alloc] init];
+        UIViewController *vc = [[SPRProjectListViewController alloc] init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [[UIApplication sharedApplication].keyWindow.rootViewController
          presentViewController:nav

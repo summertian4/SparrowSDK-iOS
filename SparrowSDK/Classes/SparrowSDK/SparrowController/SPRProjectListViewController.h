@@ -7,6 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPRManagerViewController : UIViewController
+@interface SPRProjectListViewController : UIViewController
 
 @end

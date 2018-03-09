@@ -12,9 +12,9 @@
 - (instancetype)initWithDict:(NSDictionary *)dict {
     if (self = [super init]) {
         _name = dict[@"name"];
-        _status = (int)dict[@"status"];
+        _status = [dict[@"status"] intValue];
         _note = dict[@"note"];
-        _project_id = (long)dict[@"project_id"];
+        _project_id = [dict[@"project_id"] longValue];
         _updateTime = dict[@"updateTime"];
         _createTime = dict[@"createTime"];
     }

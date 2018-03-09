@@ -13,7 +13,7 @@
     static SPRHTTPSessionManager *manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[SPRHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://120.77.149.50"]];
+        manager = [[SPRHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:@"http://localhost:8000"]];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
     });
     return manager;

@@ -13,9 +13,9 @@
 - (instancetype)initWithDict:(NSDictionary *)dict {
     if (self = [super init]) {
         // convert
-        _currentPage = (int)dict[@"current_page"];
-        _total = (int)dict[@"total"];
-        _limit = (int)dict[@"limit"];
+        _currentPage = [dict[@"current_page"] intValue];
+        _total = [dict[@"total"] intValue];
+        _limit = [dict[@"limit"] intValue];
         NSArray<NSDictionary *> *array = dict[@"projects"];
         _projects = [self projectsWithDictArray:array];
     }
