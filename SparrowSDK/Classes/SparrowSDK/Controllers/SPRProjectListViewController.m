@@ -13,6 +13,7 @@
 #import "SPRProject.h"
 #import "SPRHTTPSessionManager.h"
 #import "SPRProjectsData.h"
+#import "SPRApi.h"
 
 @interface SPRProjectListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -39,7 +40,7 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    [self loadProjects];
+    [self fetchProjects];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -54,7 +55,7 @@
     } else {
         text = @"选择";
         // 拉取 API
-
+        [self fetchApis];
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:text
                                                                               style:UIBarButtonItemStyleDone target:self
@@ -62,7 +63,7 @@
     [self.tableView reloadData];
 }
 
-- (void)loadProjects {
+- (void)fetchProjects {
     SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
@@ -79,6 +80,27 @@
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
+}
+
+- (void)fetchApis {
+    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
+    __weak __typeof(self)weakSelf = self;
+
+    NSMutableArray *projectIds = [NSMutableArray array];
+    for (SPRProject *project in self.seletedProjects) {
+        [projectIds addObject:@(project.project_id)];
+    }
+    [manager GET:@"/frontend/api/fetch"
+      parameters:@{@"project_id": projectIds}
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             __strong __typeof(weakSelf)strongSelf = weakSelf;
+             if (strongSelf) {
+                 NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                 NSLog(@"%@", apis);
+             }
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"%@", error);
+         }];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
