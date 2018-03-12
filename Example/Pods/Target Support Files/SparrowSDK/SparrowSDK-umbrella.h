@@ -18,6 +18,7 @@
 #import "SPRFloatBall.h"
 #import "SPRFloatBallWindow.h"
 #import "SPRFloatBallWindowManager.h"
+#import "SPRCacheManager.h"
 #import "SPRApi.h"
 #import "SPRProject.h"
 #import "SPRProjectsData.h"

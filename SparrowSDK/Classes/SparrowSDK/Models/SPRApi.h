@@ -13,7 +13,7 @@ typedef enum : NSUInteger {
     UseOther = 2
 } SPRApiStatus;
 
-@interface SPRApi : NSObject
+@interface SPRApi : NSObject <NSCoding>
 
 @property (nonatomic, assign) long api_id;
 @property (nonatomic, copy) NSString *path;

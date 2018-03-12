@@ -42,4 +42,24 @@
     return array;
 }
 
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    [coder encodeObject:@(self.api_id) forKey:@"api_id"];
+    [coder encodeObject:self.path forKey:@"path"];
+    [coder encodeObject:self.method forKey:@"method"];
+    [coder encodeObject:self.name forKey:@"name"];
+    [coder encodeObject:self.note forKey:@"note"];
+    [coder encodeObject:@(self.status) forKey:@"status"];
+}
+
+- (id)initWithCoder:(NSCoder *)coder {
+    self.api_id = [[coder decodeObjectForKey:@"api_id"] longValue];
+    self.path = [coder decodeObjectForKey:@"path"];
+    self.method = [coder decodeObjectForKey:@"method"];
+    self.name = [coder decodeObjectForKey:@"name"];
+    self.note = [coder decodeObjectForKey:@"note"];
+    self.status = [[coder decodeObjectForKey:@"status"] intValue];
+    return self;
+}
+
 @end
