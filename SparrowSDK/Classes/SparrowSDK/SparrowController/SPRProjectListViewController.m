@@ -17,6 +17,9 @@
 @interface SPRProjectListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) SPRProjectsData *projectsData;
+@property (nonatomic, assign) BOOL isSelecting;
+
+@property (nonatomic, strong) NSMutableSet *seletedProjects;
 @end
 
 @implementation SPRProjectListViewController
@@ -26,7 +29,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = @"选择项目";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选择"
+                                                                              style:UIBarButtonItemStyleDone target:self
+                                                                             action:@selector(startSelect)];
+
     [self.view addSubview:[self tableView]];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
@@ -36,6 +44,22 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+- (void)startSelect {
+    self.isSelecting = !self.isSelecting;
+    NSString *text = @"";
+    if (self.isSelecting) {
+        text = @"完成";
+    } else {
+        text = @"选择";
+        // 拉取 API
+
+    }
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:text
+                                                                              style:UIBarButtonItemStyleDone target:self
+                                                                             action:@selector(startSelect)];
+    [self.tableView reloadData];
 }
 
 - (void)loadProjects {
@@ -59,6 +83,17 @@
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.isSelecting == NO) {
+        return;
+    }
+    SPRProject *project = self.projectsData.projects[indexPath.row];
+    project.isSelected = YES;
+    [self.seletedProjects addObject:project];
+
+    [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.projectsData.projects.count;
 }
@@ -70,11 +105,8 @@
         cell.backgroundColor = self.view.backgroundColor;
     }
     cell.model = self.projectsData.projects[indexPath.row];
+    cell.isSelecting = self.isSelecting;
     return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self.navigationController pushViewController:[SPRProjectDetailViewController new] animated:YES];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
@@ -111,6 +143,7 @@
         _tableView.rowHeight = 100;
         _tableView.delegate = self;
         _tableView.dataSource = self;
+        _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     }
     return _tableView;
 }
@@ -126,4 +159,10 @@
     return _projectsData;
 }
 
+- (NSMutableSet *)seletedProjects {
+    if (_seletedProjects == nil) {
+        _seletedProjects = [NSMutableSet set];
+    }
+    return _seletedProjects;
+}
 @end

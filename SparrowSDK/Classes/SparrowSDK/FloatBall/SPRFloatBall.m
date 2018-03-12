@@ -38,6 +38,7 @@
     if (self.showedManagerVC == NO) {
         UIViewController *vc = [[SPRProjectListViewController alloc] init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+        nav.navigationBar.tintColor = [UIColor colorWithRed:90/256.0 green:206/256.0 blue:179/256.0 alpha:1];
         [[UIApplication sharedApplication].keyWindow.rootViewController
          presentViewController:nav
          animated:YES

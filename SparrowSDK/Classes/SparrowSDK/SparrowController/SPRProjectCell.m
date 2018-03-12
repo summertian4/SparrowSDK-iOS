@@ -8,12 +8,15 @@
 #import "SPRProjectCell.h"
 #import <Masonry/Masonry.h>
 #import "SPRProject.h"
+#import "SPRCommonData.h"
+#import "SPRCheckBox.h"
 
 @implementation SPRProjectCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self checkBox];
         [self blockView];
     }
     return self;
@@ -23,6 +26,23 @@
     _model = model;
     self.titleLabel.text = model.name;
     self.descriptionLabel.text = model.note;
+    self.checkBox.checked = model.isSelected;
+}
+
+- (void)setIsSelecting:(BOOL)isSelecting {
+    if (isSelecting) {
+        [self.checkBox mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.contentView).offset(10);
+            make.width.height.equalTo(@(20));
+            make.centerY.equalTo(self.contentView);
+        }];
+    } else {
+        [self.checkBox mas_remakeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView.mas_left);
+            make.width.height.equalTo(@(25));
+            make.centerY.equalTo(self.contentView);
+        }];
+    }
 }
 
 - (UIView *)blockView {
@@ -48,12 +68,12 @@
             make.left.equalTo(self.titleLabel);
         }];
 
-        [self addSubview:_blockView];
+        [self.contentView addSubview:_blockView];
         [_blockView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.left.equalTo(self).offset(10);
-            make.top.equalTo(self).offset(5);
-            make.right.equalTo(self).offset(-10);
-            make.bottom.equalTo(self).offset(-5);
+            make.left.equalTo(self.checkBox.mas_right).offset(10);
+            make.top.equalTo(self.contentView).offset(5);
+            make.right.equalTo(self.contentView).offset(-10);
+            make.bottom.equalTo(self.contentView).offset(-5);
         }];
     }
     return _blockView;
@@ -77,6 +97,20 @@
         _descriptionLabel.text = @"描述";
     }
     return _descriptionLabel;
+}
+
+- (SPRCheckBox *)checkBox {
+    if (_checkBox == nil) {
+        _checkBox = [[SPRCheckBox alloc] init];
+        _checkBox.cornerRadius = 10;
+        [self.contentView addSubview:_checkBox];
+        [_checkBox mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.contentView.mas_left);
+            make.width.height.equalTo(@(20));
+            make.centerY.equalTo(self.contentView);
+        }];
+    }
+    return _checkBox;
 }
 
 @end

@@ -15,5 +15,7 @@
 @property (nonatomic, copy) NSString *updateTime;
 @property (nonatomic, copy) NSString *createTime;
 
+@property (nonatomic, assign) BOOL isSelected;
+
 - (instancetype)initWithDict:(NSDictionary *)dict;
 @end
