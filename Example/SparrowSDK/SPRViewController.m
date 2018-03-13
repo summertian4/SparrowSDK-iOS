@@ -28,7 +28,9 @@
       parameters:nil
         progress:nil
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             [weakSelf showAlert:[responseObject description]];
+             NSData *unicodedStringData = [[responseObject description] dataUsingEncoding:NSUTF8StringEncoding];
+             NSString *stringValue =  [[NSString alloc] initWithData:unicodedStringData encoding:NSNonLossyASCIIStringEncoding];
+             [weakSelf showAlert:stringValue];
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              [weakSelf showAlert:error.domain];
          }];
@@ -42,7 +44,9 @@
       parameters:nil
         progress:nil
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             [weakSelf showAlert:[responseObject description]];
+             NSData *unicodedStringData = [[responseObject description] dataUsingEncoding:NSUTF8StringEncoding];
+             NSString *stringValue =  [[NSString alloc] initWithData:unicodedStringData encoding:NSNonLossyASCIIStringEncoding];
+             [weakSelf showAlert:stringValue];
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              [weakSelf showAlert:error.domain];
          }];
@@ -54,7 +58,9 @@
     __weak __typeof(self)weakSelf = self;
     [manager PUT:@"https://www.baidu.com/s"
       parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-          [weakSelf showAlert:[responseObject description]];
+          NSData *unicodedStringData = [[responseObject description] dataUsingEncoding:NSUTF8StringEncoding];
+          NSString *stringValue =  [[NSString alloc] initWithData:unicodedStringData encoding:NSNonLossyASCIIStringEncoding];
+          [weakSelf showAlert:stringValue];
       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
           [weakSelf showAlert:error.domain];
       }];
