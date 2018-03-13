@@ -9,6 +9,8 @@
 
 #define SPRThemeColor ([UIColor colorWithRed:90/256.0 green:206/256.0 blue:179/256.0 alpha:1])
 
+extern NSString * const SparrowHost;
+
 @interface SPRCommonData : NSObject
 
 @end

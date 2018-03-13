@@ -21,6 +21,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *note;
 @property (nonatomic, assign) SPRApiStatus status;
+@property (nonatomic, assign) long project_id;
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 + (NSMutableArray *)apisWithDictArray:(NSArray *)dictArr;
