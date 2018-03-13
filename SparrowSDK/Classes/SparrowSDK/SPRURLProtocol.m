@@ -162,8 +162,22 @@ static NSString *const SPRHTTP = @"SPRHTTP";
 -(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
     NSLog(@"Sparrow: request：%@", request);
 
-    if ([request.URL.absoluteString containsString:@"www.baidu.com"]) {
-        request = [[NSURLRequest alloc] initWithURL:[NSURL URLWithString:@"https://www.mocky.io/v2/5185415ba171ea3a00704eed"]];
+    if ([request.URL.absoluteString hasSuffix:@"/ithil_j/activity/book_annual2017/widget/0"]) {
+        NSMutableURLRequest *mutableRequest = request.mutableCopy;
+        mutableRequest.URL = [NSURL URLWithString:@"http://localhost:8000/mock/15/ithil_j/activity/book_annual2017/widget/0"];
+        request = [mutableRequest copy];
+    }
+
+    if ([request.URL.absoluteString hasSuffix:@"/s"]) {
+        NSMutableURLRequest *mutableRequest = request.mutableCopy;
+        mutableRequest.URL = [NSURL URLWithString:@"http://localhost:8000/mock/15/s"];
+        request = [mutableRequest copy];
+    }
+
+    if ([request.URL.absoluteString hasSuffix:@"/api/v4/home/sidebar"]) {
+        NSMutableURLRequest *mutableRequest = request.mutableCopy;
+        mutableRequest.URL = [NSURL URLWithString:@"http://localhost:8000/mock/15/api/v4/home/sidebar"];
+        request = [mutableRequest copy];
     }
 
     if (response != nil) {

@@ -14,6 +14,7 @@
 #import "SPRHTTPSessionManager.h"
 #import "SPRProjectsData.h"
 #import "SPRApi.h"
+#import "SPRCacheManager.h"
 
 @interface SPRProjectListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -96,7 +97,9 @@
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
                  NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
-                 NSLog(@"%@", apis);
+                 if (apis.count != 0) {
+                     [SPRCacheManager cacheApis:apis];
+                 }
              }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"%@", error);
