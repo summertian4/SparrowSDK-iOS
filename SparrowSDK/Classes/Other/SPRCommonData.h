@@ -6,8 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UIColor+SPRAddtion.h"
 
-#define SPRThemeColor ([UIColor colorWithRed:90/256.0 green:206/256.0 blue:179/256.0 alpha:1])
+#define SPRThemeColor ([UIColor colorWithHexString:@"04D1B2"])
 
 extern NSString * const SparrowHost;
 

@@ -19,13 +19,13 @@
         _project_id = [dict[@"project_id"] longValue];
         switch ([dict[@"status"] intValue]) {
             case 0:
-                _status = Disabled;
+                _status = SPRApiStatusDisabled;
                 break;
             case 1:
-                _status = Mock;
+                _status = SPRApiStatusMock;
                 break;
             case 2:
-                _status = UseOther;
+                _status = SPRApiStatusUseOther;
                 break;
             default:
                 break;

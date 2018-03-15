@@ -6,7 +6,6 @@
 //
 
 #import "SPRProjectListViewController.h"
-#import "SPRLoginViewController.h"
 #import <Masonry/Masonry.h>
 #import "SPRProjectCell.h"
 #import "SPRProjectDetailViewController.h"
