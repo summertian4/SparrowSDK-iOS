@@ -16,6 +16,7 @@
         _method = dict[@"method"];
         _name = dict[@"name"];
         _note = dict[@"note"];
+        _project_id = [dict[@"project_id"] longValue];
         switch ([dict[@"status"] intValue]) {
             case 0:
                 _status = Disabled;
@@ -50,6 +51,7 @@
     [coder encodeObject:self.name forKey:@"name"];
     [coder encodeObject:self.note forKey:@"note"];
     [coder encodeObject:@(self.status) forKey:@"status"];
+    [coder encodeObject:@(self.project_id) forKey:@"project_id"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -59,6 +61,7 @@
     self.name = [coder decodeObjectForKey:@"name"];
     self.note = [coder decodeObjectForKey:@"note"];
     self.status = [[coder decodeObjectForKey:@"status"] intValue];
+    self.project_id = [[coder decodeObjectForKey:@"project_id"] longValue];
     return self;
 }
 

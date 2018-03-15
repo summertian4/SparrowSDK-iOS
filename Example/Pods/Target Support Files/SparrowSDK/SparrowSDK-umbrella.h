@@ -19,13 +19,14 @@
 #import "SPRFloatBallWindow.h"
 #import "SPRFloatBallWindowManager.h"
 #import "SPRCacheManager.h"
-#import "SPRHTTPSessionManager.h"
+#import "SPRRequestFilter.h"
 #import "SPRURLProtocol.h"
 #import "SPRURLSessionConfiguration.h"
 #import "SPRApi.h"
 #import "SPRProject.h"
 #import "SPRProjectsData.h"
 #import "SPRCommonData.h"
+#import "SPRHTTPSessionManager.h"
 
 FOUNDATION_EXPORT double SparrowSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char SparrowSDKVersionString[];

@@ -8,6 +8,7 @@
 
 #import "SPRURLProtocol.h"
 #import "SPRURLSessionConfiguration.h"
+#import "SPRRequestFilter.h"
 
 static NSString *const SPRHTTP = @"SPRHTTP";
 
@@ -133,10 +134,6 @@ static NSString *const SPRHTTP = @"SPRHTTP";
     for (NSString *key in headers.allKeys) {
         NSLog(@"Sparrow: %@ : %@",key,headers[key]);
     }
-
-    //获取请求结果
-//    NSLog(@"Sparrow: 请求结果：%@", responseJSONFromData:self.spr_data);
-
 }
 
 #pragma mark - NSURLConnectionDelegate
@@ -162,23 +159,7 @@ static NSString *const SPRHTTP = @"SPRHTTP";
 -(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
     NSLog(@"Sparrow: request：%@", request);
 
-    if ([request.URL.absoluteString hasSuffix:@"/ithil_j/activity/book_annual2017/widget/0"]) {
-        NSMutableURLRequest *mutableRequest = request.mutableCopy;
-        mutableRequest.URL = [NSURL URLWithString:@"http://localhost:8000/mock/15/ithil_j/activity/book_annual2017/widget/0"];
-        request = [mutableRequest copy];
-    }
-
-    if ([request.URL.absoluteString hasSuffix:@"/s"]) {
-        NSMutableURLRequest *mutableRequest = request.mutableCopy;
-        mutableRequest.URL = [NSURL URLWithString:@"http://localhost:8000/mock/15/s"];
-        request = [mutableRequest copy];
-    }
-
-    if ([request.URL.absoluteString hasSuffix:@"/api/v4/home/sidebar"]) {
-        NSMutableURLRequest *mutableRequest = request.mutableCopy;
-        mutableRequest.URL = [NSURL URLWithString:@"http://localhost:8000/mock/15/api/v4/home/sidebar"];
-        request = [mutableRequest copy];
-    }
+    request = [SPRRequestFilter filterRequest:request];
 
     if (response != nil) {
         self.spr_response = response;

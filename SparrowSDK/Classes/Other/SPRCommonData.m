@@ -7,6 +7,8 @@
 
 #import "SPRCommonData.h"
 
+NSString * const SparrowHost = @"http://localhost:8000";
+
 @implementation SPRCommonData
 
 @end
