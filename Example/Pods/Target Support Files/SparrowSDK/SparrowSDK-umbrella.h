@@ -10,7 +10,6 @@
 #endif
 #endif
 
-#import "SPRLoginViewController.h"
 #import "SPRProjectCell.h"
 #import "SPRProjectDetailViewController.h"
 #import "SPRProjectListViewController.h"
