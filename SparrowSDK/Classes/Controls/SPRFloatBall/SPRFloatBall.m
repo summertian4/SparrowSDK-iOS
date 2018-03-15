@@ -6,7 +6,8 @@
 //
 
 #import "SPRFloatBall.h"
-#import "SPRProjectListViewController.h"
+//#import "SPRProjectListViewController.h"
+#import "SPRControlCenterViewController.h"
 
 @interface SPRFloatBall ()
 
@@ -36,7 +37,7 @@
 
 -(void)handleSingleTap:(UIGestureRecognizer *)sender {
     if (self.showedManagerVC == NO) {
-        UIViewController *vc = [[SPRProjectListViewController alloc] init];
+        UIViewController *vc = [[SPRControlCenterViewController alloc] init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         nav.navigationBar.tintColor = [UIColor colorWithRed:90/256.0 green:206/256.0 blue:179/256.0 alpha:1];
         [[UIApplication sharedApplication].keyWindow.rootViewController

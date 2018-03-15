@@ -8,9 +8,9 @@
 #import <Foundation/Foundation.h>
 
 typedef enum : NSUInteger {
-    Disabled = 0,
-    Mock = 1,
-    UseOther = 2
+    SPRApiStatusDisabled = 0,
+    SPRApiStatusMock = 1,
+    SPRApiStatusUseOther = 2
 } SPRApiStatus;
 
 @interface SPRApi : NSObject <NSCoding>
