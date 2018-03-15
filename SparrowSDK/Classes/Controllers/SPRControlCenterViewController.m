@@ -12,6 +12,7 @@
 #import "SPRApi.h"
 #import "SPRCacheManager.h"
 #import "SPRApiCell.h"
+#import "SPRProjectListViewController.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -44,6 +45,13 @@
     [self syncButton];
     [self clearCacheButton];
     [self reselectButton];
+}
+
+#pragma mark - Action
+
+- (void)reselectButtonClicked {
+    SPRProjectListViewController *vc = [[SPRProjectListViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -132,6 +140,9 @@
         [_reselectButton setTitle:@"重选项目" forState:UIControlStateNormal];
         [_reselectButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         _reselectButton.titleLabel.font = [UIFont systemFontOfSize:17];
+
+        [_reselectButton addTarget:self action:@selector(reselectButtonClicked)
+                  forControlEvents:UIControlEventTouchUpInside];
 
         [_reselectButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.syncButton.mas_bottom).offset(12);
