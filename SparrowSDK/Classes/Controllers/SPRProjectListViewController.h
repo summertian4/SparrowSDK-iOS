@@ -7,6 +7,9 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^DidFetchedDataCallBack)(void);
 @interface SPRProjectListViewController : UIViewController
+
+@property (nonatomic, copy, nullable) DidFetchedDataCallBack didFetchedDataCallBack;
 
 @end

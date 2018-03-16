@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SPRProject : NSObject
+@interface SPRProject : NSObject <NSCoding>
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) int status;
 @property (nonatomic, copy) NSString *note;

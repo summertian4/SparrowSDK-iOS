@@ -104,8 +104,10 @@
                  [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                  NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
                  if (apis.count != 0) {
+                     [SPRCacheManager cacheProjects:[NSSet setWithSet:strongSelf.seletedProjects]];
                      [SPRCacheManager cacheApis:apis];
                      [strongSelf.navigationController popViewControllerAnimated:YES];
+                     strongSelf.didFetchedDataCallBack();
                  }
              }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
@@ -122,8 +124,10 @@
         return;
     }
     SPRProject *project = self.projectsData.projects[indexPath.row];
-    project.isSelected = YES;
-    [self.seletedProjects addObject:project];
+    project.isSelected = !project.isSelected;
+    if (project.isSelected) {
+        [self.seletedProjects addObject:project];
+    }
 
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
