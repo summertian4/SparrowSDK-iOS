@@ -104,7 +104,11 @@
 }
 
 - (void)clearCacheButtonClicked {
-    
+    [SPRCacheManager clearProjectsFromCache];
+    [SPRCacheManager clearApisFromCache];
+    [SPRToast showWithMessage:@"清除成功" from:self.view];
+    self.apis = [SPRCacheManager getApisFromCache];
+    [self.mainTable reloadData];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -171,6 +175,9 @@
         [_clearCacheButton setTitle:@"清除缓存" forState:UIControlStateNormal];
         [_clearCacheButton setTitleColor:[UIColor colorWithHexString:@"545454"] forState:UIControlStateNormal];
         _clearCacheButton.titleLabel.font = [UIFont systemFontOfSize:17];
+
+        [_clearCacheButton addTarget:self action:@selector(clearCacheButtonClicked)
+                    forControlEvents:UIControlEventTouchUpInside];
 
         [self.view addSubview:_clearCacheButton];
         [_clearCacheButton mas_makeConstraints:^(MASConstraintMaker *make) {

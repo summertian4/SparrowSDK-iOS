@@ -18,8 +18,10 @@
 
 + (void)cacheApis:(NSArray<SPRApi *> *)apis;
 + (NSArray<SPRApi *> *)getApisFromCache;
++ (void)clearApisFromCache;
 
 + (void)cacheProjects:(NSSet<SPRProject *> *)projects;
 + (NSSet<SPRProject *> *)getProjectsFromCache;
++ (void)clearProjectsFromCache;
 
 @end
