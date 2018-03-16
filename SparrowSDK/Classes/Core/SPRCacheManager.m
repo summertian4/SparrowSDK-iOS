@@ -66,14 +66,16 @@
 
 + (void)clearApisFromCache {
     NSFileManager *fileMger = [NSFileManager defaultManager];
-    NSString *xiaoXiPath = [self apisPath];
+    NSString *path = [self apisPath];
 
-    BOOL exist = [fileMger fileExistsAtPath:xiaoXiPath];
+    BOOL exist = [fileMger fileExistsAtPath:path];
     if (exist) {
         NSError *err;
-        [fileMger removeItemAtPath:xiaoXiPath error:&err];
+        [fileMger removeItemAtPath:path error:&err];
         if (err) {
             NSLog(@"删除 Projects 缓存失败");
+        } else {
+            [SPRCacheManager sharedInstance].apis = nil;
         }
     }
 }
@@ -98,14 +100,16 @@
 
 + (void)clearProjectsFromCache {
     NSFileManager *fileMger = [NSFileManager defaultManager];
-    NSString *xiaoXiPath = [self projectsPath];
+    NSString *path = [self projectsPath];
 
-    BOOL exist = [fileMger fileExistsAtPath:xiaoXiPath];
+    BOOL exist = [fileMger fileExistsAtPath:path];
     if (exist) {
         NSError *err;
-        [fileMger removeItemAtPath:xiaoXiPath error:&err];
+        [fileMger removeItemAtPath:path error:&err];
         if (err) {
             NSLog(@"删除 Projects 缓存失败");
+        } else {
+            [SPRCacheManager sharedInstance].apis = nil;
         }
     }
 }
