@@ -64,6 +64,20 @@
     return apis;
 }
 
++ (void)clearApisFromCache {
+    NSFileManager *fileMger = [NSFileManager defaultManager];
+    NSString *xiaoXiPath = [self apisPath];
+
+    BOOL exist = [fileMger fileExistsAtPath:xiaoXiPath];
+    if (exist) {
+        NSError *err;
+        [fileMger removeItemAtPath:xiaoXiPath error:&err];
+        if (err) {
+            NSLog(@"删除 Projects 缓存失败");
+        }
+    }
+}
+
 + (void)cacheProjects:(NSSet<SPRProject *> *)projects {
     NSData *data = [NSKeyedArchiver archivedDataWithRootObject:projects];
     BOOL result = [data writeToFile:[self projectsPath] atomically:YES];
@@ -80,6 +94,20 @@
     NSData *data = [[NSData alloc]initWithContentsOfFile:[self projectsPath]];
     NSSet<SPRProject *> *projects =  [NSKeyedUnarchiver unarchiveObjectWithData:data];
     return projects;
+}
+
++ (void)clearProjectsFromCache {
+    NSFileManager *fileMger = [NSFileManager defaultManager];
+    NSString *xiaoXiPath = [self projectsPath];
+
+    BOOL exist = [fileMger fileExistsAtPath:xiaoXiPath];
+    if (exist) {
+        NSError *err;
+        [fileMger removeItemAtPath:xiaoXiPath error:&err];
+        if (err) {
+            NSLog(@"删除 Projects 缓存失败");
+        }
+    }
 }
 
 + (NSString *)apisPath {

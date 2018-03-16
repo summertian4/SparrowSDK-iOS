@@ -8,10 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		00C05031BBA5BA48A00FE41348F41BDA /* UIRefreshControl+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 80DBCB8671786A1F15E51ACF3E015D83 /* UIRefreshControl+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		010F322394FCC1CE6511AED30D5C0D2E /* UIColor+SPRAddtion.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A23B083904DFF655B4942098DA3BFA0 /* UIColor+SPRAddtion.m */; };
+		01F276AC821B9EEE7D82F9CB9D56D56E /* SPRFloatBallWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2CB1859381870936879787F15AD2EF /* SPRFloatBallWindow.m */; };
 		048D2441DAD4666A63EA30399347B3E7 /* AFNetworking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 86A0B52736BEA52601F0EDD80A3E79B3 /* AFNetworking.framework */; };
 		04A7D6AADAB213CE7D26F8EAD2F87536 /* MASUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = 6BEC42D2C90FB60DBAABB4ACAA8A5F02 /* MASUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		068EF598E554EC57038ACFB89CC2C47A /* View+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 053696B6A17C7D66F062A071CAAC5A5F /* View+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		077F90D1F7506D6725D39C9A138CBCCF /* SPRCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 99352E2A3C16D1680144E25D8AF96273 /* SPRCacheManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0843B5BF8FE3E0219E16696FBE49E525 /* SPRFloatBallWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 8F9E43F618B0F0478AAE4413FD8B4091 /* SPRFloatBallWindowManager.m */; };
 		091D17D5D8F832D28546A72B788CF0AE /* MASViewConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = F6C1DEC9FD898A1D3BD76F5248176BFA /* MASViewConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0968524ED4DE8DF7834055C5B6089D72 /* MBProgressHUD-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E95A7AEE816B563A93A178CAA2A2EF03 /* MBProgressHUD-dummy.m */; };
 		0D1FFD30267C0776FD3E88EFF51E312F /* UIImageView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 7A551788C593ABC624FD8B3EBEA1B74F /* UIImageView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -19,118 +21,120 @@
 		0FDB2B4F75591851F0F119EAE70B3F63 /* NSLayoutConstraint+MASDebugAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 84F6C84772569990AF717B8C4380EFA4 /* NSLayoutConstraint+MASDebugAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		140F458AB7312414FC423FEED70A3733 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EEDC42A911A8B2F4018800122DE34F3 /* UIActivityIndicatorView+AFNetworking.m */; };
 		14CA32AACADBC7D008311E6F720D583D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FF89BC2C6001BFF9B328023E25EA73 /* Foundation.framework */; };
-		16EC7223FD85B70D6D912A8E8F3E6DAC /* SPRProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DEF4DAF02D5E5873CA63013B8965898D /* SPRProjectCell.m */; };
 		1C0EC4BDC4884B16C5EA20F0FADC56BA /* Pods-SparrowSDK_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 646325C1FB9265EF568EDBD11175C3D8 /* Pods-SparrowSDK_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		1E2A6D057E20BE8F5ED3E594F7B8C286 /* AFNetworking-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CC5A615F8BA08B2E4EAC89BFEFC6284D /* AFNetworking-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2531C209BAA3226CF0A5F04C3EB63DD9 /* SparrowSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA95A617A42C39F3E093771310C47FB9 /* SparrowSDK-dummy.m */; };
+		1F318626CEEC1D6812FD2D816D30ED9C /* SPRCommonData.h in Headers */ = {isa = PBXBuildFile; fileRef = A4763BFDBE1BD07FD5862946196F8F02 /* SPRCommonData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		1FBAC971E2C72682C1EC44A5F6007EB7 /* SPRApi.h in Headers */ = {isa = PBXBuildFile; fileRef = A887A591F61E2FE19344B908226C6FA6 /* SPRApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		209B9816B2478712C8F12A02BC3A1D15 /* SPRRequestFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 4C831240FEB3CC389F0A4053B6DD5409 /* SPRRequestFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2854C9B1086758BD2B6681206B6759B4 /* ViewController+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = D96B923AA9F7B892FDA718CF9C8842F0 /* ViewController+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		28A794912ED1E06B05D96DF5ED0AED19 /* MBProgressHUD-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 86572D1560F810530EFA5C589E2C5CD5 /* MBProgressHUD-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		29476636EA86BEFC4CB833D3BB7A52D7 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = F14D48AE1D92FB383E11EEF69500DAF4 /* AFURLRequestSerialization.m */; };
 		2AF582105ACCFA46DAD54D91CE201501 /* Pods-SparrowSDK_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 9206ED74217388EF3BCCE8EA14194E13 /* Pods-SparrowSDK_Tests-dummy.m */; };
 		2B0705CC26A4CBEE32A5A60284AED35B /* UIButton+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 86B8B0BA6018575A4B9A47C6DCF3A30D /* UIButton+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		2D33250235E1F6DD9551A5CF4E81FC18 /* SPRCommonData.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D48AC7A3F547729D53D414D880695EA /* SPRCommonData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		30F0BAE1DBB79BBB6CBD957EA8B89E4B /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D2C736178BA80870A39C95FC7772842E /* MobileCoreServices.framework */; };
-		31BE8184D393FEAFC36AD140D06C09C6 /* SPRProject.h in Headers */ = {isa = PBXBuildFile; fileRef = EB89436C8A8ABFA5DDD32D923D49FF31 /* SPRProject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		31AE55207F25F61EA9F723F820D4BE5E /* SPRProject.m in Sources */ = {isa = PBXBuildFile; fileRef = 346739B8C875FDB757F098D18DDAA258 /* SPRProject.m */; };
 		32076D3DD644045CF79DFFEBB6BFF3F2 /* UIButton+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B63B51DAEC9EFABA61A00C0F97D0CC8 /* UIButton+AFNetworking.m */; };
 		34C88657FE7ABE9F833623F94952D253 /* UIProgressView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 44C7091CDB854051E6A2E675561C53FE /* UIProgressView+AFNetworking.m */; };
 		35CBB7B255FD8D412AFCECBC4311A847 /* AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = A017579E030700DD64C2D54B31F8CDBD /* AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		375C4A0F0FFC203BF27DDC1C86036814 /* UIColor+SPRAddtion.m in Sources */ = {isa = PBXBuildFile; fileRef = 2436045B5AA3BD2042BBF43F269F72EF /* UIColor+SPRAddtion.m */; };
+		38D96B19E9E9F3061D5D6ADD147B88D4 /* SPRBaseViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = D9BD9DA6AAF6E56410A52D087249196D /* SPRBaseViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		38E0CD63021889EE46E1A6B9FA0415F5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DDDF6E500F868D6D900DB1FC5B0C4576 /* UIKit.framework */; };
-		395C3E52AF28BA3C9968B091D9845B12 /* SPRProjectCell.h in Headers */ = {isa = PBXBuildFile; fileRef = ABEA7726F5CE9D65BC15B0CF650B04E0 /* SPRProjectCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3ACB9D1E82032A55EC9ECD3908F89E79 /* SparrowSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 8ECE08832981478A7D9CDFD276414681 /* SparrowSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3FDA0E69F20C26453DEDA4FEA2CE81DD /* SPRFloatBallWindowManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AE917D34A92A4DD90FC64D506872B32 /* SPRFloatBallWindowManager.m */; };
-		421C8A480222037437FC0CBF53CDA3AF /* SPRHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 5F52F7AD7C67DD2327E4955D8D6665A3 /* SPRHTTPSessionManager.m */; };
+		3FF76C8FD4D8F88DD6CA0013E1EFACB4 /* SPRURLSessionConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 75EE973AD8D465A8B4CF15ED2A2E9D81 /* SPRURLSessionConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		42AF1BB1ED090CC9E588A463441D09E3 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70575DC7357AD36C7F186F931668714B /* SystemConfiguration.framework */; };
 		432FA22864D148EBD4CB22F55AB68004 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FF89BC2C6001BFF9B328023E25EA73 /* Foundation.framework */; };
-		437CFC8FEE0FCE750AC2BE51F2C51ECA /* SPRRequestFilter.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F2E014E364DC4CAEEAD91129A164897 /* SPRRequestFilter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		43A2A6866C5A01270D005CCCFDBD9B42 /* SPRProject.h in Headers */ = {isa = PBXBuildFile; fileRef = 167D4D7699A5F7EFE1006876FDD4899E /* SPRProject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		44429541F0C8BA0ADA675EC9D93DF7CD /* SPRProjectListViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 2AA685FC2EE8B2AC7F117AAEBBC5BBCD /* SPRProjectListViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4442D8453D210EFC13CFE2CAF862ED1D /* AFHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 9A0092D611EA7CC8D1BEFCE1867D16D7 /* AFHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		457ACF9150DCF9AF445B129CC9678FB6 /* Masonry-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6A85555400DEE78614FAFCC0B9AE7869 /* Masonry-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		45F802D04B3BE0CAEC586C2F3016027B /* UIActivityIndicatorView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 1CCB5312B9D04AF117294B078706A638 /* UIActivityIndicatorView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		47F04CBDF6C54B220F6AEECEF15264D5 /* AFAutoPurgingImageCache.h in Headers */ = {isa = PBXBuildFile; fileRef = 51E0BB352176A46A0EB787CBFC54C668 /* AFAutoPurgingImageCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4A8B9EF6CD63B3E5BBFD3E101B428C36 /* SPRCommonData.m in Sources */ = {isa = PBXBuildFile; fileRef = A263374CD1F86B8DCBB43C67997E35E0 /* SPRCommonData.m */; };
 		4D4F2050654580FE1F1D5F4F82CEDDB8 /* MASConstraint+Private.h in Headers */ = {isa = PBXBuildFile; fileRef = EC791F8E000FA7867A8276E444F38FEB /* MASConstraint+Private.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D590064BE9BF7B8B639C6AA5D65ADC4 /* SPRProjectsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 8642DFE645C6733FFE0C8DE5B73398F6 /* SPRProjectsData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		51047C1945103943F70BEADE83725630 /* UIWebView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 273A1DE72D6D0FC2C0E537DC11570CF2 /* UIWebView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		53BDF81D0A52EA526D597A5C5B139D7F /* MASCompositeConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFEA4FF85DD9BA41197CEE6D264D2EC /* MASCompositeConstraint.m */; };
-		58A207B53DCD6E289AE06221CAEB5268 /* SPRCacheManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F2B9A3A04A7A32A03F1A063DD5F514C4 /* SPRCacheManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		59F81DE0305CC2AC448D2A3C6B3280A2 /* MASConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CB2F083D99405FB590AA8E0E95C5761 /* MASConstraint.m */; };
 		5A1D34D104D42B1EE399E23BCD7935A0 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = C776584727537399EBED4CAC294208E7 /* AFURLResponseSerialization.m */; };
-		5D629C7925B0FE922FB696AF491A12F1 /* SPRCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 053FB8AA96629C5D4FD3372D1BDC998F /* SPRCacheManager.m */; };
 		5D6AAF5268113B4EC21A9269E5830899 /* Pods-SparrowSDK_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E7750B8D7F750EB21BA14B143E24369D /* Pods-SparrowSDK_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5EFE3C1316AE3DF65B81286439987953 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E6F969CF18B0850A68E42F7F67E1B727 /* QuartzCore.framework */; };
 		636BBA734C1A17A734761D674FAE8800 /* MASViewAttribute.h in Headers */ = {isa = PBXBuildFile; fileRef = CC6C37B4E86BE9454DFF7FB546A9223D /* MASViewAttribute.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		63B2BC0D05729B0C1FFB6217F14AF28F /* SPRFloatBall.h in Headers */ = {isa = PBXBuildFile; fileRef = 09AC88EFEB78CB45C4CE5FD15C8C76C0 /* SPRFloatBall.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6465F646B983A126C88C90EA2E0663C9 /* SparrowSDK-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5211FEEDE158CDD70E45EA2901036186 /* SparrowSDK-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		649E78B5EA450FABDF5201E31F265FAB /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A95ED66A27D5617E90912722B89BF06B /* AFNetworkActivityIndicatorManager.m */; };
 		6573AF9ABA59AC8D1F52B07088197F71 /* AFSecurityPolicy.h in Headers */ = {isa = PBXBuildFile; fileRef = A2A3996C09C5BB94064620D4E3C6B752 /* AFSecurityPolicy.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		6B0D779971A74B8B47CC53C08E8E5D8B /* SPRControlCenterViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = AE5B39311D46656933084D639ADF54CF /* SPRControlCenterViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		67806FCF4E2130922A1F1E98F29A26FA /* SPRFloatBallWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = 4610FB17778B1D57EBBB9DAF38BFA954 /* SPRFloatBallWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6C23BBF56ED4DCC10CA1765A6736D1F8 /* MASLayoutConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0BE543ECF54E01A681A3EBDDAE084 /* MASLayoutConstraint.m */; };
-		6C293C6BB0679FC0AF4E9622A0058C63 /* SPRURLSessionConfiguration.h in Headers */ = {isa = PBXBuildFile; fileRef = 5FAB04D5BF99A4DD8BE76C1B4DFACA7C /* SPRURLSessionConfiguration.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		6E71080392930BB491122BBAC397A583 /* SPRControlCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 974BF02C1644053D66B9866383BCDD9F /* SPRControlCenterViewController.m */; };
+		7183F2DE77886039893EEE14EE79E5BC /* SPRToast.h in Headers */ = {isa = PBXBuildFile; fileRef = 5D77D6B43956A845B9E43371AAF4A619 /* SPRToast.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		73BBDACC22CCA36A6DAAA167AD780BAF /* MASConstraintMaker.m in Sources */ = {isa = PBXBuildFile; fileRef = DA3D57D1C5393E431D0E5F6D975B2139 /* MASConstraintMaker.m */; };
 		756DF24546C7D91459DCADC8F1C98660 /* MASViewConstraint.m in Sources */ = {isa = PBXBuildFile; fileRef = ED232A455AECF542D429C7EEFC2274B7 /* MASViewConstraint.m */; };
 		789D749690B308852115FF20CD982A69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14532E5B1B3F68B7DEA2750930B95487 /* CoreGraphics.framework */; };
 		7A112C0F21A62CB6F1AA8D917A6EEA6C /* AFNetworkActivityIndicatorManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 6CB42047C1F9BF374777627817B53397 /* AFNetworkActivityIndicatorManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7A98282B4A0C7EB24C38D5304A30A348 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FF89BC2C6001BFF9B328023E25EA73 /* Foundation.framework */; };
+		7BC5A32BAFFD85F98FEF95A137D51A65 /* SPRFloatBallWindowManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F2FBFD88B1E365731D91AF963784D92 /* SPRFloatBallWindowManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7C17BEA6034027310D1D205DB2008CA5 /* MASLayoutConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = F26C04731ADDE5B8CA2D4AC34061E229 /* MASLayoutConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7CE16B1BF75DF396768A0A3CFD968DB1 /* UIWebView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9F12D0535A63BA82109A2D09DCFA6D /* UIWebView+AFNetworking.m */; };
+		7E6AA74E3C703D0850295B283617F31F /* SPRHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 2FE6ED198B66427EA4E02B8CF0CBF25D /* SPRHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		829748A2C076E68CC0B6B4E9F416144D /* SPRControlCenterViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4F60E8FCF423704FC16723DA5EE8DCBB /* SPRControlCenterViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		82D554EC9FB9A62D935B6555325F5898 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2CE0801293B144F7BEFEF6A41C33E16 /* Security.framework */; };
-		832260E1B88E81CAF22CCEC9DFC512D3 /* SPRApiCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 11F5FBBCA5A039F6E064B16BC1E0B56C /* SPRApiCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		86F1CA5A818A34678E28DBFD2B354CAA /* SPRCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = ECC253DD2099B549A6E36F6BBCF22D2B /* SPRCacheManager.m */; };
 		88DE7BAB1F4999A5F4B617F44E5FD1D3 /* MASConstraintMaker.h in Headers */ = {isa = PBXBuildFile; fileRef = B1274EB2AF24184725AFC899131BC9EA /* MASConstraintMaker.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		897C38C8E3C31950E2E93A4D6937CCC4 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 9893109403ABFA339D1D10E65A31EB86 /* MBProgressHUD.m */; };
 		8A6EEF68E7625AB66A3A8DED1594F88F /* ViewController+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = D16A35BF93AAA76066634927656F1FC8 /* ViewController+MASAdditions.m */; };
 		8AC6C04B491CFEF603A12457B87678D7 /* MBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4667FAE9AAECFF13D19522744A16CCBC /* MBProgressHUD.framework */; };
-		8C08F433C9AD832C1B34FBED0F801CD4 /* SPRURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EEF415434DC092ECBC20C74C64CEF80 /* SPRURLProtocol.m */; };
+		8B1A934646E9E0311009150016CC3A9B /* SPRRequestFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 5108F19030DF21AF1E6CA514C1521F8B /* SPRRequestFilter.m */; };
 		8CD45B754192DE834B642975E85257AB /* MASCompositeConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 7CC534A632C5BB221CD7B2FE01F54D8E /* MASCompositeConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		90452D1DF1D3BCD08BCDFF045775D39D /* SPRURLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 78339D43AF24A31B166C935640AFF124 /* SPRURLProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9264BD69AFA8EE74F0D7F0EBD74F762F /* UIImage+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D2077E87D26B658B68A50DF96058EC9 /* UIImage+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93DFC0CC12E763AE770017349EE009D1 /* AFNetworkReachabilityManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C8C3EA6E00C60574FAEBA8E64DC8ED /* AFNetworkReachabilityManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		948458DC0A9308A2D8C018C37FB7BBDD /* AFURLResponseSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = EA7FEF7508C0CD7580DBB6710E3057DB /* AFURLResponseSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		957B67B2B4A1AAD3D6361A862D69B745 /* SPRFloatBall.h in Headers */ = {isa = PBXBuildFile; fileRef = 032FF1394989A49A680501D5132ACFBB /* SPRFloatBall.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		98CF83A986E563BA033E0E157CA64C13 /* SPRRequestFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C182B0A1C0268EEC7EBA8AB6F6556C /* SPRRequestFilter.m */; };
-		9910F9941E5F23539F98DA97B7E010FF /* SPRFloatBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D2E705AFF28481243801D6585626B68 /* SPRFloatBall.m */; };
-		99126EF4497DDAC35707A1A4F99AD7D0 /* SPRApi.h in Headers */ = {isa = PBXBuildFile; fileRef = 9F34694DD7279FAF9307B24B07B7EDC9 /* SPRApi.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9AC345E9DC109D9E7FCE895A5D5B2B00 /* SPRCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = 998D09A31D7980C5535166E697FFB02A /* SPRCheckBox.m */; };
-		9D58BC06454446569A8AC1DBCAFC43AC /* SPRURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 80479426DB2D4033F4DAC7322FE0436A /* SPRURLSessionConfiguration.m */; };
+		962217948FE5A1B443064FEC63A13778 /* SPRCommonData.m in Sources */ = {isa = PBXBuildFile; fileRef = CB3F1B6A70F715E2A7BBE2FA516E4CEB /* SPRCommonData.m */; };
+		97D49FA7F7670C3DC70936938DCEC48C /* SPRCheckBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FE612B6C9178DCC8AC43A30C1D353058 /* SPRCheckBox.m */; };
+		9D7D2235BC37866A79F704F978973DDE /* SPRURLSessionConfiguration.m in Sources */ = {isa = PBXBuildFile; fileRef = 291D4BF0463037F6BFB7F1EFDB4484BA /* SPRURLSessionConfiguration.m */; };
+		9E0890F63758A5F157585324F4027057 /* SPRToast.m in Sources */ = {isa = PBXBuildFile; fileRef = 8529CF7A57369783D84E8DE66D7ED5D8 /* SPRToast.m */; };
 		A08A8AB356264E248D01F1BC0EF08166 /* Masonry-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E4CFDE60F05ECB5BEFA1BC3802DEE4 /* Masonry-dummy.m */; };
 		A3591DEDA776B48C026E7F9144981E58 /* AFAutoPurgingImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = CE58441773A890D823F779F9BAC25434 /* AFAutoPurgingImageCache.m */; };
 		A398D63C8DED664D99A864D79881A13C /* AFImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = AD136F178C444D06C6CBE9813CF40369 /* AFImageDownloader.m */; };
+		A529129AC988FB5C15D7C0DBDA7C2E25 /* SPRApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 189FB4AA776444233AAE1911E65B3CCD /* SPRApi.m */; };
 		A5BF8DBDD8660DBCFE712657F3D82BDA /* MBProgressHUD.h in Headers */ = {isa = PBXBuildFile; fileRef = 4AB4000FA552E715FB253A896CAA5CC4 /* MBProgressHUD.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A7370CE9231F9A4927142D79021879EC /* MASViewAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = 147853C0CCE7755EEADE04BFC66F8D1A /* MASViewAttribute.m */; };
+		A84D149D638269B3332F61C5E1A67C2E /* SPRProjectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B1A620E1087CFE8937ED91F93E88D6C /* SPRProjectListViewController.m */; };
+		A8BA82D245D5BEAB2C78A921D04AB52A /* SPRURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = F650E78831A8357159C47B99831C3B16 /* SPRURLProtocol.m */; };
 		A8C297643282E0CF5E7DF9CB6E23A0D4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FF89BC2C6001BFF9B328023E25EA73 /* Foundation.framework */; };
-		ABC5DBCEE70CDB24C4B0494A75CBEF79 /* SPRProjectsData.h in Headers */ = {isa = PBXBuildFile; fileRef = 9BFFF183969D26C5C19F2C1563AC2BF9 /* SPRProjectsData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		AC196C547567138F1A544A30E1CA6FE7 /* SPRFloatBallWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF2EB2BBEA081EC2054496463C90F1D /* SPRFloatBallWindow.m */; };
+		AA49C75269470CA1635206CBA0DE8A0E /* SPRURLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 3B0818366049B2C9F2A5FB29695EFD4E /* SPRURLProtocol.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		ADDA1F03E17D10AD517CD6A010319E2E /* SPRCheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 0EB73128A78432768EB2689F64A7F354 /* SPRCheckBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AE976B0E8E3DD81E4F49DBEF19D3C0AD /* AFURLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = FFFC7497E43DDD851EAB55B7FE1D79BC /* AFURLSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B03D3A332D60EBE4B3889B949687A69F /* SPRFloatBallWindowManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 09F12449F5455888BF1055DA8CA982C2 /* SPRFloatBallWindowManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B0C4F6AE68803F737764528AF3341E9E /* SPRProjectDetailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 4820BC264880479486242B77FA11C10A /* SPRProjectDetailViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B16A078FC7FBC172A266A336AEF7F673 /* UIRefreshControl+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1066DC2B2E5789AE094417124C6594 /* UIRefreshControl+AFNetworking.m */; };
-		B191D4F477465BA580EE2CE93AE37E1F /* SPRProjectListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 979FA264F7E6528308CED1F89D9340DB /* SPRProjectListViewController.m */; };
 		B44383A3FA435C1E986942C817339302 /* View+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C5254ECF29AF79D489FF6F7B33277D90 /* View+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		BF2F9BFC0CCEDFBA6366836060BE2110 /* SPRApi.m in Sources */ = {isa = PBXBuildFile; fileRef = 97BCF7647117944BA4841A29A01E72A0 /* SPRApi.m */; };
+		B631A647E97C22A928B52B8910F07981 /* SPRProjectsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 2A89CC283C0C2E683541ECA5981721C8 /* SPRProjectsData.m */; };
+		B77D48FC7BC33732621DE71E22E8091A /* SPRProjectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 87EC72FB1E2759B4388AE5A8B740F14E /* SPRProjectCell.m */; };
+		B94E9CD0CD2D440D0529F4D907EF4DA1 /* SPRHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E9C40794F7EE810D68E050F92C1855E5 /* SPRHTTPSessionManager.m */; };
 		BFC3AAFFCCFE94270FA4A3040449FA18 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14532E5B1B3F68B7DEA2750930B95487 /* CoreGraphics.framework */; };
-		BFC469EA55879A0C898BBECE283461E1 /* SPRHTTPSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 50BAB5FB8C68F3166762E0F79206D58B /* SPRHTTPSessionManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		C06079A2E5F941071E6F6638AEB3567F /* SPRCheckBox.h in Headers */ = {isa = PBXBuildFile; fileRef = 27F6340CFD9E7070C988FCB0B87C6A1F /* SPRCheckBox.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C0A16E00B4BC2D88A7833D5DAED62942 /* NSArray+MASAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = C84D0367364CCD78FC226B11EBDEDC3C /* NSArray+MASAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		C1F21F9B462808C3A945F8D71F88E500 /* SPRProjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D08DB9A819DBB304A4B0CD466D554E9F /* SPRProjectDetailViewController.m */; };
 		C3A9D31080228A19F8503D29FF2A1595 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FF89BC2C6001BFF9B328023E25EA73 /* Foundation.framework */; };
+		C625C3C535365160D86D2238896E559F /* SPRBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C4AFE19BC10E80166DB202DA1D10B9C /* SPRBaseViewController.m */; };
 		C8DF22EAFFC2F81B0426E2165AC93E44 /* MASConstraint.h in Headers */ = {isa = PBXBuildFile; fileRef = 589EAFA83F80F35C34E162A77D423EA7 /* MASConstraint.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CC8F9B4A1AC4E276EA8AA4C6F2BF3CD4 /* Masonry.h in Headers */ = {isa = PBXBuildFile; fileRef = EFBBE3F8CA8BF9084411303F075DECBD /* Masonry.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CD976F092384F4094F01E68BBAC407F2 /* Masonry.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60C4793D8F82E4FBA1CCBDF0887F9C6E /* Masonry.framework */; };
 		CEB2F0E229EF841D92C780C3FFDF1BEA /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B0F7EF83C82B9C955E6E931CC6BAE7F /* AFSecurityPolicy.m */; };
 		CF287829627F26B2EB4382B897D06A0E /* AFNetworking-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 76D2857FCE09A41973A0ADA6EE772C30 /* AFNetworking-dummy.m */; };
+		D022A2A361BE4EFE6461B885DACB25A9 /* SPRApiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3712BE20F77E6BF4A45F28342137C156 /* SPRApiCell.m */; };
+		D04814D2EB97E0CFE075D993114028DF /* SPRApiCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 38FFFE69E0AED18447076FAA7AF72309 /* SPRApiCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D0C40BDC33B0C0EB8E37C77512942448 /* SparrowSDK-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C2E5054E8786A397070A042EED58C9A2 /* SparrowSDK-dummy.m */; };
 		D4E80BD7EAAB83200183110578A80591 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 65E266338ED44BEB28267EB9CC37E49F /* AFURLSessionManager.m */; };
-		D59BF0ACB7A099A10C0CC765596B47DE /* SPRApiCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B662357D0D3D3F4D6F3FE72F4FD2FF5 /* SPRApiCell.m */; };
-		D8A09735F61AA819D6173EB264866BCA /* SPRProject.m in Sources */ = {isa = PBXBuildFile; fileRef = E12523F8B6C010B8264B02C887C24920 /* SPRProject.m */; };
 		D8B1525CB3DFCBD8E5032680530413D9 /* NSArray+MASShorthandAdditions.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B7FED125C9CD156321BD7D81B21B944 /* NSArray+MASShorthandAdditions.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DBB988260A532351AC536B3A34D15C56 /* SPRProjectDetailViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 6E3898F3CAB675751E001CB0609DA83D /* SPRProjectDetailViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		DD136BE9FC93E1F3062D5BCD088FC62E /* SPRProjectListViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3AA189AFFD176B3D36B3C77300FF0055 /* SPRProjectListViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DD887A93A200A87A51B3D00BD1B80D20 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = DBAD06C3D2BA331810765ED577A3E652 /* AFNetworkReachabilityManager.m */; };
-		DE1FAFA826EB77E6A82A68CD5696BF4E /* SPRProjectsData.m in Sources */ = {isa = PBXBuildFile; fileRef = 7FC4053DEC83BD9A35CF7F2D98AC1A23 /* SPRProjectsData.m */; };
-		E0B90AFC4FF40570B9C3C07BC2728EFA /* SPRProjectDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A0C521E3828276C885F9221C294F71D /* SPRProjectDetailViewController.m */; };
+		E1B5DD8FE6F9942FED67198E7C5C6625 /* SPRFloatBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 7668951D58C21BD29A529944C8C0863E /* SPRFloatBall.m */; };
 		E23B9A6F533461CB33C0FA6FB59E3AB2 /* UIKit+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = CCB76CF73C654C8C613B8873E6764593 /* UIKit+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E72EDE323AC9F92EC8A00A93AC186093 /* NSArray+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 9CD9066743CAB386800703BF37BA1438 /* NSArray+MASAdditions.m */; };
 		E7817FC1328432D7BDF07A3A9319D69F /* Pods-SparrowSDK_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B71ED1D5D2EA42717AD926B86BC76C4 /* Pods-SparrowSDK_Example-dummy.m */; };
+		EAD684E732504E2B7F1FE05FE887567C /* UIColor+SPRAddtion.h in Headers */ = {isa = PBXBuildFile; fileRef = ADC13B821591EA0ABDB5A6D55A115806 /* UIColor+SPRAddtion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		EAF16633DB3C992CF975BE4A2932D41C /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 471C36E97655036FDAC7A6C747A86667 /* AFHTTPSessionManager.m */; };
-		ED80F7A1E53CA079BE79C2465145997A /* UIColor+SPRAddtion.h in Headers */ = {isa = PBXBuildFile; fileRef = 7D752C062F62BEC15BC151C3C72EE1F3 /* UIColor+SPRAddtion.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EF85AC444DE92006F5A1B11FD7C79B0E /* SPRControlCenterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 243BBDB4749D3B2C1FADE986AF4D912D /* SPRControlCenterViewController.m */; };
+		EE2DDC7549A22205CC340E8284DAD601 /* SPRProjectCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 71095C008633077EFD13BC93C98F2F37 /* SPRProjectCell.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F1CAA2EBDDFF558DEF98684F2479A7AF /* AFURLRequestSerialization.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A2CCDB5740F94688D4FD8093A54FC51 /* AFURLRequestSerialization.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F2D899C7AA0D7FC20160091BB9D31CF3 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = CF3686A6930D265FCB78ADDB4A737D9E /* UIImageView+AFNetworking.m */; };
 		F4B3E44D5D2F6508BC1BB35A9FBDEC70 /* View+MASAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 09F372BB127426D45093337FD141B40F /* View+MASAdditions.m */; };
 		F84DD74BB7F612DE372F8C051420DF72 /* UIProgressView+AFNetworking.h in Headers */ = {isa = PBXBuildFile; fileRef = BA4D2F2F86D5FC57FCC0186663CA0EE1 /* UIProgressView+AFNetworking.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		FE5BE949942D9B379F152915862683F6 /* SPRFloatBallWindow.h in Headers */ = {isa = PBXBuildFile; fileRef = E728AEAC231EA754129CFAF838988EEA /* SPRFloatBallWindow.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FEF6EACE962EAE70E2EAC5F3C83EF7C8 /* AFImageDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = 687DBEAA8247E5EDD5CC94BB835FA95C /* AFImageDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FFABEDD7D62817C6A146412493B31BD8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91FF89BC2C6001BFF9B328023E25EA73 /* Foundation.framework */; };
 /* End PBXBuildFile section */
@@ -189,58 +193,62 @@
 
 /* Begin PBXFileReference section */
 		02284D72F8ABC4920599467302D4431B /* Masonry-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Masonry-prefix.pch"; sourceTree = "<group>"; };
-		032FF1394989A49A680501D5132ACFBB /* SPRFloatBall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRFloatBall.h; sourceTree = "<group>"; };
 		053696B6A17C7D66F062A071CAAC5A5F /* View+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASAdditions.h"; path = "Masonry/View+MASAdditions.h"; sourceTree = "<group>"; };
-		053FB8AA96629C5D4FD3372D1BDC998F /* SPRCacheManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRCacheManager.m; sourceTree = "<group>"; };
 		060E622FBEF72EC972F788B9DCE47935 /* Masonry.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Masonry.modulemap; sourceTree = "<group>"; };
-		09F12449F5455888BF1055DA8CA982C2 /* SPRFloatBallWindowManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRFloatBallWindowManager.h; sourceTree = "<group>"; };
+		09AC88EFEB78CB45C4CE5FD15C8C76C0 /* SPRFloatBall.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRFloatBall.h; sourceTree = "<group>"; };
 		09F372BB127426D45093337FD141B40F /* View+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "View+MASAdditions.m"; path = "Masonry/View+MASAdditions.m"; sourceTree = "<group>"; };
 		0A2CCDB5740F94688D4FD8093A54FC51 /* AFURLRequestSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLRequestSerialization.h; path = AFNetworking/AFURLRequestSerialization.h; sourceTree = "<group>"; };
 		0CA0BE543ECF54E01A681A3EBDDAE084 /* MASLayoutConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASLayoutConstraint.m; path = Masonry/MASLayoutConstraint.m; sourceTree = "<group>"; };
+		0EB73128A78432768EB2689F64A7F354 /* SPRCheckBox.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRCheckBox.h; sourceTree = "<group>"; };
 		0EEDC42A911A8B2F4018800122DE34F3 /* UIActivityIndicatorView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIActivityIndicatorView+AFNetworking.m"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.m"; sourceTree = "<group>"; };
-		0EEF415434DC092ECBC20C74C64CEF80 /* SPRURLProtocol.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRURLProtocol.m; sourceTree = "<group>"; };
 		11EF3EC571B7FAD47C33965F49E6D903 /* Pods_SparrowSDK_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SparrowSDK_Example.framework; path = "Pods-SparrowSDK_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		11F5FBBCA5A039F6E064B16BC1E0B56C /* SPRApiCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRApiCell.h; sourceTree = "<group>"; };
 		14532E5B1B3F68B7DEA2750930B95487 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/CoreGraphics.framework; sourceTree = DEVELOPER_DIR; };
 		147853C0CCE7755EEADE04BFC66F8D1A /* MASViewAttribute.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewAttribute.m; path = Masonry/MASViewAttribute.m; sourceTree = "<group>"; };
-		1AD023F7F4E840AA304DA8848942FCE4 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		167D4D7699A5F7EFE1006876FDD4899E /* SPRProject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProject.h; sourceTree = "<group>"; };
+		189FB4AA776444233AAE1911E65B3CCD /* SPRApi.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRApi.m; sourceTree = "<group>"; };
+		1940094534655F01EC01A1E57C1C3F4D /* SparrowSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SparrowSDK.modulemap; sourceTree = "<group>"; };
 		1CCB5312B9D04AF117294B078706A638 /* UIActivityIndicatorView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIActivityIndicatorView+AFNetworking.h"; path = "UIKit+AFNetworking/UIActivityIndicatorView+AFNetworking.h"; sourceTree = "<group>"; };
-		243BBDB4749D3B2C1FADE986AF4D912D /* SPRControlCenterViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRControlCenterViewController.m; sourceTree = "<group>"; };
+		2436045B5AA3BD2042BBF43F269F72EF /* UIColor+SPRAddtion.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SPRAddtion.m"; sourceTree = "<group>"; };
 		24B7126B914105AAF2CDC08DA93597A7 /* Pods-SparrowSDK_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SparrowSDK_Example.release.xcconfig"; sourceTree = "<group>"; };
+		24F7BC25DFB48320D0E909719AD7F4B1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2538E4BC565D27F8ED61B28DC17BE7FA /* MBProgressHUD-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-prefix.pch"; sourceTree = "<group>"; };
 		273A1DE72D6D0FC2C0E537DC11570CF2 /* UIWebView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIWebView+AFNetworking.h"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.h"; sourceTree = "<group>"; };
-		27F6340CFD9E7070C988FCB0B87C6A1F /* SPRCheckBox.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRCheckBox.h; sourceTree = "<group>"; };
+		291D4BF0463037F6BFB7F1EFDB4484BA /* SPRURLSessionConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRURLSessionConfiguration.m; sourceTree = "<group>"; };
+		2A89CC283C0C2E683541ECA5981721C8 /* SPRProjectsData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProjectsData.m; sourceTree = "<group>"; };
+		2AA685FC2EE8B2AC7F117AAEBBC5BBCD /* SPRProjectListViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProjectListViewController.h; sourceTree = "<group>"; };
 		2B7FED125C9CD156321BD7D81B21B944 /* NSArray+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASShorthandAdditions.h"; path = "Masonry/NSArray+MASShorthandAdditions.h"; sourceTree = "<group>"; };
-		322CC4F2EF0AB288BDEEBA7058C05C15 /* SparrowSDK.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SparrowSDK.modulemap; sourceTree = "<group>"; };
+		2FE6ED198B66427EA4E02B8CF0CBF25D /* SPRHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRHTTPSessionManager.h; sourceTree = "<group>"; };
+		346739B8C875FDB757F098D18DDAA258 /* SPRProject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProject.m; sourceTree = "<group>"; };
 		35311268AE3E90B19F7950D02D2B4F11 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3A23B083904DFF655B4942098DA3BFA0 /* UIColor+SPRAddtion.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "UIColor+SPRAddtion.m"; sourceTree = "<group>"; };
-		3AA189AFFD176B3D36B3C77300FF0055 /* SPRProjectListViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProjectListViewController.h; sourceTree = "<group>"; };
-		3AE917D34A92A4DD90FC64D506872B32 /* SPRFloatBallWindowManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRFloatBallWindowManager.m; sourceTree = "<group>"; };
+		3712BE20F77E6BF4A45F28342137C156 /* SPRApiCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRApiCell.m; sourceTree = "<group>"; };
+		38FFFE69E0AED18447076FAA7AF72309 /* SPRApiCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRApiCell.h; sourceTree = "<group>"; };
+		3B0818366049B2C9F2A5FB29695EFD4E /* SPRURLProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRURLProtocol.h; sourceTree = "<group>"; };
 		3D2077E87D26B658B68A50DF96058EC9 /* UIImage+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImage+AFNetworking.h"; path = "UIKit+AFNetworking/UIImage+AFNetworking.h"; sourceTree = "<group>"; };
 		41AD946145809FABE669E52FFAD582F5 /* AFNetworking-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-prefix.pch"; sourceTree = "<group>"; };
 		44319A9C3D6BB67C6196C34B953DD9AC /* Pods-SparrowSDK_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SparrowSDK_Tests.modulemap"; sourceTree = "<group>"; };
 		44C7091CDB854051E6A2E675561C53FE /* UIProgressView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIProgressView+AFNetworking.m"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.m"; sourceTree = "<group>"; };
+		4610FB17778B1D57EBBB9DAF38BFA954 /* SPRFloatBallWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRFloatBallWindow.h; sourceTree = "<group>"; };
 		4667FAE9AAECFF13D19522744A16CCBC /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		471C36E97655036FDAC7A6C747A86667 /* AFHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFHTTPSessionManager.m; path = AFNetworking/AFHTTPSessionManager.m; sourceTree = "<group>"; };
 		47CB2085DC5836360987A37E2687205D /* Pods-SparrowSDK_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-SparrowSDK_Example.modulemap"; sourceTree = "<group>"; };
+		4820BC264880479486242B77FA11C10A /* SPRProjectDetailViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProjectDetailViewController.h; sourceTree = "<group>"; };
 		4A62AE15BDF91D6F97618CE1A5CFE0E9 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = AFNetworking.framework; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AB4000FA552E715FB253A896CAA5CC4 /* MBProgressHUD.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		4B71ED1D5D2EA42717AD926B86BC76C4 /* Pods-SparrowSDK_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SparrowSDK_Example-dummy.m"; sourceTree = "<group>"; };
 		4B9F12D0535A63BA82109A2D09DCFA6D /* UIWebView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIWebView+AFNetworking.m"; path = "UIKit+AFNetworking/UIWebView+AFNetworking.m"; sourceTree = "<group>"; };
+		4C831240FEB3CC389F0A4053B6DD5409 /* SPRRequestFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRRequestFilter.h; sourceTree = "<group>"; };
 		4E887DF40BCD09344E06BAA7BC2200C7 /* MBProgressHUD.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = MBProgressHUD.framework; path = MBProgressHUD.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4EF2EB2BBEA081EC2054496463C90F1D /* SPRFloatBallWindow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRFloatBallWindow.m; sourceTree = "<group>"; };
 		4EFEA4FF85DD9BA41197CEE6D264D2EC /* MASCompositeConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASCompositeConstraint.m; path = Masonry/MASCompositeConstraint.m; sourceTree = "<group>"; };
-		50BAB5FB8C68F3166762E0F79206D58B /* SPRHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRHTTPSessionManager.h; sourceTree = "<group>"; };
+		4F60E8FCF423704FC16723DA5EE8DCBB /* SPRControlCenterViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRControlCenterViewController.h; sourceTree = "<group>"; };
+		5016071EEC43A988C7061EEA4FEBB0AE /* SparrowSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SparrowSDK.xcconfig; sourceTree = "<group>"; };
+		5108F19030DF21AF1E6CA514C1521F8B /* SPRRequestFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRRequestFilter.m; sourceTree = "<group>"; };
 		5175DC567F87248A84C9AE808C4F468E /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51E0BB352176A46A0EB787CBFC54C668 /* AFAutoPurgingImageCache.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFAutoPurgingImageCache.h; path = "UIKit+AFNetworking/AFAutoPurgingImageCache.h"; sourceTree = "<group>"; };
+		5211FEEDE158CDD70E45EA2901036186 /* SparrowSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SparrowSDK-umbrella.h"; sourceTree = "<group>"; };
 		52E4CFDE60F05ECB5BEFA1BC3802DEE4 /* Masonry-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Masonry-dummy.m"; sourceTree = "<group>"; };
 		589EAFA83F80F35C34E162A77D423EA7 /* MASConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraint.h; path = Masonry/MASConstraint.h; sourceTree = "<group>"; };
-		5A0C521E3828276C885F9221C294F71D /* SPRProjectDetailViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProjectDetailViewController.m; sourceTree = "<group>"; };
 		5BA0722B05AB65D625D818133C022F91 /* Pods-SparrowSDK_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SparrowSDK_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		5BDC933A1AE75A5EC90EC32A1CA05850 /* SparrowSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SparrowSDK-prefix.pch"; sourceTree = "<group>"; };
-		5D2E705AFF28481243801D6585626B68 /* SPRFloatBall.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRFloatBall.m; sourceTree = "<group>"; };
-		5F52F7AD7C67DD2327E4955D8D6665A3 /* SPRHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRHTTPSessionManager.m; sourceTree = "<group>"; };
-		5FAB04D5BF99A4DD8BE76C1B4DFACA7C /* SPRURLSessionConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRURLSessionConfiguration.h; sourceTree = "<group>"; };
+		5D77D6B43956A845B9E43371AAF4A619 /* SPRToast.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRToast.h; sourceTree = "<group>"; };
 		60C4793D8F82E4FBA1CCBDF0887F9C6E /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		646325C1FB9265EF568EDBD11175C3D8 /* Pods-SparrowSDK_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SparrowSDK_Tests-umbrella.h"; sourceTree = "<group>"; };
 		65E266338ED44BEB28267EB9CC37E49F /* AFURLSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLSessionManager.m; path = AFNetworking/AFURLSessionManager.m; sourceTree = "<group>"; };
@@ -250,67 +258,68 @@
 		6B63B51DAEC9EFABA61A00C0F97D0CC8 /* UIButton+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIButton+AFNetworking.m"; path = "UIKit+AFNetworking/UIButton+AFNetworking.m"; sourceTree = "<group>"; };
 		6BEC42D2C90FB60DBAABB4ACAA8A5F02 /* MASUtilities.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASUtilities.h; path = Masonry/MASUtilities.h; sourceTree = "<group>"; };
 		6CB42047C1F9BF374777627817B53397 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkActivityIndicatorManager.h; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.h"; sourceTree = "<group>"; };
-		6E3898F3CAB675751E001CB0609DA83D /* SPRProjectDetailViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProjectDetailViewController.h; sourceTree = "<group>"; };
-		6E8614F46CEF4017003DCFBB7D342917 /* SparrowSDK.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SparrowSDK.xcconfig; sourceTree = "<group>"; };
+		6F2CB1859381870936879787F15AD2EF /* SPRFloatBallWindow.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRFloatBallWindow.m; sourceTree = "<group>"; };
 		70575DC7357AD36C7F186F931668714B /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/SystemConfiguration.framework; sourceTree = DEVELOPER_DIR; };
+		71095C008633077EFD13BC93C98F2F37 /* SPRProjectCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProjectCell.h; sourceTree = "<group>"; };
 		717C82236F92AD92533B6FDB1A3F1E33 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		73805ECA5EA7AEFFFE2B751FF93C0483 /* SparrowSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SparrowSDK.framework; path = SparrowSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		75EE973AD8D465A8B4CF15ED2A2E9D81 /* SPRURLSessionConfiguration.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRURLSessionConfiguration.h; sourceTree = "<group>"; };
+		7668951D58C21BD29A529944C8C0863E /* SPRFloatBall.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRFloatBall.m; sourceTree = "<group>"; };
 		76D2857FCE09A41973A0ADA6EE772C30 /* AFNetworking-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "AFNetworking-dummy.m"; sourceTree = "<group>"; };
-		78339D43AF24A31B166C935640AFF124 /* SPRURLProtocol.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRURLProtocol.h; sourceTree = "<group>"; };
 		78E6AA009C2C34CA7674741D750C13A0 /* Pods-SparrowSDK_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-SparrowSDK_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
 		7A551788C593ABC624FD8B3EBEA1B74F /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIImageView+AFNetworking.h"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
-		7B662357D0D3D3F4D6F3FE72F4FD2FF5 /* SPRApiCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRApiCell.m; sourceTree = "<group>"; };
+		7B1A620E1087CFE8937ED91F93E88D6C /* SPRProjectListViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProjectListViewController.m; sourceTree = "<group>"; };
+		7C4AFE19BC10E80166DB202DA1D10B9C /* SPRBaseViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRBaseViewController.m; sourceTree = "<group>"; };
 		7CC534A632C5BB221CD7B2FE01F54D8E /* MASCompositeConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASCompositeConstraint.h; path = Masonry/MASCompositeConstraint.h; sourceTree = "<group>"; };
-		7D48AC7A3F547729D53D414D880695EA /* SPRCommonData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRCommonData.h; sourceTree = "<group>"; };
-		7D752C062F62BEC15BC151C3C72EE1F3 /* UIColor+SPRAddtion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+SPRAddtion.h"; sourceTree = "<group>"; };
-		7FC4053DEC83BD9A35CF7F2D98AC1A23 /* SPRProjectsData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProjectsData.m; sourceTree = "<group>"; };
-		80479426DB2D4033F4DAC7322FE0436A /* SPRURLSessionConfiguration.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRURLSessionConfiguration.m; sourceTree = "<group>"; };
+		7F2FBFD88B1E365731D91AF963784D92 /* SPRFloatBallWindowManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRFloatBallWindowManager.h; sourceTree = "<group>"; };
 		80DBCB8671786A1F15E51ACF3E015D83 /* UIRefreshControl+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIRefreshControl+AFNetworking.h"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.h"; sourceTree = "<group>"; };
 		84F6C84772569990AF717B8C4380EFA4 /* NSLayoutConstraint+MASDebugAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSLayoutConstraint+MASDebugAdditions.h"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.h"; sourceTree = "<group>"; };
+		8529CF7A57369783D84E8DE66D7ED5D8 /* SPRToast.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRToast.m; sourceTree = "<group>"; };
+		8642DFE645C6733FFE0C8DE5B73398F6 /* SPRProjectsData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProjectsData.h; sourceTree = "<group>"; };
 		86572D1560F810530EFA5C589E2C5CD5 /* MBProgressHUD-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "MBProgressHUD-umbrella.h"; sourceTree = "<group>"; };
 		8679234FD802ADE999EE195D56D22DF1 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		86A0B52736BEA52601F0EDD80A3E79B3 /* AFNetworking.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AFNetworking.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86B8B0BA6018575A4B9A47C6DCF3A30D /* UIButton+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIButton+AFNetworking.h"; path = "UIKit+AFNetworking/UIButton+AFNetworking.h"; sourceTree = "<group>"; };
+		87EC72FB1E2759B4388AE5A8B740F14E /* SPRProjectCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProjectCell.m; sourceTree = "<group>"; };
 		8CB2F083D99405FB590AA8E0E95C5761 /* MASConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraint.m; path = Masonry/MASConstraint.m; sourceTree = "<group>"; };
-		8ECE08832981478A7D9CDFD276414681 /* SparrowSDK-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SparrowSDK-umbrella.h"; sourceTree = "<group>"; };
 		8EF5FA817217DD3F9889B21FFBF9DF48 /* Masonry.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Masonry.framework; path = Masonry.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F9E43F618B0F0478AAE4413FD8B4091 /* SPRFloatBallWindowManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRFloatBallWindowManager.m; sourceTree = "<group>"; };
 		91FF89BC2C6001BFF9B328023E25EA73 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		9206ED74217388EF3BCCE8EA14194E13 /* Pods-SparrowSDK_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-SparrowSDK_Tests-dummy.m"; sourceTree = "<group>"; };
+		935836BEEAD5384ABBD2ABA992F8ADC8 /* SparrowSDK-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SparrowSDK-prefix.pch"; sourceTree = "<group>"; };
 		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		93C8C3EA6E00C60574FAEBA8E64DC8ED /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworkReachabilityManager.h; path = AFNetworking/AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
-		979FA264F7E6528308CED1F89D9340DB /* SPRProjectListViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProjectListViewController.m; sourceTree = "<group>"; };
-		97BCF7647117944BA4841A29A01E72A0 /* SPRApi.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRApi.m; sourceTree = "<group>"; };
+		974BF02C1644053D66B9866383BCDD9F /* SPRControlCenterViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRControlCenterViewController.m; sourceTree = "<group>"; };
 		9893109403ABFA339D1D10E65A31EB86 /* MBProgressHUD.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
-		998D09A31D7980C5535166E697FFB02A /* SPRCheckBox.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRCheckBox.m; sourceTree = "<group>"; };
+		99352E2A3C16D1680144E25D8AF96273 /* SPRCacheManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRCacheManager.h; sourceTree = "<group>"; };
 		9A0092D611EA7CC8D1BEFCE1867D16D7 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFHTTPSessionManager.h; path = AFNetworking/AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		9A69956A37EED4F59EC2C15AC368372D /* Pods-SparrowSDK_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SparrowSDK_Example-resources.sh"; sourceTree = "<group>"; };
-		9BFFF183969D26C5C19F2C1563AC2BF9 /* SPRProjectsData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProjectsData.h; sourceTree = "<group>"; };
 		9CD9066743CAB386800703BF37BA1438 /* NSArray+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSArray+MASAdditions.m"; path = "Masonry/NSArray+MASAdditions.m"; sourceTree = "<group>"; };
-		9F2E014E364DC4CAEEAD91129A164897 /* SPRRequestFilter.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRRequestFilter.h; sourceTree = "<group>"; };
-		9F34694DD7279FAF9307B24B07B7EDC9 /* SPRApi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRApi.h; sourceTree = "<group>"; };
 		9F8BAB5A41EAADE109DB71108102F972 /* Pods-SparrowSDK_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SparrowSDK_Tests.release.xcconfig"; sourceTree = "<group>"; };
 		A017579E030700DD64C2D54B31F8CDBD /* AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFNetworking.h; path = AFNetworking/AFNetworking.h; sourceTree = "<group>"; };
-		A263374CD1F86B8DCBB43C67997E35E0 /* SPRCommonData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRCommonData.m; sourceTree = "<group>"; };
 		A2A3996C09C5BB94064620D4E3C6B752 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFSecurityPolicy.h; path = AFNetworking/AFSecurityPolicy.h; sourceTree = "<group>"; };
+		A4763BFDBE1BD07FD5862946196F8F02 /* SPRCommonData.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRCommonData.h; sourceTree = "<group>"; };
 		A4A99BE0460137BF4C46F39FF760BA1F /* Pods-SparrowSDK_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SparrowSDK_Tests-resources.sh"; sourceTree = "<group>"; };
 		A68683D07FDC84281DC59D160CD238FD /* AFNetworking.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = AFNetworking.xcconfig; sourceTree = "<group>"; };
+		A887A591F61E2FE19344B908226C6FA6 /* SPRApi.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRApi.h; sourceTree = "<group>"; };
 		A95ED66A27D5617E90912722B89BF06B /* AFNetworkActivityIndicatorManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkActivityIndicatorManager.m; path = "UIKit+AFNetworking/AFNetworkActivityIndicatorManager.m"; sourceTree = "<group>"; };
 		A964B7167624D95D53827C3664924F57 /* MBProgressHUD.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = MBProgressHUD.modulemap; sourceTree = "<group>"; };
 		AA0DFF6DF281F586CE2A27A7074C30CF /* Pods-SparrowSDK_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SparrowSDK_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		AB2D70A10D3772A68F6B435561F0AB2B /* Pods-SparrowSDK_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SparrowSDK_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		ABEA7726F5CE9D65BC15B0CF650B04E0 /* SPRProjectCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProjectCell.h; sourceTree = "<group>"; };
 		AD136F178C444D06C6CBE9813CF40369 /* AFImageDownloader.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFImageDownloader.m; path = "UIKit+AFNetworking/AFImageDownloader.m"; sourceTree = "<group>"; };
 		AD3A98D24A5B0C7910CB17C7551CC641 /* AFNetworking.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = AFNetworking.modulemap; sourceTree = "<group>"; };
-		AE5B39311D46656933084D639ADF54CF /* SPRControlCenterViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRControlCenterViewController.h; sourceTree = "<group>"; };
+		ADC13B821591EA0ABDB5A6D55A115806 /* UIColor+SPRAddtion.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "UIColor+SPRAddtion.h"; sourceTree = "<group>"; };
 		B1274EB2AF24184725AFC899131BC9EA /* MASConstraintMaker.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASConstraintMaker.h; path = Masonry/MASConstraintMaker.h; sourceTree = "<group>"; };
 		B2CE0801293B144F7BEFEF6A41C33E16 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		B7C1487CF44D38110F444452B383904D /* Pods-SparrowSDK_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SparrowSDK_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		BA4D2F2F86D5FC57FCC0186663CA0EE1 /* UIProgressView+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIProgressView+AFNetworking.h"; path = "UIKit+AFNetworking/UIProgressView+AFNetworking.h"; sourceTree = "<group>"; };
 		BECECE8675DCD447DD693D5FE09B8152 /* Pods-SparrowSDK_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-SparrowSDK_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		C2E5054E8786A397070A042EED58C9A2 /* SparrowSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SparrowSDK-dummy.m"; sourceTree = "<group>"; };
 		C5254ECF29AF79D489FF6F7B33277D90 /* View+MASShorthandAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "View+MASShorthandAdditions.h"; path = "Masonry/View+MASShorthandAdditions.h"; sourceTree = "<group>"; };
 		C575053E085495F08434DDD9C4570D2C /* MBProgressHUD.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = MBProgressHUD.xcconfig; sourceTree = "<group>"; };
 		C776584727537399EBED4CAC294208E7 /* AFURLResponseSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLResponseSerialization.m; path = AFNetworking/AFURLResponseSerialization.m; sourceTree = "<group>"; };
 		C84D0367364CCD78FC226B11EBDEDC3C /* NSArray+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSArray+MASAdditions.h"; path = "Masonry/NSArray+MASAdditions.h"; sourceTree = "<group>"; };
+		CB3F1B6A70F715E2A7BBE2FA516E4CEB /* SPRCommonData.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRCommonData.m; sourceTree = "<group>"; };
 		CC5A615F8BA08B2E4EAC89BFEFC6284D /* AFNetworking-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "AFNetworking-umbrella.h"; sourceTree = "<group>"; };
 		CC6C37B4E86BE9454DFF7FB546A9223D /* MASViewAttribute.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewAttribute.h; path = Masonry/MASViewAttribute.h; sourceTree = "<group>"; };
 		CCB76CF73C654C8C613B8873E6764593 /* UIKit+AFNetworking.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "UIKit+AFNetworking.h"; path = "UIKit+AFNetworking/UIKit+AFNetworking.h"; sourceTree = "<group>"; };
@@ -319,33 +328,32 @@
 		CE1066DC2B2E5789AE094417124C6594 /* UIRefreshControl+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIRefreshControl+AFNetworking.m"; path = "UIKit+AFNetworking/UIRefreshControl+AFNetworking.m"; sourceTree = "<group>"; };
 		CE58441773A890D823F779F9BAC25434 /* AFAutoPurgingImageCache.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFAutoPurgingImageCache.m; path = "UIKit+AFNetworking/AFAutoPurgingImageCache.m"; sourceTree = "<group>"; };
 		CF3686A6930D265FCB78ADDB4A737D9E /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "UIImageView+AFNetworking.m"; path = "UIKit+AFNetworking/UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		D08DB9A819DBB304A4B0CD466D554E9F /* SPRProjectDetailViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProjectDetailViewController.m; sourceTree = "<group>"; };
 		D16A35BF93AAA76066634927656F1FC8 /* ViewController+MASAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "ViewController+MASAdditions.m"; path = "Masonry/ViewController+MASAdditions.m"; sourceTree = "<group>"; };
 		D2C736178BA80870A39C95FC7772842E /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		D96B923AA9F7B892FDA718CF9C8842F0 /* ViewController+MASAdditions.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "ViewController+MASAdditions.h"; path = "Masonry/ViewController+MASAdditions.h"; sourceTree = "<group>"; };
+		D9BD9DA6AAF6E56410A52D087249196D /* SPRBaseViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRBaseViewController.h; sourceTree = "<group>"; };
 		DA3D57D1C5393E431D0E5F6D975B2139 /* MASConstraintMaker.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASConstraintMaker.m; path = Masonry/MASConstraintMaker.m; sourceTree = "<group>"; };
 		DA8FACA2787500F592D5555510925A6B /* Pods_SparrowSDK_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_SparrowSDK_Tests.framework; path = "Pods-SparrowSDK_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBAD06C3D2BA331810765ED577A3E652 /* AFNetworkReachabilityManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFNetworkReachabilityManager.m; path = AFNetworking/AFNetworkReachabilityManager.m; sourceTree = "<group>"; };
 		DDDF6E500F868D6D900DB1FC5B0C4576 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		DEF4DAF02D5E5873CA63013B8965898D /* SPRProjectCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProjectCell.m; sourceTree = "<group>"; };
-		E12523F8B6C010B8264B02C887C24920 /* SPRProject.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRProject.m; sourceTree = "<group>"; };
-		E2C182B0A1C0268EEC7EBA8AB6F6556C /* SPRRequestFilter.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRRequestFilter.m; sourceTree = "<group>"; };
 		E425044F08150BBDF70D9D9384FB3F46 /* Pods-SparrowSDK_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-SparrowSDK_Example-frameworks.sh"; sourceTree = "<group>"; };
 		E6F969CF18B0850A68E42F7F67E1B727 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.3.sdk/System/Library/Frameworks/QuartzCore.framework; sourceTree = DEVELOPER_DIR; };
-		E728AEAC231EA754129CFAF838988EEA /* SPRFloatBallWindow.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRFloatBallWindow.h; sourceTree = "<group>"; };
 		E7750B8D7F750EB21BA14B143E24369D /* Pods-SparrowSDK_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-SparrowSDK_Example-umbrella.h"; sourceTree = "<group>"; };
 		E95A7AEE816B563A93A178CAA2A2EF03 /* MBProgressHUD-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "MBProgressHUD-dummy.m"; sourceTree = "<group>"; };
+		E9C40794F7EE810D68E050F92C1855E5 /* SPRHTTPSessionManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRHTTPSessionManager.m; sourceTree = "<group>"; };
 		EA7FEF7508C0CD7580DBB6710E3057DB /* AFURLResponseSerialization.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLResponseSerialization.h; path = AFNetworking/AFURLResponseSerialization.h; sourceTree = "<group>"; };
-		EA95A617A42C39F3E093771310C47FB9 /* SparrowSDK-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SparrowSDK-dummy.m"; sourceTree = "<group>"; };
-		EB89436C8A8ABFA5DDD32D923D49FF31 /* SPRProject.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRProject.h; sourceTree = "<group>"; };
 		EC791F8E000FA7867A8276E444F38FEB /* MASConstraint+Private.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "MASConstraint+Private.h"; path = "Masonry/MASConstraint+Private.h"; sourceTree = "<group>"; };
+		ECC253DD2099B549A6E36F6BBCF22D2B /* SPRCacheManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRCacheManager.m; sourceTree = "<group>"; };
 		ED232A455AECF542D429C7EEFC2274B7 /* MASViewConstraint.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = MASViewConstraint.m; path = Masonry/MASViewConstraint.m; sourceTree = "<group>"; };
 		EFBBE3F8CA8BF9084411303F075DECBD /* Masonry.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = Masonry.h; path = Masonry/Masonry.h; sourceTree = "<group>"; };
 		EFFE8138FF66AB0E26D8FB74AC260A44 /* Pods-SparrowSDK_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-SparrowSDK_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
 		F14D48AE1D92FB383E11EEF69500DAF4 /* AFURLRequestSerialization.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = AFURLRequestSerialization.m; path = AFNetworking/AFURLRequestSerialization.m; sourceTree = "<group>"; };
 		F26C04731ADDE5B8CA2D4AC34061E229 /* MASLayoutConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASLayoutConstraint.h; path = Masonry/MASLayoutConstraint.h; sourceTree = "<group>"; };
-		F2B9A3A04A7A32A03F1A063DD5F514C4 /* SPRCacheManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = SPRCacheManager.h; sourceTree = "<group>"; };
+		F650E78831A8357159C47B99831C3B16 /* SPRURLProtocol.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRURLProtocol.m; sourceTree = "<group>"; };
 		F6C1DEC9FD898A1D3BD76F5248176BFA /* MASViewConstraint.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = MASViewConstraint.h; path = Masonry/MASViewConstraint.h; sourceTree = "<group>"; };
 		F941384D4B25643D4FDA19B6F8368730 /* NSLayoutConstraint+MASDebugAdditions.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSLayoutConstraint+MASDebugAdditions.m"; path = "Masonry/NSLayoutConstraint+MASDebugAdditions.m"; sourceTree = "<group>"; };
+		FE612B6C9178DCC8AC43A30C1D353058 /* SPRCheckBox.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = SPRCheckBox.m; sourceTree = "<group>"; };
 		FFFC7497E43DDD851EAB55B7FE1D79BC /* AFURLSessionManager.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = AFURLSessionManager.h; path = AFNetworking/AFURLSessionManager.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -411,20 +419,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		013A472B60FA9A6618879CA03B79ED02 /* Other */ = {
-			isa = PBXGroup;
-			children = (
-				7D48AC7A3F547729D53D414D880695EA /* SPRCommonData.h */,
-				A263374CD1F86B8DCBB43C67997E35E0 /* SPRCommonData.m */,
-				50BAB5FB8C68F3166762E0F79206D58B /* SPRHTTPSessionManager.h */,
-				5F52F7AD7C67DD2327E4955D8D6665A3 /* SPRHTTPSessionManager.m */,
-				7D752C062F62BEC15BC151C3C72EE1F3 /* UIColor+SPRAddtion.h */,
-				3A23B083904DFF655B4942098DA3BFA0 /* UIColor+SPRAddtion.m */,
-			);
-			name = Other;
-			path = SparrowSDK/Classes/Other;
-			sourceTree = "<group>";
-		};
 		0B188948D1C79956EAB35AED6438ABCB /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,6 +434,18 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		0B4BE2111CE09F99B5B4959AE4D49CBF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				38FFFE69E0AED18447076FAA7AF72309 /* SPRApiCell.h */,
+				3712BE20F77E6BF4A45F28342137C156 /* SPRApiCell.m */,
+				71095C008633077EFD13BC93C98F2F37 /* SPRProjectCell.h */,
+				87EC72FB1E2759B4388AE5A8B740F14E /* SPRProjectCell.m */,
+			);
+			name = Views;
+			path = Views;
+			sourceTree = "<group>";
+		};
 		0D7F497D8764BD59C2C02AB85F20364C /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -452,21 +458,6 @@
 			);
 			name = "Support Files";
 			path = "../Target Support Files/AFNetworking";
-			sourceTree = "<group>";
-		};
-		12D8B67A09CA8DBAF6ACA0446E206F2F /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				AE5B39311D46656933084D639ADF54CF /* SPRControlCenterViewController.h */,
-				243BBDB4749D3B2C1FADE986AF4D912D /* SPRControlCenterViewController.m */,
-				6E3898F3CAB675751E001CB0609DA83D /* SPRProjectDetailViewController.h */,
-				5A0C521E3828276C885F9221C294F71D /* SPRProjectDetailViewController.m */,
-				3AA189AFFD176B3D36B3C77300FF0055 /* SPRProjectListViewController.h */,
-				979FA264F7E6528308CED1F89D9340DB /* SPRProjectListViewController.m */,
-				3D8BC8DEF63A82E8FD165D49CF4B4BB0 /* Views */,
-			);
-			name = Controllers;
-			path = SparrowSDK/Classes/Controllers;
 			sourceTree = "<group>";
 		};
 		1B85ABE7915EDDDAD94806643ABC7F40 /* Serialization */ = {
@@ -521,30 +512,32 @@
 			name = UIKit;
 			sourceTree = "<group>";
 		};
-		3D8BC8DEF63A82E8FD165D49CF4B4BB0 /* Views */ = {
+		41BBA473B05BFC9216B678117DEAF823 /* SparrowSDK */ = {
 			isa = PBXGroup;
 			children = (
-				11F5FBBCA5A039F6E064B16BC1E0B56C /* SPRApiCell.h */,
-				7B662357D0D3D3F4D6F3FE72F4FD2FF5 /* SPRApiCell.m */,
-				ABEA7726F5CE9D65BC15B0CF650B04E0 /* SPRProjectCell.h */,
-				DEF4DAF02D5E5873CA63013B8965898D /* SPRProjectCell.m */,
+				F31F516EF43513B3174D71218423FD34 /* Controllers */,
+				C90DEB0FE14AFBAFDA61912FF75F5D3F /* Controls */,
+				FFA9279C23A45CF534F7A62EFC95A946 /* Core */,
+				7C82A8DA13A6F22E6073FB248F087086 /* Models */,
+				44770AA8820EB53AA559BFEA4D7C1799 /* Other */,
+				FF5314CCE470F0B8734879C31B9E18F4 /* Support Files */,
 			);
-			name = Views;
-			path = Views;
+			name = SparrowSDK;
+			path = ../..;
 			sourceTree = "<group>";
 		};
-		462A4D2D7E70B55D091295144C2A67A0 /* Models */ = {
+		44770AA8820EB53AA559BFEA4D7C1799 /* Other */ = {
 			isa = PBXGroup;
 			children = (
-				9F34694DD7279FAF9307B24B07B7EDC9 /* SPRApi.h */,
-				97BCF7647117944BA4841A29A01E72A0 /* SPRApi.m */,
-				EB89436C8A8ABFA5DDD32D923D49FF31 /* SPRProject.h */,
-				E12523F8B6C010B8264B02C887C24920 /* SPRProject.m */,
-				9BFFF183969D26C5C19F2C1563AC2BF9 /* SPRProjectsData.h */,
-				7FC4053DEC83BD9A35CF7F2D98AC1A23 /* SPRProjectsData.m */,
+				A4763BFDBE1BD07FD5862946196F8F02 /* SPRCommonData.h */,
+				CB3F1B6A70F715E2A7BBE2FA516E4CEB /* SPRCommonData.m */,
+				2FE6ED198B66427EA4E02B8CF0CBF25D /* SPRHTTPSessionManager.h */,
+				E9C40794F7EE810D68E050F92C1855E5 /* SPRHTTPSessionManager.m */,
+				ADC13B821591EA0ABDB5A6D55A115806 /* UIColor+SPRAddtion.h */,
+				2436045B5AA3BD2042BBF43F269F72EF /* UIColor+SPRAddtion.m */,
 			);
-			name = Models;
-			path = SparrowSDK/Classes/Models;
+			name = Other;
+			path = SparrowSDK/Classes/Other;
 			sourceTree = "<group>";
 		};
 		50CB8641711B8C15C82B58DAEEDFF7B0 /* Masonry */ = {
@@ -581,20 +574,6 @@
 			path = Masonry;
 			sourceTree = "<group>";
 		};
-		59FFC5FF4B5E2A253224B7E12ED3CE96 /* SparrowSDK */ = {
-			isa = PBXGroup;
-			children = (
-				12D8B67A09CA8DBAF6ACA0446E206F2F /* Controllers */,
-				F3C3149E40CB71910D74022C85C160F8 /* Controls */,
-				C65D213D9754A5A0B1E147E3AB561D40 /* Core */,
-				462A4D2D7E70B55D091295144C2A67A0 /* Models */,
-				013A472B60FA9A6618879CA03B79ED02 /* Other */,
-				C8F2CC2651097AB9EC6E7370840FF9FD /* Support Files */,
-			);
-			name = SparrowSDK;
-			path = ../..;
-			sourceTree = "<group>";
-		};
 		5A8CE5A4F87CC7460C712C973333CA05 /* MBProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
@@ -615,6 +594,20 @@
 			name = Security;
 			sourceTree = "<group>";
 		};
+		7C82A8DA13A6F22E6073FB248F087086 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A887A591F61E2FE19344B908226C6FA6 /* SPRApi.h */,
+				189FB4AA776444233AAE1911E65B3CCD /* SPRApi.m */,
+				167D4D7699A5F7EFE1006876FDD4899E /* SPRProject.h */,
+				346739B8C875FDB757F098D18DDAA258 /* SPRProject.m */,
+				8642DFE645C6733FFE0C8DE5B73398F6 /* SPRProjectsData.h */,
+				2A89CC283C0C2E683541ECA5981721C8 /* SPRProjectsData.m */,
+			);
+			name = Models;
+			path = SparrowSDK/Classes/Models;
+			sourceTree = "<group>";
+		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
@@ -627,14 +620,18 @@
 			);
 			sourceTree = "<group>";
 		};
-		9B451AF780FEF6392EF6066684D99FEE /* SPRCheckBox */ = {
+		A54460CF4ADEB61BCBD8F2F55C49E4E7 /* SPRFloatBall */ = {
 			isa = PBXGroup;
 			children = (
-				27F6340CFD9E7070C988FCB0B87C6A1F /* SPRCheckBox.h */,
-				998D09A31D7980C5535166E697FFB02A /* SPRCheckBox.m */,
+				09AC88EFEB78CB45C4CE5FD15C8C76C0 /* SPRFloatBall.h */,
+				7668951D58C21BD29A529944C8C0863E /* SPRFloatBall.m */,
+				4610FB17778B1D57EBBB9DAF38BFA954 /* SPRFloatBallWindow.h */,
+				6F2CB1859381870936879787F15AD2EF /* SPRFloatBallWindow.m */,
+				7F2FBFD88B1E365731D91AF963784D92 /* SPRFloatBallWindowManager.h */,
+				8F9E43F618B0F0478AAE4413FD8B4091 /* SPRFloatBallWindowManager.m */,
 			);
-			name = SPRCheckBox;
-			path = SPRCheckBox;
+			name = SPRFloatBall;
+			path = SPRFloatBall;
 			sourceTree = "<group>";
 		};
 		A5E2DFA68BF50B61B7ACF3D2E3C225D4 /* NSURLSession */ = {
@@ -646,6 +643,16 @@
 				65E266338ED44BEB28267EB9CC37E49F /* AFURLSessionManager.m */,
 			);
 			name = NSURLSession;
+			sourceTree = "<group>";
+		};
+		B035473D36DE384A08F5DB4D8E7CA248 /* SPRCheckBox */ = {
+			isa = PBXGroup;
+			children = (
+				0EB73128A78432768EB2689F64A7F354 /* SPRCheckBox.h */,
+				FE612B6C9178DCC8AC43A30C1D353058 /* SPRCheckBox.m */,
+			);
+			name = SPRCheckBox;
+			path = SPRCheckBox;
 			sourceTree = "<group>";
 		};
 		B32F74A105535478CA786F4688ACCB91 /* Support Files */ = {
@@ -671,40 +678,31 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		C65D213D9754A5A0B1E147E3AB561D40 /* Core */ = {
+		C90DEB0FE14AFBAFDA61912FF75F5D3F /* Controls */ = {
 			isa = PBXGroup;
 			children = (
-				F2B9A3A04A7A32A03F1A063DD5F514C4 /* SPRCacheManager.h */,
-				053FB8AA96629C5D4FD3372D1BDC998F /* SPRCacheManager.m */,
-				9F2E014E364DC4CAEEAD91129A164897 /* SPRRequestFilter.h */,
-				E2C182B0A1C0268EEC7EBA8AB6F6556C /* SPRRequestFilter.m */,
-				78339D43AF24A31B166C935640AFF124 /* SPRURLProtocol.h */,
-				0EEF415434DC092ECBC20C74C64CEF80 /* SPRURLProtocol.m */,
-				5FAB04D5BF99A4DD8BE76C1B4DFACA7C /* SPRURLSessionConfiguration.h */,
-				80479426DB2D4033F4DAC7322FE0436A /* SPRURLSessionConfiguration.m */,
+				B035473D36DE384A08F5DB4D8E7CA248 /* SPRCheckBox */,
+				A54460CF4ADEB61BCBD8F2F55C49E4E7 /* SPRFloatBall */,
+				CC96AB1C494C259F7A2E32DB33B38942 /* SPRToast */,
 			);
-			name = Core;
-			path = SparrowSDK/Classes/Core;
+			name = Controls;
+			path = SparrowSDK/Classes/Controls;
 			sourceTree = "<group>";
 		};
-		C8F2CC2651097AB9EC6E7370840FF9FD /* Support Files */ = {
+		CC96AB1C494C259F7A2E32DB33B38942 /* SPRToast */ = {
 			isa = PBXGroup;
 			children = (
-				1AD023F7F4E840AA304DA8848942FCE4 /* Info.plist */,
-				322CC4F2EF0AB288BDEEBA7058C05C15 /* SparrowSDK.modulemap */,
-				6E8614F46CEF4017003DCFBB7D342917 /* SparrowSDK.xcconfig */,
-				EA95A617A42C39F3E093771310C47FB9 /* SparrowSDK-dummy.m */,
-				5BDC933A1AE75A5EC90EC32A1CA05850 /* SparrowSDK-prefix.pch */,
-				8ECE08832981478A7D9CDFD276414681 /* SparrowSDK-umbrella.h */,
+				5D77D6B43956A845B9E43371AAF4A619 /* SPRToast.h */,
+				8529CF7A57369783D84E8DE66D7ED5D8 /* SPRToast.m */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/SparrowSDK";
+			name = SPRToast;
+			path = SPRToast;
 			sourceTree = "<group>";
 		};
 		CF21B8934B2A8C036087D07538073E9A /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				59FFC5FF4B5E2A253224B7E12ED3CE96 /* SparrowSDK */,
+				41BBA473B05BFC9216B678117DEAF823 /* SparrowSDK */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -770,20 +768,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E5FCAEDA981D70D2FB16AC124A4224A8 /* SPRFloatBall */ = {
-			isa = PBXGroup;
-			children = (
-				032FF1394989A49A680501D5132ACFBB /* SPRFloatBall.h */,
-				5D2E705AFF28481243801D6585626B68 /* SPRFloatBall.m */,
-				E728AEAC231EA754129CFAF838988EEA /* SPRFloatBallWindow.h */,
-				4EF2EB2BBEA081EC2054496463C90F1D /* SPRFloatBallWindow.m */,
-				09F12449F5455888BF1055DA8CA982C2 /* SPRFloatBallWindowManager.h */,
-				3AE917D34A92A4DD90FC64D506872B32 /* SPRFloatBallWindowManager.m */,
-			);
-			name = SPRFloatBall;
-			path = SPRFloatBall;
-			sourceTree = "<group>";
-		};
 		EC1E6827A958A96FD28FE2B45BBE86D8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -816,14 +800,51 @@
 			name = Reachability;
 			sourceTree = "<group>";
 		};
-		F3C3149E40CB71910D74022C85C160F8 /* Controls */ = {
+		F31F516EF43513B3174D71218423FD34 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9B451AF780FEF6392EF6066684D99FEE /* SPRCheckBox */,
-				E5FCAEDA981D70D2FB16AC124A4224A8 /* SPRFloatBall */,
+				D9BD9DA6AAF6E56410A52D087249196D /* SPRBaseViewController.h */,
+				7C4AFE19BC10E80166DB202DA1D10B9C /* SPRBaseViewController.m */,
+				4F60E8FCF423704FC16723DA5EE8DCBB /* SPRControlCenterViewController.h */,
+				974BF02C1644053D66B9866383BCDD9F /* SPRControlCenterViewController.m */,
+				4820BC264880479486242B77FA11C10A /* SPRProjectDetailViewController.h */,
+				D08DB9A819DBB304A4B0CD466D554E9F /* SPRProjectDetailViewController.m */,
+				2AA685FC2EE8B2AC7F117AAEBBC5BBCD /* SPRProjectListViewController.h */,
+				7B1A620E1087CFE8937ED91F93E88D6C /* SPRProjectListViewController.m */,
+				0B4BE2111CE09F99B5B4959AE4D49CBF /* Views */,
 			);
-			name = Controls;
-			path = SparrowSDK/Classes/Controls;
+			name = Controllers;
+			path = SparrowSDK/Classes/Controllers;
+			sourceTree = "<group>";
+		};
+		FF5314CCE470F0B8734879C31B9E18F4 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				24F7BC25DFB48320D0E909719AD7F4B1 /* Info.plist */,
+				1940094534655F01EC01A1E57C1C3F4D /* SparrowSDK.modulemap */,
+				5016071EEC43A988C7061EEA4FEBB0AE /* SparrowSDK.xcconfig */,
+				C2E5054E8786A397070A042EED58C9A2 /* SparrowSDK-dummy.m */,
+				935836BEEAD5384ABBD2ABA992F8ADC8 /* SparrowSDK-prefix.pch */,
+				5211FEEDE158CDD70E45EA2901036186 /* SparrowSDK-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/SparrowSDK";
+			sourceTree = "<group>";
+		};
+		FFA9279C23A45CF534F7A62EFC95A946 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				99352E2A3C16D1680144E25D8AF96273 /* SPRCacheManager.h */,
+				ECC253DD2099B549A6E36F6BBCF22D2B /* SPRCacheManager.m */,
+				4C831240FEB3CC389F0A4053B6DD5409 /* SPRRequestFilter.h */,
+				5108F19030DF21AF1E6CA514C1521F8B /* SPRRequestFilter.m */,
+				3B0818366049B2C9F2A5FB29695EFD4E /* SPRURLProtocol.h */,
+				F650E78831A8357159C47B99831C3B16 /* SPRURLProtocol.m */,
+				75EE973AD8D465A8B4CF15ED2A2E9D81 /* SPRURLSessionConfiguration.h */,
+				291D4BF0463037F6BFB7F1EFDB4484BA /* SPRURLSessionConfiguration.m */,
+			);
+			name = Core;
+			path = SparrowSDK/Classes/Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -835,33 +856,6 @@
 			files = (
 				28A794912ED1E06B05D96DF5ED0AED19 /* MBProgressHUD-umbrella.h in Headers */,
 				A5BF8DBDD8660DBCFE712657F3D82BDA /* MBProgressHUD.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		407A6A209310590076CD42FE548481B6 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3ACB9D1E82032A55EC9ECD3908F89E79 /* SparrowSDK-umbrella.h in Headers */,
-				99126EF4497DDAC35707A1A4F99AD7D0 /* SPRApi.h in Headers */,
-				832260E1B88E81CAF22CCEC9DFC512D3 /* SPRApiCell.h in Headers */,
-				58A207B53DCD6E289AE06221CAEB5268 /* SPRCacheManager.h in Headers */,
-				C06079A2E5F941071E6F6638AEB3567F /* SPRCheckBox.h in Headers */,
-				2D33250235E1F6DD9551A5CF4E81FC18 /* SPRCommonData.h in Headers */,
-				6B0D779971A74B8B47CC53C08E8E5D8B /* SPRControlCenterViewController.h in Headers */,
-				957B67B2B4A1AAD3D6361A862D69B745 /* SPRFloatBall.h in Headers */,
-				FE5BE949942D9B379F152915862683F6 /* SPRFloatBallWindow.h in Headers */,
-				B03D3A332D60EBE4B3889B949687A69F /* SPRFloatBallWindowManager.h in Headers */,
-				BFC469EA55879A0C898BBECE283461E1 /* SPRHTTPSessionManager.h in Headers */,
-				31BE8184D393FEAFC36AD140D06C09C6 /* SPRProject.h in Headers */,
-				395C3E52AF28BA3C9968B091D9845B12 /* SPRProjectCell.h in Headers */,
-				DBB988260A532351AC536B3A34D15C56 /* SPRProjectDetailViewController.h in Headers */,
-				DD136BE9FC93E1F3062D5BCD088FC62E /* SPRProjectListViewController.h in Headers */,
-				ABC5DBCEE70CDB24C4B0494A75CBEF79 /* SPRProjectsData.h in Headers */,
-				437CFC8FEE0FCE750AC2BE51F2C51ECA /* SPRRequestFilter.h in Headers */,
-				90452D1DF1D3BCD08BCDFF045775D39D /* SPRURLProtocol.h in Headers */,
-				6C293C6BB0679FC0AF4E9622A0058C63 /* SPRURLSessionConfiguration.h in Headers */,
-				ED80F7A1E53CA079BE79C2465145997A /* UIColor+SPRAddtion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -904,6 +898,35 @@
 				F84DD74BB7F612DE372F8C051420DF72 /* UIProgressView+AFNetworking.h in Headers */,
 				00C05031BBA5BA48A00FE41348F41BDA /* UIRefreshControl+AFNetworking.h in Headers */,
 				51047C1945103943F70BEADE83725630 /* UIWebView+AFNetworking.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E24F3A95C310C6A0554F87B206AD5987 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6465F646B983A126C88C90EA2E0663C9 /* SparrowSDK-umbrella.h in Headers */,
+				1FBAC971E2C72682C1EC44A5F6007EB7 /* SPRApi.h in Headers */,
+				D04814D2EB97E0CFE075D993114028DF /* SPRApiCell.h in Headers */,
+				38D96B19E9E9F3061D5D6ADD147B88D4 /* SPRBaseViewController.h in Headers */,
+				077F90D1F7506D6725D39C9A138CBCCF /* SPRCacheManager.h in Headers */,
+				ADDA1F03E17D10AD517CD6A010319E2E /* SPRCheckBox.h in Headers */,
+				1F318626CEEC1D6812FD2D816D30ED9C /* SPRCommonData.h in Headers */,
+				829748A2C076E68CC0B6B4E9F416144D /* SPRControlCenterViewController.h in Headers */,
+				63B2BC0D05729B0C1FFB6217F14AF28F /* SPRFloatBall.h in Headers */,
+				67806FCF4E2130922A1F1E98F29A26FA /* SPRFloatBallWindow.h in Headers */,
+				7BC5A32BAFFD85F98FEF95A137D51A65 /* SPRFloatBallWindowManager.h in Headers */,
+				7E6AA74E3C703D0850295B283617F31F /* SPRHTTPSessionManager.h in Headers */,
+				43A2A6866C5A01270D005CCCFDBD9B42 /* SPRProject.h in Headers */,
+				EE2DDC7549A22205CC340E8284DAD601 /* SPRProjectCell.h in Headers */,
+				B0C4F6AE68803F737764528AF3341E9E /* SPRProjectDetailViewController.h in Headers */,
+				44429541F0C8BA0ADA675EC9D93DF7CD /* SPRProjectListViewController.h in Headers */,
+				4D590064BE9BF7B8B639C6AA5D65ADC4 /* SPRProjectsData.h in Headers */,
+				209B9816B2478712C8F12A02BC3A1D15 /* SPRRequestFilter.h in Headers */,
+				7183F2DE77886039893EEE14EE79E5BC /* SPRToast.h in Headers */,
+				AA49C75269470CA1635206CBA0DE8A0E /* SPRURLProtocol.h in Headers */,
+				3FF76C8FD4D8F88DD6CA0013E1EFACB4 /* SPRURLSessionConfiguration.h in Headers */,
+				EAD684E732504E2B7F1FE05FE887567C /* UIColor+SPRAddtion.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -975,9 +998,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 04B00E362C7BBBA91E79ECE192D054E4 /* Build configuration list for PBXNativeTarget "SparrowSDK" */;
 			buildPhases = (
-				0318D9677E6BC896BC1B0C9187A012A3 /* Sources */,
+				1F1F5E4E2357CB0D6F808AFDD91CF8F9 /* Sources */,
 				D43C413A24A6DF8D53D8ECA0227CEDD2 /* Frameworks */,
-				407A6A209310590076CD42FE548481B6 /* Headers */,
+				E24F3A95C310C6A0554F87B206AD5987 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -1092,30 +1115,32 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		0318D9677E6BC896BC1B0C9187A012A3 /* Sources */ = {
+		1F1F5E4E2357CB0D6F808AFDD91CF8F9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2531C209BAA3226CF0A5F04C3EB63DD9 /* SparrowSDK-dummy.m in Sources */,
-				BF2F9BFC0CCEDFBA6366836060BE2110 /* SPRApi.m in Sources */,
-				D59BF0ACB7A099A10C0CC765596B47DE /* SPRApiCell.m in Sources */,
-				5D629C7925B0FE922FB696AF491A12F1 /* SPRCacheManager.m in Sources */,
-				9AC345E9DC109D9E7FCE895A5D5B2B00 /* SPRCheckBox.m in Sources */,
-				4A8B9EF6CD63B3E5BBFD3E101B428C36 /* SPRCommonData.m in Sources */,
-				EF85AC444DE92006F5A1B11FD7C79B0E /* SPRControlCenterViewController.m in Sources */,
-				9910F9941E5F23539F98DA97B7E010FF /* SPRFloatBall.m in Sources */,
-				AC196C547567138F1A544A30E1CA6FE7 /* SPRFloatBallWindow.m in Sources */,
-				3FDA0E69F20C26453DEDA4FEA2CE81DD /* SPRFloatBallWindowManager.m in Sources */,
-				421C8A480222037437FC0CBF53CDA3AF /* SPRHTTPSessionManager.m in Sources */,
-				D8A09735F61AA819D6173EB264866BCA /* SPRProject.m in Sources */,
-				16EC7223FD85B70D6D912A8E8F3E6DAC /* SPRProjectCell.m in Sources */,
-				E0B90AFC4FF40570B9C3C07BC2728EFA /* SPRProjectDetailViewController.m in Sources */,
-				B191D4F477465BA580EE2CE93AE37E1F /* SPRProjectListViewController.m in Sources */,
-				DE1FAFA826EB77E6A82A68CD5696BF4E /* SPRProjectsData.m in Sources */,
-				98CF83A986E563BA033E0E157CA64C13 /* SPRRequestFilter.m in Sources */,
-				8C08F433C9AD832C1B34FBED0F801CD4 /* SPRURLProtocol.m in Sources */,
-				9D58BC06454446569A8AC1DBCAFC43AC /* SPRURLSessionConfiguration.m in Sources */,
-				010F322394FCC1CE6511AED30D5C0D2E /* UIColor+SPRAddtion.m in Sources */,
+				D0C40BDC33B0C0EB8E37C77512942448 /* SparrowSDK-dummy.m in Sources */,
+				A529129AC988FB5C15D7C0DBDA7C2E25 /* SPRApi.m in Sources */,
+				D022A2A361BE4EFE6461B885DACB25A9 /* SPRApiCell.m in Sources */,
+				C625C3C535365160D86D2238896E559F /* SPRBaseViewController.m in Sources */,
+				86F1CA5A818A34678E28DBFD2B354CAA /* SPRCacheManager.m in Sources */,
+				97D49FA7F7670C3DC70936938DCEC48C /* SPRCheckBox.m in Sources */,
+				962217948FE5A1B443064FEC63A13778 /* SPRCommonData.m in Sources */,
+				6E71080392930BB491122BBAC397A583 /* SPRControlCenterViewController.m in Sources */,
+				E1B5DD8FE6F9942FED67198E7C5C6625 /* SPRFloatBall.m in Sources */,
+				01F276AC821B9EEE7D82F9CB9D56D56E /* SPRFloatBallWindow.m in Sources */,
+				0843B5BF8FE3E0219E16696FBE49E525 /* SPRFloatBallWindowManager.m in Sources */,
+				B94E9CD0CD2D440D0529F4D907EF4DA1 /* SPRHTTPSessionManager.m in Sources */,
+				31AE55207F25F61EA9F723F820D4BE5E /* SPRProject.m in Sources */,
+				B77D48FC7BC33732621DE71E22E8091A /* SPRProjectCell.m in Sources */,
+				C1F21F9B462808C3A945F8D71F88E500 /* SPRProjectDetailViewController.m in Sources */,
+				A84D149D638269B3332F61C5E1A67C2E /* SPRProjectListViewController.m in Sources */,
+				B631A647E97C22A928B52B8910F07981 /* SPRProjectsData.m in Sources */,
+				8B1A934646E9E0311009150016CC3A9B /* SPRRequestFilter.m in Sources */,
+				9E0890F63758A5F157585324F4027057 /* SPRToast.m in Sources */,
+				A8BA82D245D5BEAB2C78A921D04AB52A /* SPRURLProtocol.m in Sources */,
+				9D7D2235BC37866A79F704F978973DDE /* SPRURLSessionConfiguration.m in Sources */,
+				375C4A0F0FFC203BF27DDC1C86036814 /* UIColor+SPRAddtion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1459,7 +1484,7 @@
 		};
 		9EDF28FF5B60A907C8D57CE792C3014D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E8614F46CEF4017003DCFBB7D342917 /* SparrowSDK.xcconfig */;
+			baseConfigurationReference = 5016071EEC43A988C7061EEA4FEBB0AE /* SparrowSDK.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -1669,7 +1694,7 @@
 		};
 		F9FE019C4EBA8E17B1253A4E5C2BB549 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6E8614F46CEF4017003DCFBB7D342917 /* SparrowSDK.xcconfig */;
+			baseConfigurationReference = 5016071EEC43A988C7061EEA4FEBB0AE /* SparrowSDK.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";

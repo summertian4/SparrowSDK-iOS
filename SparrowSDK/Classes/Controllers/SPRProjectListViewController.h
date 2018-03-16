@@ -5,10 +5,10 @@
 //  Created by 周凌宇 on 2018/3/8.
 //
 
-#import <UIKit/UIKit.h>
+#import "SPRBaseViewController.h"
 
 typedef void (^DidFetchedDataCallBack)(void);
-@interface SPRProjectListViewController : UIViewController
+@interface SPRProjectListViewController : SPRBaseViewController
 
 @property (nonatomic, copy, nullable) DidFetchedDataCallBack didFetchedDataCallBack;
 

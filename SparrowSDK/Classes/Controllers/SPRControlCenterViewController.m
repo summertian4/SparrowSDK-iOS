@@ -14,7 +14,7 @@
 #import "SPRApiCell.h"
 #import "SPRProjectListViewController.h"
 #import "SPRHTTPSessionManager.h"
-#import <MBProgressHUD/MBProgressHUD.h>
+#import "SPRToast.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -74,14 +74,7 @@
 
     NSSet *projects = [SPRCacheManager getProjectsFromCache];
     if (projects == nil || projects.count == 0) {
-        MBProgressHUD *toast = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-        [toast setMode:MBProgressHUDModeText];
-        toast.label.text = @"请先选择项目";
-        [toast showAnimated:YES];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-                       dispatch_get_main_queue(), ^{
-            [toast hideAnimated:YES];
-        });
+        [SPRToast showWithMessage:@"请先选择项目" from:self.view];
         return;
     }
 
@@ -89,13 +82,13 @@
     for (SPRProject *project in projects) {
         [projectIds addObject:@(project.project_id)];
     }
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [self showHUD];
     [manager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
-                 [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+                 [strongSelf hideHUD];
                  NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
                  if (apis.count != 0) {
                      [SPRCacheManager cacheApis:apis];
@@ -106,8 +99,16 @@
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"%@", error);
              __strong __typeof(weakSelf)strongSelf = weakSelf;
-             [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+             [strongSelf hideHUD];
          }];
+}
+
+- (void)clearCacheButtonClicked {
+    [SPRCacheManager clearProjectsFromCache];
+    [SPRCacheManager clearApisFromCache];
+    [SPRToast showWithMessage:@"清除成功" from:self.view];
+    self.apis = [SPRCacheManager getApisFromCache];
+    [self.mainTable reloadData];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -174,6 +175,9 @@
         [_clearCacheButton setTitle:@"清除缓存" forState:UIControlStateNormal];
         [_clearCacheButton setTitleColor:[UIColor colorWithHexString:@"545454"] forState:UIControlStateNormal];
         _clearCacheButton.titleLabel.font = [UIFont systemFontOfSize:17];
+
+        [_clearCacheButton addTarget:self action:@selector(clearCacheButtonClicked)
+                    forControlEvents:UIControlEventTouchUpInside];
 
         [self.view addSubview:_clearCacheButton];
         [_clearCacheButton mas_makeConstraints:^(MASConstraintMaker *make) {
