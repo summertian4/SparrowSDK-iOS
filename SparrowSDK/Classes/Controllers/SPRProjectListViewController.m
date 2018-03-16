@@ -14,6 +14,7 @@
 #import "SPRProjectsData.h"
 #import "SPRApi.h"
 #import "SPRCacheManager.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface SPRProjectListViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
@@ -67,11 +68,13 @@
     SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [manager GET:@"/frontend/project/list"
       parameters:@{@"current_page": @(self.projectsData.currentPage + 1), @"limit": @(self.projectsData.limit)}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
+                 [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                  SPRProjectsData *newPorjectsData = [[SPRProjectsData alloc] initWithDict:responseObject[@"projects_data"]];
                  [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
                  strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
@@ -79,6 +82,8 @@
              }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
     }];
 }
 
@@ -90,18 +95,23 @@
     for (SPRProject *project in self.seletedProjects) {
         [projectIds addObject:@(project.project_id)];
     }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [manager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
+                 [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
                  NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
                  if (apis.count != 0) {
                      [SPRCacheManager cacheApis:apis];
+                     [strongSelf.navigationController popViewControllerAnimated:YES];
                  }
              }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"%@", error);
+             __strong __typeof(weakSelf)strongSelf = weakSelf;
+             [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
          }];
 }
 
@@ -147,7 +157,7 @@
         make.height.equalTo(@(30));
         make.width.equalTo(@(100));
     }];
-    [button addTarget:self action:@selector(loadProjects) forControlEvents:UIControlEventTouchUpInside];
+    [button addTarget:self action:@selector(fetchProjects) forControlEvents:UIControlEventTouchUpInside];
 
     BOOL result = (self.projectsData.currentPage - 1) * self.projectsData.limit < self.projectsData.total;
     button.enabled = result;
