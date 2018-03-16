@@ -105,9 +105,9 @@
                  if (apis.count != 0) {
                      [SPRCacheManager cacheProjects:[NSSet setWithSet:strongSelf.seletedProjects]];
                      [SPRCacheManager cacheApis:apis];
-                     [strongSelf.navigationController popViewControllerAnimated:YES];
-                     strongSelf.didFetchedDataCallBack();
                  }
+                 [strongSelf.navigationController popViewControllerAnimated:YES];
+                 strongSelf.didFetchedDataCallBack();
              }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"%@", error);
