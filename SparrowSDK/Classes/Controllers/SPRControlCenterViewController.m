@@ -13,6 +13,8 @@
 #import "SPRCacheManager.h"
 #import "SPRApiCell.h"
 #import "SPRProjectListViewController.h"
+#import "SPRHTTPSessionManager.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -51,7 +53,61 @@
 
 - (void)reselectButtonClicked {
     SPRProjectListViewController *vc = [[SPRProjectListViewController alloc] init];
+    __weak __typeof(self)weakSelf = self;
+    vc.didFetchedDataCallBack = ^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf.apis = [SPRCacheManager getApisFromCache];
+            [strongSelf.mainTable reloadData];
+        }
+    };
     [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)syncButtonClicked {
+    [self fetchApis];
+}
+
+- (void)fetchApis {
+    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
+    __weak __typeof(self)weakSelf = self;
+
+    NSSet *projects = [SPRCacheManager getProjectsFromCache];
+    if (projects == nil || projects.count == 0) {
+        MBProgressHUD *toast = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+        [toast setMode:MBProgressHUDModeText];
+        toast.label.text = @"请先选择项目";
+        [toast showAnimated:YES];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+                       dispatch_get_main_queue(), ^{
+            [toast hideAnimated:YES];
+        });
+        return;
+    }
+
+    NSMutableArray *projectIds = [NSMutableArray array];
+    for (SPRProject *project in projects) {
+        [projectIds addObject:@(project.project_id)];
+    }
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    [manager GET:@"/frontend/api/fetch"
+      parameters:@{@"project_id": projectIds}
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             __strong __typeof(weakSelf)strongSelf = weakSelf;
+             if (strongSelf) {
+                 [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+                 NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                 if (apis.count != 0) {
+                     [SPRCacheManager cacheApis:apis];
+                     strongSelf.apis = apis;
+                     [strongSelf.mainTable reloadData];
+                 }
+             }
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             NSLog(@"%@", error);
+             __strong __typeof(weakSelf)strongSelf = weakSelf;
+             [MBProgressHUD hideHUDForView:strongSelf.view animated:YES];
+         }];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -89,6 +145,9 @@
         [_syncButton setTitle:@"同步" forState:UIControlStateNormal];
         [_syncButton setTitleColor:[UIColor colorWithHexString:@"545454"] forState:UIControlStateNormal];
         _syncButton.titleLabel.font = [UIFont systemFontOfSize:17];
+
+        [_syncButton addTarget:self action:@selector(syncButtonClicked)
+              forControlEvents:UIControlEventTouchUpInside];
 
         [self.view addSubview:_syncButton];
         [_syncButton mas_makeConstraints:^(MASConstraintMaker *make) {

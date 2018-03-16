@@ -64,8 +64,30 @@
     return apis;
 }
 
++ (void)cacheProjects:(NSSet<SPRProject *> *)projects {
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:projects];
+    BOOL result = [data writeToFile:[self projectsPath] atomically:YES];
+
+    if (result == NO) {
+        NSLog(@"Caching API failed");
+        return;
+    }
+    SPRCacheManager *manager = [SPRCacheManager sharedInstance];
+    manager.projects = projects;
+}
+
++ (NSSet<SPRProject *> *)getProjectsFromCache {
+    NSData *data = [[NSData alloc]initWithContentsOfFile:[self projectsPath]];
+    NSSet<SPRProject *> *projects =  [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    return projects;
+}
+
 + (NSString *)apisPath {
     return [[self cacheDir] stringByAppendingString:@"/apis"];
+}
+
++ (NSString *)projectsPath {
+    return [[self cacheDir] stringByAppendingString:@"/projects"];
 }
 
 @end

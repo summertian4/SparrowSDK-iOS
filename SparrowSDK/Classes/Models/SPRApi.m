@@ -43,7 +43,6 @@
     return array;
 }
 
-
 - (void)encodeWithCoder:(NSCoder *)coder {
     [coder encodeObject:@(self.api_id) forKey:@"api_id"];
     [coder encodeObject:self.path forKey:@"path"];
