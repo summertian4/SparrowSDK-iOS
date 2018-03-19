@@ -111,6 +111,33 @@
     [self.mainTable reloadData];
 }
 
+- (void)didApiSwitchChangedWithApi: (SPRApi *)api isOn:(BOOL) isOn {
+    // 请求 Mock 开关
+    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
+    NSString *urlString = [NSString stringWithFormat:@"/frontend/project/%ld/api/%ld/update_status",
+                           api.project_id, api.api_id];
+    __weak __typeof(self)weakSelf = self;
+    [manager GET:urlString
+      parameters:@{@"status": @(isOn)}
+         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+             __strong __typeof(weakSelf)strongSelf = weakSelf;
+             if (strongSelf) {
+                 NSString *message = isOn? @"打开 Mock 成功" : @"关闭 Mock 成功";
+                 [SPRToast showWithMessage:message from:strongSelf.view];
+                 api.status = isOn ? SPRApiStatusMock : SPRApiStatusDisabled;
+                 [strongSelf.mainTable reloadData];
+             }
+         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+             __strong __typeof(weakSelf)strongSelf = weakSelf;
+             if (strongSelf) {
+                 NSString *message = isOn? @"打开 Mock 失败" : @"关闭 Mock 失败";
+                 [SPRToast showWithMessage:message from:strongSelf.view];
+                 [strongSelf.mainTable reloadData];
+             }
+         }];
+}
+
+
 #pragma mark - UITableViewDelegate & UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -121,6 +148,10 @@
     SPRApiCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SPRApiCell"];
     if (cell == nil) {
         cell = [[SPRApiCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SPRApiCell"];
+        __weak __typeof(self)weakSelf = self;
+        cell.apiSwitchChanged = ^(SPRApi * _Nonnull model, BOOL isOn) {
+            [weakSelf didApiSwitchChangedWithApi:model isOn:isOn];
+        };
     }
     cell.model = self.apis[indexPath.row];
     return cell;

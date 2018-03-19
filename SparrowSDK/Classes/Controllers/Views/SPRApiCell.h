@@ -8,13 +8,15 @@
 #import <UIKit/UIKit.h>
 
 @class SPRApi;
+
 @interface SPRApiCell : UITableViewCell
-@property (nonatomic, strong) UILabel *methodLabel;
-@property (nonatomic, strong) UILabel *nameLabel;
-@property (nonatomic, strong) UILabel *urlLabel;
-@property (nonatomic, strong) UISwitch *mockSwitch;
+@property (nonatomic, strong, nonnull) UILabel *methodLabel;
+@property (nonatomic, strong, nonnull) UILabel *nameLabel;
+@property (nonatomic, strong, nonnull) UILabel *urlLabel;
+@property (nonatomic, strong, nonnull) UISwitch *mockSwitch;
+@property (nonatomic, strong, nonnull) UIView *lineView;
 
-@property (nonatomic, strong) UIView *lineView;
+@property (nonatomic, strong, nonnull) SPRApi *model;
 
-@property (nonatomic, strong) SPRApi *model;
+@property (nonatomic, copy, nullable) void (^apiSwitchChanged)(SPRApi *_Nonnull model , BOOL isOn);
 @end

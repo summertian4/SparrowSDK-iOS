@@ -9,11 +9,11 @@
 
 @interface SPRHTTPSessionManager : AFHTTPSessionManager
 
-+ (SPRHTTPSessionManager *)defaultManager;
++ (SPRHTTPSessionManager * _Nullable)defaultManager;
 
-- (void)GET:(NSString *)URLString
- parameters:(id)parameters
-    success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
-    failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure;
+- (void)GET:(NSString * _Nullable)URLString
+ parameters:(id _Nullable)parameters
+    success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
+    failure:(void (^ _Nullable)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure;
 
 @end
