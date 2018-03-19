@@ -26,6 +26,12 @@
     return self;
 }
 
+#pragma mark - Action
+
+- (void)mockSwitchChanged:(UISwitch *)sender  {
+    self.apiSwitchChanged(self.model, sender.on);
+}
+
 #pragma mark - Getter Setter
 
 - (void)setModel:(SPRApi *)model {
@@ -120,6 +126,9 @@
     if (_mockSwitch == nil) {
         _mockSwitch = [[UISwitch alloc] init];
         _mockSwitch.onTintColor = SPRThemeColor;
+
+        [_mockSwitch addTarget:self action:@selector(mockSwitchChanged:)
+              forControlEvents:UIControlEventValueChanged];
 
         [self.contentView addSubview:_mockSwitch];
         [_mockSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
