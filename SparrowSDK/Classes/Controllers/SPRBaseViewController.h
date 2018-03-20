@@ -6,10 +6,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SPRToast.h"
+#import <Masonry/Masonry.h>
+#import "SPRCommonData.h"
 
 @interface SPRBaseViewController : UIViewController
 
 - (void)showHUD;
 - (void)hideHUD;
+
+- (void)setRightBarWithTitle:(NSString *)title action:(SEL)action;
+- (void)setRightBarWithImage:(UIImage *)image action:(SEL)action;
 
 @end

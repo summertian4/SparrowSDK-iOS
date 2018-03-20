@@ -16,7 +16,19 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+}
+
+- (void)setRightBarWithTitle:(NSString *)title action:(nullable SEL)action {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:title
+                                                                              style:UIBarButtonItemStyleDone target:self
+                                                                             action:action];
+}
+
+- (void)setRightBarWithImage:(UIImage *)image action:(nullable SEL)action {
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
+                                                                              style:UIBarButtonItemStyleDone
+                                                                             target:self action:action];
 }
 
 - (void)showHUD {

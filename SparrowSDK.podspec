@@ -32,9 +32,9 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'SparrowSDK/Classes/**/*'
   
-  # s.resource_bundles = {
-  #   'SparrowSDK' => ['SparrowSDK/Assets/*.png']
-  # }
+  s.resource_bundles = {
+    'SparrowSDK' => ['SparrowSDK/Assets/*.xcassets']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

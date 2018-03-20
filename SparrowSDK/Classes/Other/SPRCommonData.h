@@ -10,8 +10,10 @@
 
 #define SPRThemeColor ([UIColor colorWithHexString:@"04D1B2"])
 
-extern NSString * const SparrowHost;
-
 @interface SPRCommonData : NSObject
+
++ (NSBundle *)bundle;
++ (NSString *)sparrowHost;
++ (void)setSparrowHost:(NSString *)hostStr;
 
 @end
