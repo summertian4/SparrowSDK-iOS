@@ -14,4 +14,6 @@ extern NSString * const SparrowHost;
 
 @interface SPRCommonData : NSObject
 
++ (NSBundle *)bundle;
+
 @end

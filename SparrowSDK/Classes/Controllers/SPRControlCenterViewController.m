@@ -35,6 +35,11 @@
     self.title = @"Sparrow";
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self initSubviews];
+
+    UIImage *image = [UIImage imageNamed:@"sparrow_setting"
+                                inBundle:[SPRCommonData bundle]
+           compatibleWithTraitCollection:nil];
+    [self setRightBarWithImage:image action:@selector(jumpToSettingVC)];
 }
 
 - (void)initData {
@@ -66,6 +71,10 @@
 
 - (void)syncButtonClicked {
     [self fetchApis];
+}
+
+- (void)jumpToSettingVC {
+
 }
 
 - (void)fetchApis {

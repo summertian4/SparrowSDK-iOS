@@ -14,6 +14,7 @@
 #import "SPRControlCenterViewController.h"
 #import "SPRProjectDetailViewController.h"
 #import "SPRProjectListViewController.h"
+#import "SPRSettingViewController.h"
 #import "SPRApiCell.h"
 #import "SPRProjectCell.h"
 #import "SPRCheckBox.h"

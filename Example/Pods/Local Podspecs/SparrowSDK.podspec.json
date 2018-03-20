@@ -19,6 +19,11 @@
     "ios": "8.0"
   },
   "source_files": "SparrowSDK/Classes/**/*",
+  "resource_bundles": {
+    "SparrowSDK": [
+      "SparrowSDK/Assets/*.xcassets"
+    ]
+  },
   "dependencies": {
     "AFNetworking": [
 
