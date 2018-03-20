@@ -6,15 +6,13 @@
 //
 
 #import "SPRControlCenterViewController.h"
-#import <Masonry/Masonry.h>
-#import "SPRCommonData.h"
 #import "SPRProject.h"
 #import "SPRApi.h"
 #import "SPRCacheManager.h"
 #import "SPRApiCell.h"
 #import "SPRProjectListViewController.h"
 #import "SPRHTTPSessionManager.h"
-#import "SPRToast.h"
+#import "SPRSettingViewController.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -74,7 +72,7 @@
 }
 
 - (void)jumpToSettingVC {
-
+    [self.navigationController pushViewController:[SPRSettingViewController new] animated:YES];
 }
 
 - (void)fetchApis {

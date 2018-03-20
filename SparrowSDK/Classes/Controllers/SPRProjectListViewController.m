@@ -6,7 +6,6 @@
 //
 
 #import "SPRProjectListViewController.h"
-#import <Masonry/Masonry.h>
 #import "SPRProjectCell.h"
 #import "SPRProjectDetailViewController.h"
 #import "SPRProject.h"
@@ -32,9 +31,7 @@
     self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = @"选择项目";
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"选择"
-                                                                              style:UIBarButtonItemStyleDone target:self
-                                                                             action:@selector(startSelect)];
+    [self setRightBarWithTitle:@"选择" action:@selector(startSelect)];
 
     [self.view addSubview:[self tableView]];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
