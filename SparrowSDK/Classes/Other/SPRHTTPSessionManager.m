@@ -10,14 +10,20 @@
 
 @implementation SPRHTTPSessionManager
 
+static SPRHTTPSessionManager *manager;
+
 + (SPRHTTPSessionManager *)defaultManager {
-    static SPRHTTPSessionManager *manager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        manager = [[SPRHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:SparrowHost]];
+        manager = [[SPRHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:[SPRCommonData sparrowHost]]];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
     });
     return manager;
+}
+
++ (void)updateBaseURL {
+    manager = [[SPRHTTPSessionManager alloc] initWithBaseURL:[NSURL URLWithString:[SPRCommonData sparrowHost]]];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
 }
 
 - (void)GET:(NSString * _Nullable)URLString

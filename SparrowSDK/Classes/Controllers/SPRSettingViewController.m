@@ -16,17 +16,32 @@
 
 @implementation SPRSettingViewController
 
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.title = @"设置";
     [self initSubviews];
 }
 
+#pragma mark - Private
+
 - (void)initSubviews {
     [self hostTitleLabel];
     [self hostContentView];
     [self hostTextField];
     [self hostConfirmButton];
+}
+
+- (void)hostConfirmButtonClicked {
+    NSString *hostStr = [self.hostTextField.text
+                         stringByTrimmingCharactersInSet:
+                         [NSCharacterSet whitespaceCharacterSet]];
+    if ([hostStr hasSuffix:@"/"]) {
+        hostStr = [hostStr substringToIndex: hostStr.length - 1];
+    }
+    [SPRCommonData setSparrowHost:hostStr];
+    [SPRToast showWithMessage:@"设置 host 成功" from:self.view];
 }
 
 #pragma mark - Getter Setter
@@ -72,7 +87,7 @@
 - (UITextField *)hostTextField {
     if (_hostTextField == nil) {
         _hostTextField = [[UITextField alloc] init];
-        _hostTextField.text = @"xxx";
+        _hostTextField.text = [SPRCommonData sparrowHost];
         _hostTextField.font = [UIFont systemFontOfSize:17];
         _hostTextField.textColor = [UIColor colorWithHexString:@"4B4B4B"];
         [self.hostContentView addSubview:_hostTextField];
@@ -92,6 +107,8 @@
         _hostConfirmButton.layer.cornerRadius = 5;
         _hostConfirmButton.titleLabel.font = [UIFont systemFontOfSize:14];
         [_hostConfirmButton setTitle:@"确认" forState:UIControlStateNormal];
+        [_hostConfirmButton addTarget:self action:@selector(hostConfirmButtonClicked)
+                     forControlEvents:UIControlEventTouchUpInside];
         [self.hostContentView addSubview:_hostConfirmButton];
         [_hostConfirmButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.hostContentView).offset(-8);

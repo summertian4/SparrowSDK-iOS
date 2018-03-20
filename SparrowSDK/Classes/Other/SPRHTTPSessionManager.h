@@ -10,6 +10,7 @@
 @interface SPRHTTPSessionManager : AFHTTPSessionManager
 
 + (SPRHTTPSessionManager * _Nullable)defaultManager;
++ (void)updateBaseURL;
 
 - (void)GET:(NSString * _Nullable)URLString
  parameters:(id _Nullable)parameters

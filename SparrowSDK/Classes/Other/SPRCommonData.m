@@ -7,8 +7,7 @@
 
 #import "SPRCommonData.h"
 
-NSString * const SparrowHost = @"http://localhost:8000";
-
+NSString * const SparrowHostKey = @"SparrowHostKey";
 @implementation SPRCommonData
 
 + (NSBundle *)bundle {
@@ -16,6 +15,18 @@ NSString * const SparrowHost = @"http://localhost:8000";
                             stringByAppendingPathComponent:@"/SparrowSDK.bundle"];
     NSBundle *resource_bundle = [NSBundle bundleWithPath:bundlePath];
     return resource_bundle;
+}
+
++ (NSString *)sparrowHost {
+    NSString *result = [[NSUserDefaults standardUserDefaults] objectForKey:SparrowHostKey];
+    if (result == nil) {
+        result = @"http://localhost:8000";
+    }
+    return result;
+}
+
++ (void)setSparrowHost:(NSString *)hostStr {
+    [[NSUserDefaults standardUserDefaults] setObject:hostStr forKey:SparrowHostKey];
 }
 
 @end

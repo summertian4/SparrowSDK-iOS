@@ -13,7 +13,7 @@
 @implementation SPRRequestFilter
 
 + (NSURLRequest *)filterRequest:(NSURLRequest *)request {
-    if ([request.URL.absoluteString hasPrefix:SparrowHost]) {
+    if ([request.URL.absoluteString hasPrefix:[SPRCommonData sparrowHost]]) {
         return request;
     }
     NSMutableURLRequest *mutableRequest = request.mutableCopy;
@@ -21,7 +21,8 @@
     NSArray<SPRApi *> *apis = [SPRCacheManager sharedInstance].apis;
     for (SPRApi *api in apis) {
         if ([request.URL.absoluteString hasSuffix:api.path]) {
-            mutableRequest.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/mock/%ld/%@", SparrowHost, api.project_id, api.path]];
+            mutableRequest.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/mock/%ld/%@",
+                                                       [SPRCommonData sparrowHost], api.project_id, api.path]];
             break;
         }
     }
