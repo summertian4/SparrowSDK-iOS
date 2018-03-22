@@ -9,4 +9,6 @@
 
 @interface SPROptions : NSObject
 
+@property (nonatomic, copy) NSString *hostURL;
+
 @end

@@ -8,10 +8,14 @@
 #import "SparrowSDK.h"
 #import "SPRURLProtocol.h"
 #import "SPRFloatBallWindowManager.h"
+#import "SPRCommonData.h"
 
 @implementation SparrowSDK
 
 + (void)startWithOption:(SPROptions *)options {
+    if (options.hostURL != nil) {
+        [SPRCommonData setSparrowHost:options.hostURL];
+    }
     [SPRURLProtocol start];
     [SPRFloatBallWindowManager showWindow];
 }
