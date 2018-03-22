@@ -17,6 +17,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    self.navigationController.navigationBar.tintColor = SPRThemeColor;
+    [self.navigationController.navigationBar
+     setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
 }
 
 - (void)setRightBarWithTitle:(NSString *)title action:(nullable SEL)action {
