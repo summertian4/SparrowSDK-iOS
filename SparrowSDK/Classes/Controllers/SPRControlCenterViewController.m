@@ -124,7 +124,6 @@
 - (void)clearCacheButtonClicked {
     [SPRCacheManager clearProjectsFromCache];
     [SPRCacheManager clearApisFromCache];
-    [self showHUD];
     [SPRToast showWithMessage:@"清除成功" from:self.view];
     self.apis = [SPRCacheManager getApisFromCache];
     [self.mainTable reloadData];

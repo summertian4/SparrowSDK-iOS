@@ -49,7 +49,7 @@
 - (UILabel *)hostTitleLabel {
     if (_hostTitleLabel == nil) {
         _hostTitleLabel = [[UILabel alloc] init];
-        _hostTitleLabel.text = @"Host 设置";
+        _hostTitleLabel.text = @"Sparrow Host 设置";
         _hostTitleLabel.font = [UIFont systemFontOfSize:17];
         _hostTitleLabel.textColor = [UIColor colorWithHexString:@"545454"];
 
