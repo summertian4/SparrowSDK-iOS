@@ -9,6 +9,7 @@
 #import "SPRURLProtocol.h"
 #import "SPRFloatBallWindowManager.h"
 #import "SPRCommonData.h"
+#import "SPRControlCenterViewController.h"
 
 @implementation SparrowSDK
 
@@ -17,7 +18,13 @@
         [SPRCommonData setSparrowHost:options.hostURL];
     }
     [SPRURLProtocol start];
-    [SPRFloatBallWindowManager showWindow];
+    [SPRFloatBallWindowManager showWindow:options.ballClickedCallback];
+}
+
++ (UIViewController *)controlCenter {
+    UIViewController *vc = [[SPRControlCenterViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    return nav;
 }
 
 @end

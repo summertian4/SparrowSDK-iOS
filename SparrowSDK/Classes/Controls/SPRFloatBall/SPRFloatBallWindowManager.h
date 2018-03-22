@@ -7,9 +7,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void (^BallClickedCallback)(void);
 @interface SPRFloatBallWindowManager : NSObject
 
-+ (void)showWindow;
++ (void)showWindow:(BallClickedCallback)ballClickedCallback;
 + (void)dismissWindow;
 
 + (void)showFloatBall;

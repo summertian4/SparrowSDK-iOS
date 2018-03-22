@@ -8,8 +8,10 @@
 #import <Foundation/Foundation.h>
 #import "SPROptions.h"
 
+@class SPRControlCenterViewController;
 @interface SparrowSDK : NSObject
 
 + (void)startWithOption:(SPROptions *)options;
++ (UIViewController *)controlCenter;
 
 @end
