@@ -6,7 +6,7 @@
 //
 
 #import "SPRBaseViewController.h"
-#import <MBProgressHUD/MBProgressHUD.h>
+#import <SVProgressHUD/SVProgressHUD.h>
 
 @interface SPRBaseViewController ()
 
@@ -29,14 +29,6 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
                                                                               style:UIBarButtonItemStyleDone
                                                                              target:self action:action];
-}
-
-- (void)showHUD {
-    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
-}
-
-- (void)hideHUD {
-    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 @end
