@@ -11,6 +11,7 @@
 
 @interface SPRFloatBallWindowManager ()
 
+@property (nonatomic, copy) BallClickedCallback ballClickedCallback;
 @property (nonatomic, strong) UIWindow *window;
 
 @end
@@ -28,7 +29,8 @@
 
 #pragma mark - Public
 
-+ (void)showWindow {
++ (void)showWindow:(BallClickedCallback)ballClickedCallback {
+    [[self sharedInstance] setBallClickedCallback:ballClickedCallback];
     [[self sharedInstance] window].hidden = NO;
     [[self sharedInstance] window].rootViewController.view.userInteractionEnabled = YES;
 }
@@ -39,11 +41,10 @@
 
 + (void)showFloatBall {
 
-
 }
 
 - (void)addFloatBall {
-    SPRFloatBall *ball = [[SPRFloatBall alloc] init];
+    SPRFloatBall *ball = [[SPRFloatBall alloc] initWithCallBack:self.ballClickedCallback];
     [self.window.rootViewController.view addSubview:ball];
 }
 

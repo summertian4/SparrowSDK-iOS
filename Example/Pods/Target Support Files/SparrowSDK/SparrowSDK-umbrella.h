@@ -32,6 +32,8 @@
 #import "SPRCommonData.h"
 #import "SPRHTTPSessionManager.h"
 #import "UIColor+SPRAddtion.h"
+#import "SparrowSDK.h"
+#import "SPROptions.h"
 
 FOUNDATION_EXPORT double SparrowSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char SparrowSDKVersionString[];

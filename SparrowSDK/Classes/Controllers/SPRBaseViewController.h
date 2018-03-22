@@ -14,5 +14,6 @@
 
 - (void)setRightBarWithTitle:(NSString *)title action:(SEL)action;
 - (void)setRightBarWithImage:(UIImage *)image action:(SEL)action;
+- (void)setLeftBarWithImage:(UIImage *)image action:(SEL)action;
 
 @end
