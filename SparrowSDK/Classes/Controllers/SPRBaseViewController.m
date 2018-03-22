@@ -7,6 +7,7 @@
 
 #import "SPRBaseViewController.h"
 #import <SVProgressHUD/SVProgressHUD.h>
+#import "SPRProgressHUD.h"
 
 @interface SPRBaseViewController ()
 
@@ -40,5 +41,14 @@
                                                                               style:UIBarButtonItemStyleDone
                                                                              target:self action:action];
 }
+
+- (void)showHUD {
+    [SPRProgressHUD showHUDAddedTo:self.view animated:YES];
+}
+
+- (void)dismissHUD {
+    [SPRProgressHUD hideHUDForView:self.view animated:YES];
+}
+
 
 @end

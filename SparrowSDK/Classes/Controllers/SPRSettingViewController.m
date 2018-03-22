@@ -41,7 +41,7 @@
         hostStr = [hostStr substringToIndex: hostStr.length - 1];
     }
     [SPRCommonData setSparrowHost:hostStr];
-    [SPRToast showWithMessage:@"设置 host 成功"];
+    [SPRToast showWithMessage:@"设置 host 成功" from:self.view];
 }
 
 #pragma mark - Getter Setter

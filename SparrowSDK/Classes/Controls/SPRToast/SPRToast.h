@@ -9,8 +9,6 @@
 
 @interface SPRToast : UIView
 
-+ (void)showWithMessage:(NSString *)message;
-+ (void)showHUD;
-+ (void)dismissHUD;
++ (void)showWithMessage:(NSString *)message from:(UIView *)view;
 
 @end

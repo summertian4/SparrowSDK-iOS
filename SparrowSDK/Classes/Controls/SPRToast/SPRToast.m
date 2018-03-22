@@ -6,24 +6,22 @@
 //
 
 #import "SPRToast.h"
+#import "SPRProgressHUD.h"
 #import <SVProgressHUD/SVProgressHUD.h>
 
 @implementation SPRToast
 
-+ (void)showWithMessage:(NSString *)message {
-    [SVProgressHUD showInfoWithStatus:message];
++ (void)showWithMessage:(NSString *)message from:(UIView *)view {
+    SPRProgressHUD *toast = [SPRProgressHUD showHUDAddedTo:view animated:YES];
+    [toast setMode:SPRProgressHUDModeText];
+    toast.label.text = message;
+    [toast showAnimated:YES];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
                    dispatch_get_main_queue(), ^{
-                       [SVProgressHUD dismiss];
+                       [toast hideAnimated:YES];
                    });
-}
 
-+ (void)showHUD {
-    [SVProgressHUD show];
-}
 
-+ (void)dismissHUD {
-    [SVProgressHUD dismiss];
 }
 
 @end
