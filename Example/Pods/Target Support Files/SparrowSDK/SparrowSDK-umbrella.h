@@ -21,6 +21,7 @@
 #import "SPRFloatBall.h"
 #import "SPRFloatBallWindow.h"
 #import "SPRFloatBallWindowManager.h"
+#import "SPRProgressHUD.h"
 #import "SPRToast.h"
 #import "SPRCacheManager.h"
 #import "SPRRequestFilter.h"
