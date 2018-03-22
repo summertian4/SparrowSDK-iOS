@@ -81,7 +81,7 @@
 
     NSSet *projects = [SPRCacheManager getProjectsFromCache];
     if (projects == nil || projects.count == 0) {
-        [SPRToast showWithMessage:@"请先选择项目" from:self.view];
+        [SPRToast showWithMessage:@"请先选择项目"];
         return;
     }
 
@@ -89,13 +89,13 @@
     for (SPRProject *project in projects) {
         [projectIds addObject:@(project.project_id)];
     }
-    [self showHUD];
+    [SPRToast showHUD];
     [manager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
-                 [strongSelf hideHUD];
+                 [SPRToast dismissHUD];
                  NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
                  if (apis.count != 0) {
                      [SPRCacheManager cacheApis:apis];
@@ -105,15 +105,15 @@
              }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"%@", error);
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             [strongSelf hideHUD];
+             [SPRToast dismissHUD];
+             [SPRToast showWithMessage:@"拉取 API 失败"];
          }];
 }
 
 - (void)clearCacheButtonClicked {
     [SPRCacheManager clearProjectsFromCache];
     [SPRCacheManager clearApisFromCache];
-    [SPRToast showWithMessage:@"清除成功" from:self.view];
+    [SPRToast showWithMessage:@"清除成功"];
     self.apis = [SPRCacheManager getApisFromCache];
     [self.mainTable reloadData];
 }
@@ -130,7 +130,7 @@
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
                  NSString *message = isOn? @"打开 Mock 成功" : @"关闭 Mock 成功";
-                 [SPRToast showWithMessage:message from:strongSelf.view];
+                 [SPRToast showWithMessage:message];
                  api.status = isOn ? SPRApiStatusMock : SPRApiStatusDisabled;
                  [strongSelf.mainTable reloadData];
              }
@@ -138,7 +138,7 @@
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
                  NSString *message = isOn? @"打开 Mock 失败" : @"关闭 Mock 失败";
-                 [SPRToast showWithMessage:message from:strongSelf.view];
+                 [SPRToast showWithMessage:message];
                  [strongSelf.mainTable reloadData];
              }
          }];

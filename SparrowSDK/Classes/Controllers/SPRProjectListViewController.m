@@ -64,13 +64,13 @@
     SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
-    [self showHUD];
+    [SPRToast showHUD];
     [manager GET:@"/frontend/project/list"
       parameters:@{@"current_page": @(self.projectsData.currentPage + 1), @"limit": @(self.projectsData.limit)}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
-                 [strongSelf hideHUD];
+                 [SPRToast dismissHUD];
                  SPRProjectsData *newPorjectsData = [[SPRProjectsData alloc] initWithDict:responseObject[@"projects_data"]];
                  [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
                  strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
@@ -78,8 +78,8 @@
              }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         NSLog(@"%@", error);
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        [strongSelf hideHUD];
+        [SPRToast dismissHUD];
+        [SPRToast showWithMessage:error.domain];
     }];
 }
 
@@ -91,13 +91,13 @@
     for (SPRProject *project in self.seletedProjects) {
         [projectIds addObject:@(project.project_id)];
     }
-    [self showHUD];
+    [SPRToast showHUD];
     [manager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
-                 [strongSelf hideHUD];
+                 [SPRToast dismissHUD];
                  NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
                  if (apis.count != 0) {
                      [SPRCacheManager cacheProjects:[NSSet setWithSet:strongSelf.seletedProjects]];
@@ -108,8 +108,8 @@
              }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"%@", error);
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             [strongSelf hideHUD];
+             [SPRToast dismissHUD];
+             [SPRToast showWithMessage:@"拉取 API 失败"];
          }];
 }
 
