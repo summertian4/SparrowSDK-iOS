@@ -35,4 +35,10 @@
                                                                              target:self action:action];
 }
 
+- (void)setLeftBarWithImage:(UIImage *)image action:(nullable SEL)action {
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:image
+                                                                              style:UIBarButtonItemStyleDone
+                                                                             target:self action:action];
+}
+
 @end

@@ -34,10 +34,14 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self initSubviews];
 
-    UIImage *image = [UIImage imageNamed:@"sparrow_setting"
+    UIImage *leftImage = [UIImage imageNamed:@"sparrow_setting"
                                 inBundle:[SPRCommonData bundle]
            compatibleWithTraitCollection:nil];
-    [self setRightBarWithImage:image action:@selector(jumpToSettingVC)];
+    UIImage *rightImage = [UIImage imageNamed:@"sparrow_back"
+                                    inBundle:[SPRCommonData bundle]
+               compatibleWithTraitCollection:nil];
+    [self setRightBarWithImage:leftImage action:@selector(jumpToSettingVC)];
+    [self setLeftBarWithImage:rightImage action:@selector(leftBarButtonClicked)];
 }
 
 - (void)initData {
@@ -73,6 +77,10 @@
 
 - (void)jumpToSettingVC {
     [self.navigationController pushViewController:[SPRSettingViewController new] animated:YES];
+}
+
+- (void)leftBarButtonClicked {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)fetchApis {
