@@ -5,16 +5,16 @@
 //  Created by 周凌宇 on 2018/3/8.
 //
 
-#import "SPRFloatBall.h"
+#import "SPRFloatingBall.h"
 #import "SPRControlCenterViewController.h"
 
-@interface SPRFloatBall ()
+@interface SPRFloatingBall ()
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, assign) BOOL showedManagerVC;
 @end
 
-@implementation SPRFloatBall
+@implementation SPRFloatingBall
 
 - (instancetype)initWithCallBack:(BallClickedCallback)callback {
     if (self = [super init]) {

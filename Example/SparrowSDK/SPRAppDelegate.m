@@ -7,7 +7,6 @@
 //
 
 #import "SPRAppDelegate.h"
-#import "SPRFloatBallWindowManager.h"
 #import <SparrowSDK/SparrowSDK.h>
 
 @implementation SPRAppDelegate
