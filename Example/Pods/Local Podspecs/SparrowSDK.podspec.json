@@ -1,9 +1,9 @@
 {
   "name": "SparrowSDK",
   "version": "1.0.0",
-  "summary": "A short description of SparrowSDK.",
+  "summary": "An iOS SDK for Sparrow.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://git.elenet.me/LPD-iOS/SparrowSDK-iOS",
+  "homepage": "https://github.com/summertian4/SparrowSDK",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
@@ -12,9 +12,10 @@
     "summertian4": "coderfish@163.com"
   },
   "source": {
-    "git": "git@git.elenet.me:LPD-iOS/SparrowSDK-iOS.git",
+    "git": "https://github.com/summertian4/SparrowSDK.git",
     "tag": "1.0.0"
   },
+  "social_media_url": "https://weibo.com/coderfish/",
   "platforms": {
     "ios": "8.0"
   },
