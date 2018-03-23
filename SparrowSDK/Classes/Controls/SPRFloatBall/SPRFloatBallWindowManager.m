@@ -45,6 +45,7 @@
 
 - (void)addFloatBall {
     SPRFloatingBall *ball = [[SPRFloatingBall alloc] initWithCallBack:self.ballClickedCallback];
+    ball.frame = CGRectMake(0, 20, 50, 50);
     [self.window.rootViewController.view addSubview:ball];
 }
 

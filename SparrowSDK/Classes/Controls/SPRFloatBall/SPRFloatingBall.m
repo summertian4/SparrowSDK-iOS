@@ -12,6 +12,8 @@
 
 @property (nonatomic, strong) UIWindow *window;
 @property (nonatomic, assign) BOOL showedManagerVC;
+
+@property (nonatomic, strong) UIImageView *ballImageView;
 @end
 
 @implementation SPRFloatingBall
@@ -19,13 +21,10 @@
 - (instancetype)initWithCallBack:(BallClickedCallback)callback {
     if (self = [super init]) {
         self.ballClickedCallback = [callback copy];;
-        self.frame = CGRectMake(0, 0, 40, 40);
-        self.layer.cornerRadius = 20;
-        self.layer.masksToBounds = YES;
-        self.layer.borderWidth = 1;
-        self.layer.borderColor = [UIColor colorWithRed:0.1 green:0.1 blue:0.1 alpha:1].CGColor;
-        self.backgroundColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1];
-        self.alpha = 0.2;
+        self.frame = CGRectMake(0, 0, 50, 50);
+        self.backgroundColor = [UIColor clearColor];
+        self.alpha = 0.8;
+        [self ballImageView];
 
         UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
         singleTapGesture.numberOfTapsRequired = 1;
@@ -73,6 +72,22 @@
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+}
+
+- (UIImageView *)ballImageView {
+    if (_ballImageView == nil) {
+        _ballImageView = [[UIImageView alloc] init];
+        UIImage *image = [UIImage imageNamed:@"sparrow_floatingball"
+                                        inBundle:[SPRCommonData bundle]
+                   compatibleWithTraitCollection:nil];
+        _ballImageView.contentMode = UIViewContentModeScaleAspectFill;
+        _ballImageView.image = image;
+        [self addSubview:_ballImageView];
+        [_ballImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self);
+        }];
+    }
+    return _ballImageView;
 }
 
 @end
