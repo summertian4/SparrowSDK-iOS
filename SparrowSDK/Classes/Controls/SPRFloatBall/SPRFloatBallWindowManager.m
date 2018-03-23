@@ -6,7 +6,7 @@
 //
 
 #import "SPRFloatBallWindowManager.h"
-#import "SPRFloatBall.h"
+#import "SPRFloatingBall.h"
 #import "SPRFloatBallWindow.h"
 
 @interface SPRFloatBallWindowManager ()
@@ -44,7 +44,8 @@
 }
 
 - (void)addFloatBall {
-    SPRFloatBall *ball = [[SPRFloatBall alloc] initWithCallBack:self.ballClickedCallback];
+    SPRFloatingBall *ball = [[SPRFloatingBall alloc] initWithCallBack:self.ballClickedCallback];
+    ball.frame = CGRectMake(0, 20, 50, 50);
     [self.window.rootViewController.view addSubview:ball];
 }
 
