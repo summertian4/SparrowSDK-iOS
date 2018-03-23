@@ -34,10 +34,14 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self initSubviews];
 
-    UIImage *image = [UIImage imageNamed:@"sparrow_setting"
+    UIImage *leftImage = [UIImage imageNamed:@"sparrow_setting"
                                 inBundle:[SPRCommonData bundle]
            compatibleWithTraitCollection:nil];
-    [self setRightBarWithImage:image action:@selector(jumpToSettingVC)];
+    UIImage *rightImage = [UIImage imageNamed:@"sparrow_back"
+                                    inBundle:[SPRCommonData bundle]
+               compatibleWithTraitCollection:nil];
+    [self setRightBarWithImage:leftImage action:@selector(jumpToSettingVC)];
+    [self setLeftBarWithImage:rightImage action:@selector(leftBarButtonClicked)];
 }
 
 - (void)initData {
@@ -75,13 +79,17 @@
     [self.navigationController pushViewController:[SPRSettingViewController new] animated:YES];
 }
 
+- (void)leftBarButtonClicked {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)fetchApis {
     SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
     NSSet *projects = [SPRCacheManager getProjectsFromCache];
     if (projects == nil || projects.count == 0) {
-        [SPRToast showWithMessage:@"请先选择项目"];
+        [SPRToast showWithMessage:@"请先选择项目" from:self.view];
         return;
     }
 
@@ -89,13 +97,13 @@
     for (SPRProject *project in projects) {
         [projectIds addObject:@(project.project_id)];
     }
-    [SPRToast showHUD];
+    [self showHUD];
     [manager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
-                 [SPRToast dismissHUD];
+                 [strongSelf dismissHUD];
                  NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
                  if (apis.count != 0) {
                      [SPRCacheManager cacheApis:apis];
@@ -105,15 +113,18 @@
              }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              NSLog(@"%@", error);
-             [SPRToast dismissHUD];
-             [SPRToast showWithMessage:@"拉取 API 失败"];
+             __strong __typeof(weakSelf)strongSelf = weakSelf;
+             if (strongSelf) {
+                 [strongSelf dismissHUD];
+                 [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.view];
+             }
          }];
 }
 
 - (void)clearCacheButtonClicked {
     [SPRCacheManager clearProjectsFromCache];
     [SPRCacheManager clearApisFromCache];
-    [SPRToast showWithMessage:@"清除成功"];
+    [SPRToast showWithMessage:@"清除成功" from:self.view];
     self.apis = [SPRCacheManager getApisFromCache];
     [self.mainTable reloadData];
 }
@@ -130,7 +141,7 @@
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
                  NSString *message = isOn? @"打开 Mock 成功" : @"关闭 Mock 成功";
-                 [SPRToast showWithMessage:message];
+                 [SPRToast showWithMessage:message from:weakSelf.view];
                  api.status = isOn ? SPRApiStatusMock : SPRApiStatusDisabled;
                  [strongSelf.mainTable reloadData];
              }
@@ -138,7 +149,7 @@
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
                  NSString *message = isOn? @"打开 Mock 失败" : @"关闭 Mock 失败";
-                 [SPRToast showWithMessage:message];
+                 [SPRToast showWithMessage:message from:weakSelf.view];
                  [strongSelf.mainTable reloadData];
              }
          }];
