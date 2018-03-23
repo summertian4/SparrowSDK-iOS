@@ -8,15 +8,17 @@
 
 #import "SPRAppDelegate.h"
 #import "SPRFloatBallWindowManager.h"
-#import "SPRURLProtocol.h"
+#import <SparrowSDK/SparrowSDK.h>
 
 @implementation SPRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    [SPRURLProtocol start];
-    [SPRFloatBallWindowManager showWindow];
+#ifdef DEBUG
+    SPROptions *options = [SPROptions new];
+    options.hostURL = @"http://localhost:8000";
+    [SparrowSDK startWithOption:options];
+#endif
     return YES;
 }
 
