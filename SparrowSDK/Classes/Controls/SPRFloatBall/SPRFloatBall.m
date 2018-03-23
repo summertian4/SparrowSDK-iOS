@@ -6,7 +6,6 @@
 //
 
 #import "SPRFloatBall.h"
-//#import "SPRProjectListViewController.h"
 #import "SPRControlCenterViewController.h"
 
 @interface SPRFloatBall ()
@@ -17,8 +16,9 @@
 
 @implementation SPRFloatBall
 
-- (instancetype)init {
+- (instancetype)initWithCallBack:(BallClickedCallback)callback {
     if (self = [super init]) {
+        self.ballClickedCallback = [callback copy];;
         self.frame = CGRectMake(0, 0, 40, 40);
         self.layer.cornerRadius = 20;
         self.layer.masksToBounds = YES;
@@ -36,34 +36,23 @@
 }
 
 -(void)handleSingleTap:(UIGestureRecognizer *)sender {
+    if (self.ballClickedCallback) {
+        self.ballClickedCallback();
+        return;
+    }
     if (self.showedManagerVC == NO) {
         UIViewController *vc = [[SPRControlCenterViewController alloc] init];
         UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-        nav.navigationBar.tintColor = [UIColor colorWithRed:90/256.0 green:206/256.0 blue:179/256.0 alpha:1];
         [[UIApplication sharedApplication].keyWindow.rootViewController
          presentViewController:nav
          animated:YES
          completion:nil];
     } else {
-#pragma mark - TODO
         [[UIApplication sharedApplication].keyWindow.rootViewController
          dismissViewControllerAnimated:YES
          completion:nil];
     }
     self.showedManagerVC = !self.showedManagerVC;
-}
-
-+ (instancetype)sharedInstance {
-    static SPRFloatBall *instance = nil;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        instance = [[SPRFloatBall alloc] init];
-    });
-    return instance;
-}
-
-+ (void)show {
-    [[SPRFloatBall sharedInstance] window];
 }
 
 + (void)dismiss {
