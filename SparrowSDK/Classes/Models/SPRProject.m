@@ -10,6 +10,9 @@
 @implementation SPRProject
 
 - (instancetype)initWithDict:(NSDictionary *)dict {
+    if (dict == nil) {
+        return nil;
+    }
     if (self = [super init]) {
         _name = dict[@"name"];
         _status = [dict[@"status"] intValue];
