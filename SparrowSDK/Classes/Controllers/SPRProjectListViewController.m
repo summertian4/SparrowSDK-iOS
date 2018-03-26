@@ -28,7 +28,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1];
+    self.view.backgroundColor = [UIColor colorWithRed:0.95 green:0.95 blue:0.95 alpha:1];
     self.automaticallyAdjustsScrollViewInsets = NO;
     self.title = @"选择项目";
     [self setRightBarWithTitle:@"选择" action:@selector(startSelect)];
@@ -153,7 +153,7 @@
     UIView *footer = [[UIView alloc] init];
     UIButton *button = [[UIButton alloc] init];
     button.titleLabel.font = [UIFont systemFontOfSize:13];
-    button.backgroundColor = [UIColor colorWithRed:90/256.0 green:206/256.0 blue:179/256.0 alpha:1];
+    button.backgroundColor = SPRThemeColor;
     [button setTitle:@"加载更多" forState:UIControlStateNormal];
     [button setTitle:@"已加载全部" forState:UIControlStateDisabled];
     [footer addSubview:button];
