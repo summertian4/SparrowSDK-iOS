@@ -51,10 +51,12 @@
         _blockView.backgroundColor = [UIColor whiteColor];
         _blockView.layer.borderColor = [UIColor colorWithRed:0.9 green:0.9 blue:0.9 alpha:1].CGColor;
         _blockView.layer.borderWidth = 1;
-        _blockView.layer.cornerRadius = 5;
-        _blockView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-        _blockView.layer.shadowOpacity = 0.95f;
-        _blockView.layer.shadowOffset = CGSizeMake(1,1);
+        _blockView.layer.cornerRadius = 8;
+
+        _blockView.layer.shadowColor = [UIColor colorWithHexString:@"000000"].CGColor;
+        _blockView.layer.shadowOpacity = 0.2f;
+        _blockView.layer.shadowOffset = CGSizeMake(0,6);
+        _blockView.layer.shadowRadius = 12;
 
         [_blockView addSubview:[self titleLabel]];
         [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
