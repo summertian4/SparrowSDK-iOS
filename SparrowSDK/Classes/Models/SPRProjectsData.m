@@ -11,8 +11,10 @@
 @implementation SPRProjectsData
 
 - (instancetype)initWithDict:(NSDictionary *)dict {
+    if (dict == nil) {
+        return nil;
+    }
     if (self = [super init]) {
-        // convert
         _currentPage = [dict[@"current_page"] intValue];
         _total = [dict[@"total"] intValue];
         _limit = [dict[@"limit"] intValue];
@@ -26,7 +28,9 @@
     NSMutableArray<SPRProject *> *projects = [NSMutableArray array];
     for (NSDictionary *projectDict in array) {
         SPRProject *project = [[SPRProject alloc] initWithDict:projectDict];
-        [projects addObject:project];
+        if (project != nil) {
+            [projects addObject:project];
+        }
     }
     return projects;
 }

@@ -74,6 +74,11 @@
              if (strongSelf) {
                  [strongSelf dismissHUD];
                  SPRProjectsData *newPorjectsData = [[SPRProjectsData alloc] initWithDict:responseObject[@"projects_data"]];
+                 if (newPorjectsData == nil || newPorjectsData.projects == nil) {
+                     strongSelf.projectsData.currentPage = 0;
+                     [strongSelf.tableView reloadData];
+                     return;
+                 }
                  [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
                  strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
                  [strongSelf.tableView reloadData];
