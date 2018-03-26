@@ -52,7 +52,9 @@
     } else {
         text = @"选择";
         // 拉取 API
-        [self fetchApis];
+        if (self.seletedProjects.count > 0) {
+            [self fetchApis];
+        }
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:text
                                                                               style:UIBarButtonItemStyleDone target:self
@@ -129,6 +131,8 @@
     project.isSelected = !project.isSelected;
     if (project.isSelected) {
         [self.seletedProjects addObject:project];
+    } else {
+        [self.seletedProjects removeObject:project];
     }
 
     [tableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
