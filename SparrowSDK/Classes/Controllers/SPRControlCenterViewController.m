@@ -144,6 +144,7 @@
                  [SPRToast showWithMessage:message from:weakSelf.view];
                  api.status = isOn ? SPRApiStatusMock : SPRApiStatusDisabled;
                  [strongSelf.mainTable reloadData];
+                 [SPRCacheManager cacheApis:strongSelf.apis];
              }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
