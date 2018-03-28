@@ -123,17 +123,6 @@ static NSString *const SPRHTTP = @"SPRHTTP";
 
 - (void)stopLoading {
     [self.connection cancel];
-
-    //获取请求方法
-    NSString *requestMethod = self.spr_request.HTTPMethod;
-    NSLog(@"Sparrow: 请求方法：%@",requestMethod);
-
-    //获取请求头
-    NSDictionary *headers = self.spr_request.allHTTPHeaderFields;
-    NSLog(@"Sparrow: 请求头：\n");
-    for (NSString *key in headers.allKeys) {
-        NSLog(@"Sparrow: %@ : %@",key,headers[key]);
-    }
 }
 
 #pragma mark - NSURLConnectionDelegate
