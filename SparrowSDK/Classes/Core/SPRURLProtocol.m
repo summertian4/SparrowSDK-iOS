@@ -123,17 +123,6 @@ static NSString *const SPRHTTP = @"SPRHTTP";
 
 - (void)stopLoading {
     [self.connection cancel];
-
-    //获取请求方法
-    NSString *requestMethod = self.spr_request.HTTPMethod;
-    NSLog(@"Sparrow: 请求方法：%@",requestMethod);
-
-    //获取请求头
-    NSDictionary *headers = self.spr_request.allHTTPHeaderFields;
-    NSLog(@"Sparrow: 请求头：\n");
-    for (NSString *key in headers.allKeys) {
-        NSLog(@"Sparrow: %@ : %@",key,headers[key]);
-    }
 }
 
 #pragma mark - NSURLConnectionDelegate
@@ -157,8 +146,6 @@ static NSString *const SPRHTTP = @"SPRHTTP";
 #pragma mark - NSURLConnectionDataDelegate
 
 -(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
-    NSLog(@"Sparrow: request：%@", request);
-
     request = [SPRRequestFilter filterRequest:request];
 
     if (response != nil) {
@@ -177,7 +164,6 @@ didReceiveResponse:(NSURLResponse *)response {
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.client URLProtocol:self didLoadData:data];
     [self.spr_data appendData:data];
-    NSLog(@"Sparrow: receiveData");
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection

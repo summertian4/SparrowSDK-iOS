@@ -10,6 +10,15 @@
 
 #define SPRThemeColor ([UIColor colorWithHexString:@"04D1B2"])
 
+#ifdef DEBUG
+#define SPRLog(fmt, ...) NSLog(@"--------"); \
+NSLog((@"SparrowSDK: %s [Line %d] "), __PRETTY_FUNCTION__, __LINE__); \
+NSLog(fmt,  ##__VA_ARGS__); \
+NSLog(@"--------");
+#else
+# define SPRLog(...);
+#endif
+
 @interface SPRCommonData : NSObject
 
 + (NSBundle *)bundle;
