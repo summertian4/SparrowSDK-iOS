@@ -146,8 +146,6 @@ static NSString *const SPRHTTP = @"SPRHTTP";
 #pragma mark - NSURLConnectionDataDelegate
 
 -(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
-    NSLog(@"Sparrow: request：%@", request);
-
     request = [SPRRequestFilter filterRequest:request];
 
     if (response != nil) {
@@ -166,7 +164,6 @@ didReceiveResponse:(NSURLResponse *)response {
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
     [self.client URLProtocol:self didLoadData:data];
     [self.spr_data appendData:data];
-    NSLog(@"Sparrow: receiveData");
 }
 
 - (NSCachedURLResponse *)connection:(NSURLConnection *)connection
