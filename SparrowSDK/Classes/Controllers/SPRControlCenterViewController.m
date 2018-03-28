@@ -112,7 +112,7 @@
                  }
              }
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             NSLog(@"%@", error);
+             SPRLog(@"%@", error);
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
                  [strongSelf dismissHUD];

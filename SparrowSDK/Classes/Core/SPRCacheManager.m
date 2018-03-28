@@ -7,6 +7,7 @@
 
 #import "SPRCacheManager.h"
 #import "SPRApi.h"
+#import "SPRCommonData.h"
 
 static char *QueueName = "com.zhoulingyu.sparrow.queue";
 @interface SPRCacheManager () {
@@ -73,7 +74,7 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
             BOOL result = [data writeToFile:[SPRCacheManager apisPath] atomically:YES];
 
             if (result == NO) {
-                NSLog(@"Caching API failed");
+                SPRLog(@"Caching API failed");
                 return;
             }
             strongSelf.apis = apis;
@@ -122,7 +123,7 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
                 NSError *err;
                 [fileMger removeItemAtPath:path error:&err];
                 if (err) {
-                    NSLog(@"删除 Projects 缓存失败");
+                    SPRLog(@"Delete projects cache failed");
                 } else {
                     strongSelf.apis = nil;
                 }
@@ -144,7 +145,7 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
             BOOL result = [data writeToFile:[SPRCacheManager projectsPath] atomically:YES];
 
             if (result == NO) {
-                NSLog(@"Caching API failed");
+                SPRLog(@"Caching API failed");
                 return;
             }
             strongSelf.projects = projects;
@@ -192,7 +193,7 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
                 NSError *err;
                 [fileMger removeItemAtPath:path error:&err];
                 if (err) {
-                    NSLog(@"删除 Projects 缓存失败");
+                    SPRLog(@"Delete Projects cache failed");
                 } else {
                     strongSelf.projects = nil;
                 }
