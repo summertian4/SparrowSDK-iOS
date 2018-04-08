@@ -8,7 +8,6 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SparrowSDK'
-<<<<<<< HEAD
   s.version          = '1.0.1'
   s.summary          = 'An iOS SDK for Sparrow.'
 
