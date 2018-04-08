@@ -1,0 +1,39 @@
+{
+  "name": "SparrowSDK",
+  "version": "1.0.0",
+  "summary": "An iOS SDK for Sparrow.",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "https://github.com/summertian4/SparrowSDK",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "summertian4": "coderfish@163.com"
+  },
+  "source": {
+    "git": "https://github.com/summertian4/SparrowSDK.git",
+    "tag": "1.0.0"
+  },
+  "social_media_url": "https://weibo.com/coderfish/",
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "SparrowSDK/Classes/**/*",
+  "resource_bundles": {
+    "SparrowSDK": [
+      "SparrowSDK/Assets/*.xcassets"
+    ]
+  },
+  "dependencies": {
+    "AFNetworking": [
+
+    ],
+    "Masonry": [
+
+    ],
+    "SVProgressHUD": [
+
+    ]
+  }
+}
