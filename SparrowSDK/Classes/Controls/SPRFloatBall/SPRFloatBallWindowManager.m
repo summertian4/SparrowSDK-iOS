@@ -65,7 +65,6 @@
         _window.rootViewController.view.userInteractionEnabled = NO;
         _window.hidden = YES;
         _window.userInteractionEnabled = YES;
-        [_window makeKeyAndVisible];
 
         [self addFloatBall];
     }
