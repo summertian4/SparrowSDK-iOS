@@ -6,12 +6,15 @@
 //
 
 #import "SPRSettingViewController.h"
+#import "SPRHTTPSessionManager.h"
+#import "SPRCacheManager.h"
 
 @interface SPRSettingViewController ()
 @property (nonatomic, strong) UILabel *hostTitleLabel;
 @property (nonatomic, strong) UITextField *hostTextField;
 @property (nonatomic, strong) UIButton *hostConfirmButton;
 @property (nonatomic, strong) UIView *hostContentView;
+@property (nonatomic, strong) UIButton *logoutButton;
 @end
 
 @implementation SPRSettingViewController
@@ -31,6 +34,7 @@
     [self hostContentView];
     [self hostTextField];
     [self hostConfirmButton];
+    [self logoutButton];
 }
 
 - (void)hostConfirmButtonClicked {
@@ -42,6 +46,37 @@
     }
     [SPRCommonData setSparrowHost:hostStr];
     [SPRToast showWithMessage:@"设置 host 成功" from:self.view];
+}
+
+- (void)requestLogout {
+    SPRHTTPSessionManager *manager = [[SPRHTTPSessionManager defaultManager] copy];
+    __weak __typeof(self)weakSelf = self;
+    [self showHUD];
+    [manager POST:@"/frontend/account/logout"
+       parameters:nil
+         progress:nil
+          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf dismissHUD];
+            [SPRToast showWithMessage:@"登出成功" from:strongSelf.view];
+            [SPRCacheManager clearAccountFromCache];
+            [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        SPRLog(@"%@", error);
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf dismissHUD];
+            [SPRToast showWithMessage:error.domain from:strongSelf.view];
+        }
+    }];
+}
+
+#pragma mark - Action
+
+- (void)logoutButtonClicked {
+    [self requestLogout];
 }
 
 #pragma mark - Getter Setter
@@ -118,6 +153,31 @@
         }];
     }
     return _hostConfirmButton;
+}
+
+- (UIButton *)logoutButton {
+    if (_logoutButton == nil) {
+        _logoutButton = [[UIButton alloc] init];
+        _logoutButton.backgroundColor = SPRThemeColor;
+        [_logoutButton setTitle:@"登出" forState:UIControlStateNormal];
+        _logoutButton.titleLabel.font = [UIFont systemFontOfSize:17];
+        _logoutButton.layer.shadowColor = [UIColor colorWithHexString:@"000000"].CGColor;
+        _logoutButton.layer.shadowOpacity = 0.2f;
+        _logoutButton.layer.shadowOffset = CGSizeMake(0,6);
+        _logoutButton.layer.shadowRadius = 14;
+        _logoutButton.layer.cornerRadius = 8;
+        [_logoutButton addTarget:self
+                          action:@selector(logoutButtonClicked)
+                forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:_logoutButton];
+        [_logoutButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.equalTo(self.hostContentView.mas_bottom).offset(30);
+            make.left.equalTo(self.view).offset(15);
+            make.right.equalTo(self.view).offset(-15);
+            make.height.equalTo(@(45));
+        }];
+    }
+    return _logoutButton;
 }
 
 @end

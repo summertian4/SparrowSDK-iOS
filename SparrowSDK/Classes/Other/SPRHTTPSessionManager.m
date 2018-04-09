@@ -7,6 +7,7 @@
 
 #import "SPRHTTPSessionManager.h"
 #import "SPRCommonData.h"
+#import "SPRFloatBallWindowManager.h"
 
 @implementation SPRHTTPSessionManager
 
@@ -26,7 +27,7 @@ static SPRHTTPSessionManager *manager;
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
 }
 
-- (void)GET:(NSString * _Nullable)URLString
++ (void)GET:(NSString * _Nullable)URLString
  parameters:(id _Nullable)parameters
     success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
     failure:(void (^ _Nullable)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
@@ -34,21 +35,15 @@ static SPRHTTPSessionManager *manager;
       parameters:parameters
         progress:nil
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             if ([responseObject[@"code"] isEqual:@(200)]) {
-                success(task, responseObject);
-             } else {
-                 NSString *domain = responseObject[@"message"];
-                 NSError *error = [[NSError alloc] initWithDomain:domain
-                                                             code:(NSInteger)responseObject[@"code"]
-                                                         userInfo:@{}];
-                 failure(task, error);
-             }
+             [SPRHTTPSessionManager handleSuccessBlock:success
+                                               failure:failure
+                                                  task:task responseObject:responseObject];
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              failure(task, error);
          }];
 }
 
-- (void)POST:(NSString *)URLString
++ (void)POST:(NSString *)URLString
                     parameters:(id)parameters
                        success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
                        failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
@@ -56,19 +51,54 @@ static SPRHTTPSessionManager *manager;
                                       parameters:parameters
                                         progress:nil
                                          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-                                             if ([responseObject[@"code"] isEqual:@(200)]) {
-                                                 success(task, responseObject);
-                                             } else {
-                                                 NSString *domain = responseObject[@"message"];
-                                                 NSError *error = [[NSError alloc] initWithDomain:domain
-                                                                                             code:(NSInteger)responseObject[@"code"]
-                                                                                         userInfo:@{}];
-                                                 failure(task, error);
-                                             }
+                                             [SPRHTTPSessionManager handleSuccessBlock:success
+                                                                               failure:failure
+                                                                                  task:task responseObject:responseObject];
                                          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
                                              failure(task, error);
                                          }
      ];
+}
+
++ (void)POST:(NSString *)URLString
+                    parameters:(id)parameters
+     constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block
+                      progress:(nullable void (^)(NSProgress * _Nonnull))uploadProgress
+                       success:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                       failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure {
+    [[SPRHTTPSessionManager defaultManager] POST:URLString
+                                      parameters:parameters
+                       constructingBodyWithBlock:block
+                                        progress:uploadProgress
+                                         success:^(NSURLSessionDataTask *task, id responseObject) {
+                                             [SPRHTTPSessionManager handleSuccessBlock:success
+                                                                               failure:failure
+                                                                                  task:task responseObject:responseObject];
+                                         }
+                                         failure:failure];
+}
+
++ (void)handleSuccessBlock:(void (^)(NSURLSessionDataTask *task, id responseObject))success
+                   failure:(void (^)(NSURLSessionDataTask *task, NSError *error))failure
+                      task:(NSURLSessionDataTask *)task
+            responseObject:(id)responseObject {
+    if ([responseObject[@"code"] isEqual:@(200)]) {
+        success(task, responseObject);
+    } else if ([responseObject[@"code"] isEqual:@(901)]) {
+        NSString *domain = @"请先登录";
+        NSError *error = [[NSError alloc] initWithDomain:domain
+                                                    code:(NSInteger)responseObject[@"code"]
+                                                userInfo:@{}];
+        // 跳转登录
+        [SPRFloatBallWindowManager jumpToLoginVC];
+        failure(task, error);
+    } else {
+        NSString *domain = responseObject[@"message"];
+        NSError *error = [[NSError alloc] initWithDomain:domain
+                                                    code:(NSInteger)responseObject[@"code"]
+                                                userInfo:@{}];
+        failure(task, error);
+    }
 }
 
 @end

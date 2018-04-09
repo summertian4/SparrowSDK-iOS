@@ -85,13 +85,9 @@
                           stringByTrimmingCharactersInSet:
                           [NSCharacterSet whitespaceCharacterSet]];
 
-    SPRHTTPSessionManager *manager = [[SPRHTTPSessionManager defaultManager] copy];
-    [manager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
     __weak __typeof(self)weakSelf = self;
-
     [self showHUD];
-
-    [manager POST:@"/frontend/account/login" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+    [SPRHTTPSessionManager POST:@"/frontend/account/login" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         [formData appendPartWithFormData:[username dataUsingEncoding:NSUTF8StringEncoding]
                                     name:@"username"];
         [formData appendPartWithFormData:[password dataUsingEncoding:NSUTF8StringEncoding]
@@ -104,7 +100,7 @@
 
             SPRAccount *account = [[SPRAccount alloc] initWithDict:responseObject[@"accountInfo"]];
             [SPRCacheManager cacheAccount:account];
-            
+
             [strongSelf dismissButtonClicked];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {

@@ -47,15 +47,6 @@
     [self setLeftBarWithImage:rightImage action:@selector(leftBarButtonClicked)];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    SPRAccount *account = [SPRCacheManager getAccountFromCache];
-    if (account == nil || account.username == nil || [account.username isEqualToString:@""]) {
-        UIViewController *vc = [[SPRLoginViewController alloc] init];
-        [self presentViewController:vc animated:YES completion:nil];
-    }
-}
-
 - (void)initData {
     [self apis];
     [self.mainTable reloadData];
@@ -96,7 +87,6 @@
 }
 
 - (void)fetchApis {
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
     NSSet *projects = [SPRCacheManager getProjectsFromCache];
@@ -110,7 +100,7 @@
         [projectIds addObject:@(project.project_id)];
     }
     [self showHUD];
-    [manager GET:@"/frontend/api/fetch"
+    [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -143,11 +133,10 @@
 
 - (void)didApiSwitchChangedWithApi: (SPRApi *)api isOn:(BOOL) isOn {
     // 请求 Mock 开关
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     NSString *urlString = [NSString stringWithFormat:@"/frontend/project/%ld/api/%ld/update_status",
                            api.project_id, api.api_id];
     __weak __typeof(self)weakSelf = self;
-    [manager GET:urlString
+    [SPRHTTPSessionManager GET:urlString
       parameters:@{@"status": @(isOn)}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;

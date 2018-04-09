@@ -63,11 +63,10 @@
 }
 
 - (void)fetchProjects {
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
     [self showHUD];
-    [manager GET:@"/frontend/project/list"
+    [SPRHTTPSessionManager GET:@"/frontend/project/list"
       parameters:@{@"current_page": @(self.projectsData.currentPage + 1), @"limit": @(self.projectsData.limit)}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -94,7 +93,6 @@
 }
 
 - (void)fetchApis {
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
     NSMutableArray *projectIds = [NSMutableArray array];
@@ -102,7 +100,7 @@
         [projectIds addObject:@(project.project_id)];
     }
     [self showHUD];
-    [manager GET:@"/frontend/api/fetch"
+    [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
