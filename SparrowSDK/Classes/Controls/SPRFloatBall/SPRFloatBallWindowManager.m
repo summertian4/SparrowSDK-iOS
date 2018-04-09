@@ -8,12 +8,16 @@
 #import "SPRFloatBallWindowManager.h"
 #import "SPRFloatingBall.h"
 #import "SPRFloatBallWindow.h"
+#import "SPRControlCenterViewController.h"
+#import "SPRLoginViewController.h"
+#import "SPRProjectsData.h"
+#import "SPRCommonData.h"
 
 @interface SPRFloatBallWindowManager ()
 
-@property (nonatomic, copy) BallClickedCallback ballClickedCallback;
-@property (nonatomic, strong) UIWindow *window;
-
+@property (nonatomic, copy) BallClickedCustomCallback ballClickedCustomCallback;
+@property (nonatomic, assign) BOOL showedManagerVC;
+@property (nonatomic, strong) SPRFloatingBall *floatingBall;
 @end
 
 @implementation SPRFloatBallWindowManager
@@ -27,10 +31,20 @@
     return instance;
 }
 
+- (instancetype)init {
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(loginSuccess:)
+                                                     name:kSPRnotificationLoginSuccess
+                                                   object:nil];
+    }
+    return self;
+}
+
 #pragma mark - Public
 
 + (void)showWindow:(BallClickedCallback)ballClickedCallback {
-    [[self sharedInstance] setBallClickedCallback:ballClickedCallback];
+    [[self sharedInstance] setBallClickedCustomCallback:ballClickedCallback];
     [[self sharedInstance] window].hidden = NO;
     [[self sharedInstance] window].rootViewController.view.userInteractionEnabled = YES;
 }
@@ -44,13 +58,63 @@
 }
 
 - (void)addFloatBall {
-    SPRFloatingBall *ball = [[SPRFloatingBall alloc] initWithCallBack:self.ballClickedCallback];
-    ball.frame = CGRectMake(0, 20, 50, 50);
-    [self.window.rootViewController.view addSubview:ball];
+    __weak __typeof(self)weakSelf = self;
+    self.floatingBall = [[SPRFloatingBall alloc] initWithCallBack:^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            if (strongSelf.ballClickedCustomCallback) {
+                strongSelf.ballClickedCustomCallback();
+                return;
+            }
+            if (strongSelf.showedManagerVC == NO) {
+                SPRControlCenterViewController *vc = [[SPRControlCenterViewController alloc] init];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+                strongSelf.controlCenterVC = vc;
+                [strongSelf.window.rootViewController
+                 presentViewController:nav
+                 animated:YES
+                 completion:nil];
+            } else {
+                [strongSelf.window.rootViewController.presentedViewController
+                 dismissViewControllerAnimated:YES
+                 completion:^{
+                     [strongSelf.window.rootViewController
+                      dismissViewControllerAnimated:YES
+                      completion:nil];
+                 }];
+            }
+            self.showedManagerVC = !strongSelf.showedManagerVC;
+        }
+    }];
+    self.floatingBall.frame = CGRectMake(0, 20, 50, 50);
+    [self.window.rootViewController.view addSubview:self.floatingBall];
 }
 
 + (void)dismissFloatBall {
 
+}
+
++ (void)jumpToLoginVC {
+    [[SPRFloatBallWindowManager sharedInstance] jumpToLoginVC];
+}
+
+- (void)jumpToLoginVC {
+    UIViewController *vc = [[SPRLoginViewController alloc] init];
+    UIViewController *rootVC = [SPRFloatBallWindowManager sharedInstance].window.rootViewController;
+    __weak __typeof(self)weakSelf = self;
+    [rootVC dismissViewControllerAnimated:YES completion:^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            strongSelf.showedManagerVC = NO;
+            [rootVC presentViewController:vc animated:YES completion:nil];
+        }
+    }];
+}
+
+#pragma mark - Private
+
+-(void)loginSuccess:(NSNotification *)notification {
+    [self.floatingBall click];
 }
 
 - (UIWindow *)window {

@@ -17,7 +17,8 @@
     // Override point for customization after application launch.
     [IQKeyboardManager sharedManager].enable = YES;
     SPROptions *options = [SPROptions new];
-    options.hostURL = @"http://alta1-lpd-talaris-team-app-download-1.vm.elenet.me";
+//    options.hostURL = @"http://alta1-lpd-talaris-team-app-download-1.vm.elenet.me";
+    options.hostURL = @"http://localhost:8000";
     [SparrowSDK startWithOption:options];
     return YES;
 }

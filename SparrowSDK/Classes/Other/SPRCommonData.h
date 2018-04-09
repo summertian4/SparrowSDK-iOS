@@ -19,6 +19,8 @@ NSLog(@"--------");
 # define SPRLog(...);
 #endif
 
+extern NSString * const kSPRnotificationLoginSuccess;
+
 @interface SPRCommonData : NSObject
 
 + (NSBundle *)bundle;

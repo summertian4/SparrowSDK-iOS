@@ -8,11 +8,16 @@
 #import <UIKit/UIKit.h>
 
 typedef void (^BallClickedCallback)(void);
+typedef void (^BallClickedCustomCallback)(void);
 @interface SPRFloatingBall : UIView
 
-@property (nonatomic, copy) BallClickedCallback ballClickedCallback;
+@property (nonatomic, copy, readonly) BallClickedCallback ballClickedCallback;
+@property (nonatomic, copy) BallClickedCustomCallback ballClickedCustomCallback;
 
 + (void)dismiss;
 - (instancetype)initWithCallBack:(BallClickedCallback)callback;
+- (instancetype)initWithCustomCallBack:(BallClickedCustomCallback)callback;
+
+- (void)click;
 
 @end

@@ -7,7 +7,9 @@
 
 #import "SPRCommonData.h"
 
+NSString * const kSPRnotificationLoginSuccess = @"kSPRnotificationLoginSuccess";
 NSString * const SparrowHostKey = @"SparrowHostKey";
+
 @implementation SPRCommonData
 
 + (NSBundle *)bundle {

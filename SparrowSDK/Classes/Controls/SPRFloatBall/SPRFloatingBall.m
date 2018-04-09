@@ -6,14 +6,13 @@
 //
 
 #import "SPRFloatingBall.h"
-#import "SPRControlCenterViewController.h"
-#import "SPRLoginViewController.h"
+#import "SPRCommonData.h"
+#import <Masonry/Masonry.h>
 
+typedef void (^BallClickedCallback)(void);
 @interface SPRFloatingBall ()
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, assign) BOOL showedManagerVC;
-
 @property (nonatomic, strong) UIImageView *ballImageView;
 @end
 
@@ -21,7 +20,7 @@
 
 - (instancetype)initWithCallBack:(BallClickedCallback)callback {
     if (self = [super init]) {
-        self.ballClickedCallback = [callback copy];;
+        _ballClickedCallback = [callback copy];;
         self.frame = CGRectMake(0, 0, 50, 50);
         self.backgroundColor = [UIColor clearColor];
         self.alpha = 0.8;
@@ -35,29 +34,31 @@
     return self;
 }
 
--(void)handleSingleTap:(UIGestureRecognizer *)sender {
+- (instancetype)initWithCustomCallBack:(BallClickedCustomCallback)callback {
+    if (self = [super init]) {
+        self.ballClickedCustomCallback = [callback copy];;
+        self.frame = CGRectMake(0, 0, 50, 50);
+        self.backgroundColor = [UIColor clearColor];
+        self.alpha = 0.8;
+        [self ballImageView];
+
+        UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
+        singleTapGesture.numberOfTapsRequired = 1;
+        singleTapGesture.numberOfTouchesRequired  = 1;
+        [self addGestureRecognizer:singleTapGesture];
+    }
+    return self;
+}
+
+- (void)handleSingleTap:(UIGestureRecognizer *)sender {
+    if (self.ballClickedCustomCallback) {
+        self.ballClickedCustomCallback();
+        return;
+    }
     if (self.ballClickedCallback) {
         self.ballClickedCallback();
         return;
     }
-    if (self.showedManagerVC == NO) {
-        UIViewController *vc = [[SPRLoginViewController alloc] init];
-        [[UIApplication sharedApplication].keyWindow.rootViewController
-         presentViewController:vc
-         animated:YES
-         completion:nil];
-//        UIViewController *vc = [[SPRControlCenterViewController alloc] init];
-//        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-//        [[UIApplication sharedApplication].keyWindow.rootViewController
-//         presentViewController:nav
-//         animated:YES
-//         completion:nil];
-    } else {
-        [[UIApplication sharedApplication].keyWindow.rootViewController
-         dismissViewControllerAnimated:YES
-         completion:nil];
-    }
-    self.showedManagerVC = !self.showedManagerVC;
 }
 
 + (void)dismiss {
@@ -78,6 +79,10 @@
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+}
+
+- (void)click {
+    [self handleSingleTap:nil];
 }
 
 - (UIImageView *)ballImageView {

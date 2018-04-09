@@ -7,13 +7,22 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^BallClickedCallback)(void);
+@class SPRFloatBallWindow;
+@class SPRControlCenterViewController;
+
+typedef void (^BallClickedCustomCallback)(void);
 @interface SPRFloatBallWindowManager : NSObject
 
-+ (void)showWindow:(BallClickedCallback)ballClickedCallback;
+@property (nonatomic, strong) SPRFloatBallWindow *window;
+@property (nonatomic, strong) SPRControlCenterViewController *controlCenterVC;
+
++ (instancetype)sharedInstance;
++ (void)showWindow:(BallClickedCustomCallback)ballClickedCustomCallback;
 + (void)dismissWindow;
 
 + (void)showFloatBall;
 + (void)dismissFloatBall;
+
++ (void)jumpToLoginVC;
 
 @end

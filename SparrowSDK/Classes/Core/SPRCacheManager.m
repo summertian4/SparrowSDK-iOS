@@ -8,6 +8,7 @@
 #import "SPRCacheManager.h"
 #import "SPRApi.h"
 #import "SPRCommonData.h"
+#import "SPRAccount.h"
 
 static char *QueueName = "com.zhoulingyu.sparrow.queue";
 @interface SPRCacheManager () {
@@ -60,6 +61,8 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
                            stringByAppendingString:@"/com.zhoulingyu.sparrow"];
     return cacheDir;
 }
+
+#pragma mark - Apis
 
 + (void)cacheApis:(NSArray<SPRApi *> *)apis {
     [[SPRCacheManager sharedInstance] cacheApis:apis];
@@ -132,6 +135,8 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
     });
 }
 
+#pragma mark - Projects
+
 + (void)cacheProjects:(NSSet<SPRProject *> *)projects {
     [[SPRCacheManager sharedInstance] cacheProjects:projects];
 }
@@ -202,12 +207,94 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
     });
 }
 
+#pragma mark - Account
+
++ (void)cacheAccount:(SPRAccount *)account {
+    [[SPRCacheManager sharedInstance] cacheAccount:account];
+}
+
+- (void)cacheAccount:(SPRAccount *)account {
+    __weak __typeof(self)weakSelf = self;
+    dispatch_sync(_queue, ^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:account];
+            BOOL result = [data writeToFile:[SPRCacheManager accountPath] atomically:YES];
+
+            if (result == NO) {
+                SPRLog(@"Caching Account failed");
+                return;
+            }
+            strongSelf.account = account;
+        }
+    });
+}
+
++ (SPRAccount *)getAccountFromCache {
+    __block SPRAccount *block_account = [SPRAccount new];
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    [[SPRCacheManager sharedInstance] getAccountFromCache:^(SPRAccount *account) {
+        block_account = account;
+        dispatch_semaphore_signal(sema);
+    }];
+    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    return block_account;
+}
+
+- (void)getAccountFromCache:(void (^)(SPRAccount *account))callback {
+    __weak __typeof(self)weakSelf = self;
+    dispatch_sync(_queue, ^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            NSData *data = [[NSData alloc]initWithContentsOfFile:[SPRCacheManager accountPath]];
+            SPRAccount *account =  [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            callback(account);
+        }
+    });
+}
+
++ (void)clearAccountFromCache {
+    [[SPRCacheManager sharedInstance] clearAccountFromCache];
+}
+
+- (void)clearAccountFromCache {
+    __weak __typeof(self)weakSelf = self;
+    dispatch_sync(_queue, ^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            NSFileManager *fileMger = [NSFileManager defaultManager];
+            NSString *path = [SPRCacheManager accountPath];
+
+            BOOL exist = [fileMger fileExistsAtPath:path];
+            if (exist) {
+                NSError *err;
+                [fileMger removeItemAtPath:path error:&err];
+                if (err) {
+                    SPRLog(@"Delete Projects cache failed");
+                } else {
+                    strongSelf.projects = nil;
+                }
+            }
+        }
+    });
+}
+
++ (void)clearAllCache {
+    [self clearAccountFromCache];
+    [self clearApisFromCache];
+    [self clearProjectsFromCache];
+}
+
 + (NSString *)apisPath {
     return [[self cacheDir] stringByAppendingString:@"/apis"];
 }
 
 + (NSString *)projectsPath {
     return [[self cacheDir] stringByAppendingString:@"/projects"];
+}
+
++ (NSString *)accountPath {
+    return [[self cacheDir] stringByAppendingString:@"/account"];
 }
 
 @end

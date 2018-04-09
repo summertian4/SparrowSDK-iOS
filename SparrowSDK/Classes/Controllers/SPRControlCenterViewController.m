@@ -13,6 +13,8 @@
 #import "SPRProjectListViewController.h"
 #import "SPRHTTPSessionManager.h"
 #import "SPRSettingViewController.h"
+#import "SPRLoginViewController.h"
+#import "SPRAccount.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -32,6 +34,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"Sparrow";
     self.automaticallyAdjustsScrollViewInsets = NO;
+
     [self initSubviews];
 
     UIImage *leftImage = [UIImage imageNamed:@"sparrow_setting"
@@ -84,7 +87,6 @@
 }
 
 - (void)fetchApis {
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
     NSSet *projects = [SPRCacheManager getProjectsFromCache];
@@ -98,7 +100,7 @@
         [projectIds addObject:@(project.project_id)];
     }
     [self showHUD];
-    [manager GET:@"/frontend/api/fetch"
+    [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
@@ -131,11 +133,10 @@
 
 - (void)didApiSwitchChangedWithApi: (SPRApi *)api isOn:(BOOL) isOn {
     // 请求 Mock 开关
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     NSString *urlString = [NSString stringWithFormat:@"/frontend/project/%ld/api/%ld/update_status",
                            api.project_id, api.api_id];
     __weak __typeof(self)weakSelf = self;
-    [manager GET:urlString
+    [SPRHTTPSessionManager GET:urlString
       parameters:@{@"status": @(isOn)}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
