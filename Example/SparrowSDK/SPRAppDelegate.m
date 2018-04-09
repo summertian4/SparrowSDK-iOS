@@ -8,12 +8,14 @@
 
 #import "SPRAppDelegate.h"
 #import <SparrowSDK/SparrowSDK.h>
+#import <IQKeyboardManager/IQKeyboardManager.h>
 
 @implementation SPRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [IQKeyboardManager sharedManager].enable = YES;
     SPROptions *options = [SPROptions new];
     options.hostURL = @"http://alta1-lpd-talaris-team-app-download-1.vm.elenet.me";
     [SparrowSDK startWithOption:options];
