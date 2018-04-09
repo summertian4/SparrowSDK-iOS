@@ -17,6 +17,7 @@
 @property (nonatomic, strong) UIView *passwordLineView;
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIImageView *catImageView;
+@property (nonatomic, strong) UIButton *dismissButton;
 @end
 
 @implementation SPRLoginViewController
@@ -42,6 +43,7 @@
     [self passwordTextField];
     [self loginButton];
     [self catImageView];
+    [self dismissButton];
 }
 
 - (UIImageView *)cornerLogo {
@@ -256,6 +258,24 @@
         }];
     }
     return _catImageView;
+}
+
+- (UIButton *)dismissButton {
+    if (_dismissButton == nil) {
+        _dismissButton = [[UIButton alloc] init];
+        UIImage *image = [UIImage imageNamed:@"sparrow_login_dismiss_button"
+                                    inBundle:[SPRCommonData bundle]
+               compatibleWithTraitCollection:nil];
+        [_dismissButton setImage:image forState:UIControlStateNormal];
+        [self.view addSubview:_dismissButton];
+        [_dismissButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.view.mas_centerX);
+            make.bottom.equalTo(self.view);
+            make.width.equalTo(@(116));
+            make.height.equalTo(@(48));
+        }];
+    }
+    return _dismissButton;
 }
 
 @end
