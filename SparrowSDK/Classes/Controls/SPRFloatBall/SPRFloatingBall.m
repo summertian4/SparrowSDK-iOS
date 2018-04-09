@@ -81,6 +81,10 @@ typedef void (^BallClickedCallback)(void);
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
 }
 
+- (void)click {
+    [self handleSingleTap:nil];
+}
+
 - (UIImageView *)ballImageView {
     if (_ballImageView == nil) {
         _ballImageView = [[UIImageView alloc] init];

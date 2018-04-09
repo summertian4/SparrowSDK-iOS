@@ -97,11 +97,11 @@
         if (strongSelf) {
             [strongSelf dismissHUD];
             [SPRToast showWithMessage:@"登录成功" from:strongSelf.view];
-
             SPRAccount *account = [[SPRAccount alloc] initWithDict:responseObject[@"accountInfo"]];
             [SPRCacheManager cacheAccount:account];
-
-            [strongSelf dismissButtonClicked];
+            [strongSelf dismissButtonClickedCompletion:^{
+                [[NSNotificationCenter defaultCenter] postNotificationName:kSPRnotificationLoginSuccess object:nil];
+            }];
         }
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         SPRLog(@"%@", error);
@@ -115,8 +115,8 @@
 
 #pragma mark - Action
 
-- (void)dismissButtonClicked {
-    [self dismissViewControllerAnimated:YES completion:nil];
+- (void)dismissButtonClickedCompletion: (void (^ __nullable)(void))completion {
+    [self dismissViewControllerAnimated:YES completion:completion];
 }
 
 - (void)loginButtonClicked {

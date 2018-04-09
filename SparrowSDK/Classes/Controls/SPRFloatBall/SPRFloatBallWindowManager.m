@@ -10,6 +10,8 @@
 #import "SPRFloatBallWindow.h"
 #import "SPRControlCenterViewController.h"
 #import "SPRLoginViewController.h"
+#import "SPRProjectsData.h"
+#import "SPRCommonData.h"
 
 @interface SPRFloatBallWindowManager ()
 
@@ -27,6 +29,16 @@
         instance = [[SPRFloatBallWindowManager alloc] init];
     });
     return instance;
+}
+
+- (instancetype)init {
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(loginSuccess:)
+                                                     name:kSPRnotificationLoginSuccess
+                                                   object:nil];
+    }
+    return self;
 }
 
 #pragma mark - Public
@@ -97,6 +109,12 @@
             [rootVC presentViewController:vc animated:YES completion:nil];
         }
     }];
+}
+
+#pragma mark - Private
+
+-(void)loginSuccess:(NSNotification *)notification {
+    [self.floatingBall click];
 }
 
 - (UIWindow *)window {

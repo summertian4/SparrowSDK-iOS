@@ -18,4 +18,6 @@ typedef void (^BallClickedCustomCallback)(void);
 - (instancetype)initWithCallBack:(BallClickedCallback)callback;
 - (instancetype)initWithCustomCallBack:(BallClickedCustomCallback)callback;
 
+- (void)click;
+
 @end
