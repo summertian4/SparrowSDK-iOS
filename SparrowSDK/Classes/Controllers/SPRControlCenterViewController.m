@@ -13,6 +13,8 @@
 #import "SPRProjectListViewController.h"
 #import "SPRHTTPSessionManager.h"
 #import "SPRSettingViewController.h"
+#import "SPRLoginViewController.h"
+#import "SPRAccount.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -32,6 +34,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"Sparrow";
     self.automaticallyAdjustsScrollViewInsets = NO;
+
     [self initSubviews];
 
     UIImage *leftImage = [UIImage imageNamed:@"sparrow_setting"
@@ -42,6 +45,15 @@
                compatibleWithTraitCollection:nil];
     [self setRightBarWithImage:leftImage action:@selector(jumpToSettingVC)];
     [self setLeftBarWithImage:rightImage action:@selector(leftBarButtonClicked)];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    SPRAccount *account = [SPRCacheManager getAccountFromCache];
+    if (account == nil || account.username == nil || [account.username isEqualToString:@""]) {
+        UIViewController *vc = [[SPRLoginViewController alloc] init];
+        [self presentViewController:vc animated:YES completion:nil];
+    }
 }
 
 - (void)initData {
