@@ -166,6 +166,7 @@
         _usernameTextField = [[UITextField alloc] init];
         _usernameTextField.placeholder = @"username";
         _usernameTextField.font = [UIFont systemFontOfSize:14];
+        _usernameTextField.keyboardType = UIKeyboardTypeASCIICapable;
         [self.frontBlockView addSubview:_usernameTextField];
         [_usernameTextField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.usernameLineView.mas_top);
@@ -195,6 +196,7 @@
         _passwordTextField = [[UITextField alloc] init];
         _passwordTextField.placeholder = @"password";
         _passwordTextField.font = [UIFont systemFontOfSize:14];
+        _passwordTextField.secureTextEntry = YES;
         _passwordTextField.delegate = self;
         [self.frontBlockView addSubview:_passwordTextField];
         [_passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
