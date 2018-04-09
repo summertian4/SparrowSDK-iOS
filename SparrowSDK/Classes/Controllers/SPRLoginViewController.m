@@ -6,6 +6,9 @@
 //
 
 #import "SPRLoginViewController.h"
+#import "SPRHTTPSessionManager.h"
+#import "SPRAccount.h"
+#import "SPRCacheManager.h"
 
 @interface SPRLoginViewController () <UITextFieldDelegate>
 @property (nonatomic, strong) UIView *frontBlockView;
@@ -72,6 +75,56 @@
         make.height.equalTo(@(6));
     }];
     return _colorLineView;
+}
+
+- (void)requestLogin {
+    NSString *username = [self.usernameTextField.text
+                          stringByTrimmingCharactersInSet:
+                          [NSCharacterSet whitespaceCharacterSet]];
+    NSString *password = [self.passwordTextField.text
+                          stringByTrimmingCharactersInSet:
+                          [NSCharacterSet whitespaceCharacterSet]];
+
+    SPRHTTPSessionManager *manager = [[SPRHTTPSessionManager defaultManager] copy];
+    [manager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    __weak __typeof(self)weakSelf = self;
+
+    [self showHUD];
+
+    [manager POST:@"/frontend/account/login" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFormData:[username dataUsingEncoding:NSUTF8StringEncoding]
+                                    name:@"username"];
+        [formData appendPartWithFormData:[password dataUsingEncoding:NSUTF8StringEncoding]
+                                    name:@"password"];
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf dismissHUD];
+            [SPRToast showWithMessage:@"登录成功" from:strongSelf.view];
+
+            SPRAccount *account = [[SPRAccount alloc] initWithDict:responseObject[@"accountInfo"]];
+            [SPRCacheManager cacheAccount:account];
+            
+            [strongSelf dismissButtonClicked];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        SPRLog(@"%@", error);
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf dismissHUD];
+            [SPRToast showWithMessage:error.domain from:strongSelf.view];
+        }
+    }];
+}
+
+#pragma mark - Action
+
+- (void)dismissButtonClicked {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)loginButtonClicked {
+    [self requestLogin];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -220,6 +273,9 @@
         [_loginButton setImage:image forState:UIControlStateNormal];
         _loginButton.layer.masksToBounds = YES;
         _loginButton.layer.cornerRadius = 25;
+        [_loginButton addTarget:self
+                         action:@selector(loginButtonClicked)
+               forControlEvents:UIControlEventTouchUpInside];
 
         UIView *shadowView = [[UIView alloc] init];
         shadowView.backgroundColor = [UIColor whiteColor];
@@ -266,11 +322,14 @@
         UIImage *image = [UIImage imageNamed:@"sparrow_login_dismiss_button"
                                     inBundle:[SPRCommonData bundle]
                compatibleWithTraitCollection:nil];
+        [_dismissButton addTarget:self
+                           action:@selector(dismissButtonClicked)
+                 forControlEvents:UIControlEventTouchUpInside];
         [_dismissButton setImage:image forState:UIControlStateNormal];
         [self.view addSubview:_dismissButton];
         [_dismissButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.centerX.equalTo(self.view.mas_centerX);
-            make.bottom.equalTo(self.view);
+            make.bottom.equalTo(self.view).offset(-10);
             make.width.equalTo(@(116));
             make.height.equalTo(@(48));
         }];

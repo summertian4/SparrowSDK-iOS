@@ -48,4 +48,27 @@ static SPRHTTPSessionManager *manager;
          }];
 }
 
+- (void)POST:(NSString *)URLString
+                    parameters:(id)parameters
+                       success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
+                       failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure {
+    [[SPRHTTPSessionManager defaultManager] POST:URLString
+                                      parameters:parameters
+                                        progress:nil
+                                         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                                             if ([responseObject[@"code"] isEqual:@(200)]) {
+                                                 success(task, responseObject);
+                                             } else {
+                                                 NSString *domain = responseObject[@"message"];
+                                                 NSError *error = [[NSError alloc] initWithDomain:domain
+                                                                                             code:(NSInteger)responseObject[@"code"]
+                                                                                         userInfo:@{}];
+                                                 failure(task, error);
+                                             }
+                                         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                                             failure(task, error);
+                                         }
+     ];
+}
+
 @end

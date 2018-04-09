@@ -17,4 +17,9 @@
     success:(void (^ _Nullable)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
     failure:(void (^ _Nullable)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure;
 
+- (void)POST:(NSString *)URLString
+  parameters:(id)parameters
+     success:(void (^)(NSURLSessionDataTask * _Nonnull, id _Nullable))success
+     failure:(void (^)(NSURLSessionDataTask * _Nullable, NSError * _Nonnull))failure;
+
 @end

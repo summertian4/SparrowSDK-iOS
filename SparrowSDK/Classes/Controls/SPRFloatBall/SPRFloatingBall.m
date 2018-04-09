@@ -7,7 +7,6 @@
 
 #import "SPRFloatingBall.h"
 #import "SPRControlCenterViewController.h"
-#import "SPRLoginViewController.h"
 
 @interface SPRFloatingBall ()
 
@@ -41,17 +40,12 @@
         return;
     }
     if (self.showedManagerVC == NO) {
-        UIViewController *vc = [[SPRLoginViewController alloc] init];
+        UIViewController *vc = [[SPRControlCenterViewController alloc] init];
+        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
         [[UIApplication sharedApplication].keyWindow.rootViewController
-         presentViewController:vc
+         presentViewController:nav
          animated:YES
          completion:nil];
-//        UIViewController *vc = [[SPRControlCenterViewController alloc] init];
-//        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-//        [[UIApplication sharedApplication].keyWindow.rootViewController
-//         presentViewController:nav
-//         animated:YES
-//         completion:nil];
     } else {
         [[UIApplication sharedApplication].keyWindow.rootViewController
          dismissViewControllerAnimated:YES
