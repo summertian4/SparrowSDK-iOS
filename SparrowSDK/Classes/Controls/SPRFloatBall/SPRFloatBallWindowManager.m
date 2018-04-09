@@ -53,8 +53,8 @@
     [[self sharedInstance] window].hidden = YES;
 }
 
-+ (void)showFloatBall {
-
++ (void)clickBall {
+    [[[self sharedInstance] floatingBall] click];
 }
 
 - (void)addFloatBall {
@@ -88,10 +88,6 @@
     }];
     self.floatingBall.frame = CGRectMake(0, 20, 50, 50);
     [self.window.rootViewController.view addSubview:self.floatingBall];
-}
-
-+ (void)dismissFloatBall {
-
 }
 
 + (void)jumpToLoginVC {

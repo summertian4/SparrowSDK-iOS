@@ -15,6 +15,7 @@
 #import "SPRSettingViewController.h"
 #import "SPRLoginViewController.h"
 #import "SPRAccount.h"
+#import "SPRFloatBallWindowManager.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -84,6 +85,7 @@
 
 - (void)leftBarButtonClicked {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [SPRFloatBallWindowManager clickBall];
 }
 
 - (void)fetchApis {
