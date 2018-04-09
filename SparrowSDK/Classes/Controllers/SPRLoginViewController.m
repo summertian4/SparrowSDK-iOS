@@ -7,7 +7,7 @@
 
 #import "SPRLoginViewController.h"
 
-@interface SPRLoginViewController ()
+@interface SPRLoginViewController () <UITextFieldDelegate>
 @property (nonatomic, strong) UIView *frontBlockView;
 @property (nonatomic, strong) UIView *backBlockView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -21,10 +21,14 @@
 
 @implementation SPRLoginViewController
 
+#pragma mark - Life Cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self initSubViews];
 }
+
+#pragma mark - Private
 
 - (void)initSubViews {
     [self cornerLogo];
@@ -53,6 +57,38 @@
     }];
     return _cornerLogo;
 }
+
+- (UIImageView *)colorLineImageView {
+    UIImage *image = [UIImage imageNamed:@"sparrow_color_line"
+                                inBundle:[SPRCommonData bundle]
+           compatibleWithTraitCollection:nil];
+    UIImageView *_colorLineView = [[UIImageView alloc] initWithImage:image];
+    [self.view addSubview:_colorLineView];
+    [_colorLineView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.right.equalTo(self.frontBlockView);
+        make.bottom.equalTo(self.frontBlockView.mas_top).equalTo(@(-6));
+        make.height.equalTo(@(6));
+    }];
+    return _colorLineView;
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    UIImage *image = [UIImage imageNamed:@"sparrow_cat_with_closed_eyes"
+                                inBundle:[SPRCommonData bundle]
+           compatibleWithTraitCollection:nil];
+    self.catImageView.image = image;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    UIImage *image = [UIImage imageNamed:@"sparrow_cat_with_openi_eyes"
+                                inBundle:[SPRCommonData bundle]
+           compatibleWithTraitCollection:nil];
+    self.catImageView.image = image;
+}
+
+#pragma mark - Getter Setter
 
 - (UIView *)backBlockView {
     if (_backBlockView == nil) {
@@ -94,20 +130,6 @@
     }
 
     return _frontBlockView;
-}
-
-- (UIImageView *)colorLineImageView {
-    UIImage *image = [UIImage imageNamed:@"sparrow_color_line"
-                                inBundle:[SPRCommonData bundle]
-           compatibleWithTraitCollection:nil];
-    UIImageView *_colorLineView = [[UIImageView alloc] initWithImage:image];
-    [self.view addSubview:_colorLineView];
-    [_colorLineView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.right.equalTo(self.frontBlockView);
-        make.bottom.equalTo(self.frontBlockView.mas_top).equalTo(@(-6));
-        make.height.equalTo(@(6));
-    }];
-    return _colorLineView;
 }
 
 - (UILabel *)titleLabel {
@@ -173,6 +195,7 @@
         _passwordTextField = [[UITextField alloc] init];
         _passwordTextField.placeholder = @"password";
         _passwordTextField.font = [UIFont systemFontOfSize:14];
+        _passwordTextField.delegate = self;
         [self.frontBlockView addSubview:_passwordTextField];
         [_passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.passwordLineView.mas_top);
