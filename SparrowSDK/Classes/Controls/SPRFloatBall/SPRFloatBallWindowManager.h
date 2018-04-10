@@ -20,8 +20,7 @@ typedef void (^BallClickedCustomCallback)(void);
 + (void)showWindow:(BallClickedCustomCallback)ballClickedCustomCallback;
 + (void)dismissWindow;
 
-+ (void)showFloatBall;
-+ (void)dismissFloatBall;
++ (void)clickBall;
 
 + (void)jumpToLoginVC;
 
