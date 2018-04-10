@@ -99,7 +99,7 @@
             [SPRToast showWithMessage:@"登录成功" from:strongSelf.view];
             SPRAccount *account = [[SPRAccount alloc] initWithDict:responseObject[@"accountInfo"]];
             [SPRCacheManager cacheAccount:account];
-            [strongSelf dismissButtonClickedCompletion:^{
+            [strongSelf dismissVCCompletion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kSPRnotificationLoginSuccess object:nil];
             }];
         }
@@ -115,7 +115,11 @@
 
 #pragma mark - Action
 
-- (void)dismissButtonClickedCompletion: (void (^ __nullable)(void))completion {
+- (void)dismissButtonClicked {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)dismissVCCompletion: (void (^ __nullable)(void))completion {
     [self dismissViewControllerAnimated:YES completion:completion];
 }
 

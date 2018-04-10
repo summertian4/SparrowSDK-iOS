@@ -97,20 +97,19 @@
 - (void)jumpToLoginVC {
     UIViewController *vc = [[SPRLoginViewController alloc] init];
     UIViewController *rootVC = [SPRFloatBallWindowManager sharedInstance].window.rootViewController;
-    __weak __typeof(self)weakSelf = self;
-    [rootVC dismissViewControllerAnimated:YES completion:^{
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (strongSelf) {
-            strongSelf.showedManagerVC = NO;
-            [rootVC presentViewController:vc animated:YES completion:nil];
-        }
-    }];
+    UIViewController *presentationVC;
+    if (rootVC.presentedViewController) {
+        presentationVC = rootVC.presentedViewController;
+    } else {
+        presentationVC = rootVC;
+    }
+    [presentationVC presentViewController:vc animated:YES completion:nil];
 }
 
 #pragma mark - Private
 
 -(void)loginSuccess:(NSNotification *)notification {
-    [self.floatingBall click];
+    
 }
 
 - (UIWindow *)window {
