@@ -11,7 +11,7 @@
 @class SPRControlCenterViewController;
 
 typedef void (^BallClickedCustomCallback)(void);
-@interface SPRFloatBallWindowManager : NSObject
+@interface SPRManager : NSObject
 
 @property (nonatomic, strong) SPRFloatBallWindow *window;
 @property (nonatomic, strong) SPRControlCenterViewController *controlCenterVC;

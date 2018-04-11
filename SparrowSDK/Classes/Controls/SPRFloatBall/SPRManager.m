@@ -5,7 +5,7 @@
 //  Created by 周凌宇 on 2018/3/8.
 //
 
-#import "SPRFloatBallWindowManager.h"
+#import "SPRManager.h"
 #import "SPRFloatingBall.h"
 #import "SPRFloatBallWindow.h"
 #import "SPRControlCenterViewController.h"
@@ -13,20 +13,20 @@
 #import "SPRProjectsData.h"
 #import "SPRCommonData.h"
 
-@interface SPRFloatBallWindowManager ()
+@interface SPRManager ()
 
 @property (nonatomic, copy) BallClickedCustomCallback ballClickedCustomCallback;
 @property (nonatomic, assign) BOOL showedManagerVC;
 @property (nonatomic, strong) SPRFloatingBall *floatingBall;
 @end
 
-@implementation SPRFloatBallWindowManager
+@implementation SPRManager
 
 + (instancetype)sharedInstance {
-    static SPRFloatBallWindowManager *instance = nil;
+    static SPRManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[SPRFloatBallWindowManager alloc] init];
+        instance = [[SPRManager alloc] init];
     });
     return instance;
 }
@@ -91,12 +91,12 @@
 }
 
 + (void)jumpToLoginVC {
-    [[SPRFloatBallWindowManager sharedInstance] jumpToLoginVC];
+    [[SPRManager sharedInstance] jumpToLoginVC];
 }
 
 - (void)jumpToLoginVC {
     UIViewController *vc = [[SPRLoginViewController alloc] init];
-    UIViewController *rootVC = [SPRFloatBallWindowManager sharedInstance].window.rootViewController;
+    UIViewController *rootVC = [SPRManager sharedInstance].window.rootViewController;
     UIViewController *presentationVC;
     if (rootVC.presentedViewController) {
         presentationVC = rootVC.presentedViewController;
