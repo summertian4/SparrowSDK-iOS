@@ -7,7 +7,7 @@
 
 #import "SPRManager.h"
 #import "SPRFloatingBall.h"
-#import "SPRFloatBallWindow.h"
+#import "SPRWindow.h"
 #import "SPRControlCenterViewController.h"
 #import "SPRLoginViewController.h"
 #import "SPRProjectsData.h"
@@ -114,7 +114,7 @@
 
 - (UIWindow *)window {
     if (_window == nil) {
-        _window = [[SPRFloatBallWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _window = [[SPRWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _window.windowLevel = CGFLOAT_MAX;
 
         UIViewController *rootVC = [UIViewController new];
