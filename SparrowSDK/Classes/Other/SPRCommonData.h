@@ -20,6 +20,8 @@ NSLog(@"--------");
 #endif
 
 extern NSString * const kSPRnotificationLoginSuccess;
+extern NSString * const kSPRnotificationMotionEvent;
+extern NSString * const kSPRnotificationNeedRefreshData;
 
 @interface SPRCommonData : NSObject
 

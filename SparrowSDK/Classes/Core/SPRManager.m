@@ -12,6 +12,11 @@
 #import "SPRLoginViewController.h"
 #import "SPRProjectsData.h"
 #import "SPRCommonData.h"
+#import "SPRCacheManager.h"
+#import "SPRProject.h"
+#import "SPRProgressHUD.h"
+#import "SPRHTTPSessionManager.h"
+#import "SPRApi.h"
 
 @interface SPRManager ()
 
@@ -37,8 +42,16 @@
                                                  selector:@selector(loginSuccess:)
                                                      name:kSPRnotificationLoginSuccess
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(motionEnd:)
+                                                     name:kSPRnotificationMotionEvent
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Public
@@ -110,6 +123,48 @@
 
 -(void)loginSuccess:(NSNotification *)notification {
     
+}
+
+-(void)motionEnd:(NSNotification *)notification {
+    [self refreshApis];
+}
+
+- (void)refreshApis {
+    __weak __typeof(self)weakSelf = self;
+
+    NSSet *projects = [SPRCacheManager getProjectsFromCache];
+    if (projects == nil || projects.count == 0) {
+#pragma mark - TODO 待测试
+        [SPRToast showWithMessage:@"请先选择项目" from:self.window.rootViewController.view];
+        return;
+    }
+
+    NSMutableArray *projectIds = [NSMutableArray array];
+    for (SPRProject *project in projects) {
+        [projectIds addObject:@(project.project_id)];
+    }
+    [SPRProgressHUD showHUDAddedTo:self.window.rootViewController.view animated:YES];
+    [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
+                    parameters:@{@"project_id": projectIds}
+                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [SPRProgressHUD hideHUDForView:strongSelf.window.rootViewController.view animated:YES];
+                               NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                               if (apis.count != 0) {
+                                   [SPRCacheManager cacheApis:apis];
+                                   [SPRToast showWithMessage:@"刷新数据成功" from:strongSelf.window.rootViewController.view];
+                                   [[NSNotificationCenter defaultCenter] postNotificationName:kSPRnotificationNeedRefreshData object:nil];
+                               }
+                           }
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           SPRLog(@"%@", error);
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [SPRProgressHUD hideHUDForView:strongSelf.window.rootViewController.view animated:YES];
+                               [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.window.rootViewController.view];
+                           }
+                       }];
 }
 
 - (UIWindow *)window {
