@@ -77,7 +77,7 @@
 }
 
 - (void)refreshData:(NSNotification *)notification {
-    [self fetchApis];
+    [self refreshDataFromCache];
 }
 
 #pragma mark - Private
@@ -104,6 +104,41 @@
 }
 
 - (void)fetchApis {
+    NSSet *projects = [SPRCacheManager getProjectsFromCache];
+    if (projects == nil || projects.count == 0) {
+        [SPRToast showWithMessage:@"请先选择项目" from:self.view];
+        return;
+    }
+    NSMutableArray *projectIds = [NSMutableArray array];
+    for (SPRProject *project in projects) {
+        [projectIds addObject:@(project.project_id)];
+    }
+    [self showHUD];
+    __weak __typeof(self)weakSelf = self;
+    [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
+                    parameters:@{@"project_id": projectIds}
+                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                               strongSelf.apis = apis;
+                               [strongSelf.mainTable reloadData];
+                               [SPRCacheManager cacheApis:apis];
+                               [SPRToast showWithMessage:@"刷新数据成功" from:strongSelf.view];
+                           }
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           SPRLog(@"%@", error);
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.view];
+                           }
+                       }];
+    [self.mainTable reloadData];
+}
+
+- (void)refreshDataFromCache {
     self.apis = [SPRCacheManager getApisFromCache];
     [self.mainTable reloadData];
 }
