@@ -88,7 +88,7 @@
 }
 
 - (void)syncWithShakeSwitchChanged:(UISwitch *)sender {
-    [[NSUserDefaults standardUserDefaults] setObject:@(sender.isOn) forKey:kSPRUDSyncWithShakeSwitch];
+    [[SPRCommonData defaultData] setShouldSyncWithShake:sender.isOn];
 }
 
 #pragma mark - Getter Setter
@@ -230,8 +230,7 @@
     if (_syncWithShakeSwitch == nil) {
         _syncWithShakeSwitch = [[UISwitch alloc] init];
         _syncWithShakeSwitch.onTintColor = SPRThemeColor;
-        _syncWithShakeSwitch.on = [[[NSUserDefaults standardUserDefaults]
-                                    objectForKey:kSPRUDSyncWithShakeSwitch] boolValue];
+        _syncWithShakeSwitch.on = [[SPRCommonData defaultData] shouldSyncWithShake];
         [_syncWithShakeSwitch addTarget:self
                                  action:@selector(syncWithShakeSwitchChanged:)
                        forControlEvents:UIControlEventValueChanged];

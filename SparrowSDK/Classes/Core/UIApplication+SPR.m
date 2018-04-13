@@ -25,7 +25,7 @@ void Swizzle(Class c, SEL orig, SEL new) {
 }
 
 - (void)sprSendEvent:(UIEvent*)event {
-    BOOL shouldSyncWithShake = [[[NSUserDefaults standardUserDefaults] objectForKey:kSPRUDSyncWithShakeSwitch] boolValue];
+    BOOL shouldSyncWithShake = [[SPRCommonData defaultData] shouldSyncWithShake];
     if (shouldSyncWithShake == YES) {
         if (event.type == UIEventTypeMotion) {
             int result = [event valueForKey:@"_shakeState"] != nil ? [[event valueForKey:@"_shakeState"] intValue]: 0;

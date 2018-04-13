@@ -17,6 +17,16 @@ NSString * const SparrowHostKey = @"SparrowHostKey";
 
 @implementation SPRCommonData
 
+static SPRCommonData *defaultData;
+
++ (SPRCommonData *)defaultData {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        defaultData = [[SPRCommonData alloc] init];
+    });
+    return defaultData;
+}
+
 + (NSBundle *)bundle {
     NSString *bundlePath = [[NSBundle bundleForClass:[self class]].resourcePath
                             stringByAppendingPathComponent:@"/SparrowSDK.bundle"];
@@ -34,6 +44,19 @@ NSString * const SparrowHostKey = @"SparrowHostKey";
 
 + (void)setSparrowHost:(NSString *)hostStr {
     [[NSUserDefaults standardUserDefaults] setObject:hostStr forKey:SparrowHostKey];
+}
+
+- (BOOL)shouldSyncWithShake {
+    id value = [[NSUserDefaults standardUserDefaults] objectForKey:kSPRUDSyncWithShakeSwitch];
+    if (value == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:@(YES) forKey:kSPRUDSyncWithShakeSwitch];
+        return YES;
+    }
+    return [value boolValue];
+}
+
+- (void)setShouldSyncWithShake:(BOOL)shouldSyncWithShake {
+    [[NSUserDefaults standardUserDefaults] setObject:@(shouldSyncWithShake) forKey:kSPRUDSyncWithShakeSwitch];
 }
 
 @end

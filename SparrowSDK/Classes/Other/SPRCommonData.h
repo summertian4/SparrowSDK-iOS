@@ -23,9 +23,11 @@ extern NSString * const kSPRnotificationLoginSuccess;
 extern NSString * const kSPRnotificationMotionEvent;
 extern NSString * const kSPRnotificationNeedRefreshData;
 
-extern NSString * const kSPRUDSyncWithShakeSwitch;
-
 @interface SPRCommonData : NSObject
+
+@property (nonatomic, assign) BOOL shouldSyncWithShake;
+
++ (SPRCommonData *)defaultData;
 
 + (NSBundle *)bundle;
 + (NSString *)sparrowHost;
