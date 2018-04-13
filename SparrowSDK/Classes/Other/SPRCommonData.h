@@ -25,6 +25,10 @@ extern NSString * const kSPRnotificationNeedRefreshData;
 
 @interface SPRCommonData : NSObject
 
+@property (nonatomic, assign) BOOL shouldSyncWithShake;
+
++ (SPRCommonData *)defaultData;
+
 + (NSBundle *)bundle;
 + (NSString *)sparrowHost;
 + (void)setSparrowHost:(NSString *)hostStr;

@@ -25,10 +25,13 @@ void Swizzle(Class c, SEL orig, SEL new) {
 }
 
 - (void)sprSendEvent:(UIEvent*)event {
-    if (event.type == UIEventTypeMotion) {
-        int result = [event performSelector:@selector(_shakeState) withObject:nil];
-        if (result == 1) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:kSPRnotificationMotionEvent object:nil];
+    BOOL shouldSyncWithShake = [[SPRCommonData defaultData] shouldSyncWithShake];
+    if (shouldSyncWithShake == YES) {
+        if (event.type == UIEventTypeMotion) {
+            int result = [event valueForKey:@"_shakeState"] != nil ? [[event valueForKey:@"_shakeState"] intValue]: 0;
+            if (result == 1) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:kSPRnotificationMotionEvent object:nil];
+            }
         }
     }
     [self sprSendEvent:event];
