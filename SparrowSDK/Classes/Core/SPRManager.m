@@ -134,7 +134,6 @@
 
     NSSet *projects = [SPRCacheManager getProjectsFromCache];
     if (projects == nil || projects.count == 0) {
-#pragma mark - TODO 待测试
         [SPRToast showWithMessage:@"请先选择项目" from:self.window.rootViewController.view];
         return;
     }
