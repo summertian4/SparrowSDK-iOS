@@ -7,13 +7,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class SPRFloatBallWindow;
+@class SPRWindow;
 @class SPRControlCenterViewController;
 
 typedef void (^BallClickedCustomCallback)(void);
-@interface SPRFloatBallWindowManager : NSObject
+@interface SPRManager : NSObject
 
-@property (nonatomic, strong) SPRFloatBallWindow *window;
+@property (nonatomic, strong) SPRWindow *window;
 @property (nonatomic, strong) SPRControlCenterViewController *controlCenterVC;
 
 + (instancetype)sharedInstance;

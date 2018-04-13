@@ -8,6 +8,9 @@
 #import "SPRCommonData.h"
 
 NSString * const kSPRnotificationLoginSuccess = @"kSPRnotificationLoginSuccess";
+NSString * const kSPRnotificationMotionEvent = @"kSPRnotificationMotionEvent";
+NSString * const kSPRnotificationNeedRefreshData = @"kSPRnotificationNeedRefreshData";
+
 NSString * const SparrowHostKey = @"SparrowHostKey";
 
 @implementation SPRCommonData

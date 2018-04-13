@@ -5,28 +5,33 @@
 //  Created by 周凌宇 on 2018/3/8.
 //
 
-#import "SPRFloatBallWindowManager.h"
+#import "SPRManager.h"
 #import "SPRFloatingBall.h"
-#import "SPRFloatBallWindow.h"
+#import "SPRWindow.h"
 #import "SPRControlCenterViewController.h"
 #import "SPRLoginViewController.h"
 #import "SPRProjectsData.h"
 #import "SPRCommonData.h"
+#import "SPRCacheManager.h"
+#import "SPRProject.h"
+#import "SPRProgressHUD.h"
+#import "SPRHTTPSessionManager.h"
+#import "SPRApi.h"
 
-@interface SPRFloatBallWindowManager ()
+@interface SPRManager ()
 
 @property (nonatomic, copy) BallClickedCustomCallback ballClickedCustomCallback;
 @property (nonatomic, assign) BOOL showedManagerVC;
 @property (nonatomic, strong) SPRFloatingBall *floatingBall;
 @end
 
-@implementation SPRFloatBallWindowManager
+@implementation SPRManager
 
 + (instancetype)sharedInstance {
-    static SPRFloatBallWindowManager *instance = nil;
+    static SPRManager *instance = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        instance = [[SPRFloatBallWindowManager alloc] init];
+        instance = [[SPRManager alloc] init];
     });
     return instance;
 }
@@ -37,8 +42,16 @@
                                                  selector:@selector(loginSuccess:)
                                                      name:kSPRnotificationLoginSuccess
                                                    object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(motionEnd:)
+                                                     name:kSPRnotificationMotionEvent
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Public
@@ -91,12 +104,12 @@
 }
 
 + (void)jumpToLoginVC {
-    [[SPRFloatBallWindowManager sharedInstance] jumpToLoginVC];
+    [[SPRManager sharedInstance] jumpToLoginVC];
 }
 
 - (void)jumpToLoginVC {
     UIViewController *vc = [[SPRLoginViewController alloc] init];
-    UIViewController *rootVC = [SPRFloatBallWindowManager sharedInstance].window.rootViewController;
+    UIViewController *rootVC = [SPRManager sharedInstance].window.rootViewController;
     UIViewController *presentationVC;
     if (rootVC.presentedViewController) {
         presentationVC = rootVC.presentedViewController;
@@ -112,9 +125,51 @@
     
 }
 
+-(void)motionEnd:(NSNotification *)notification {
+    [self refreshApis];
+}
+
+- (void)refreshApis {
+    __weak __typeof(self)weakSelf = self;
+
+    NSSet *projects = [SPRCacheManager getProjectsFromCache];
+    if (projects == nil || projects.count == 0) {
+#pragma mark - TODO 待测试
+        [SPRToast showWithMessage:@"请先选择项目" from:self.window.rootViewController.view];
+        return;
+    }
+
+    NSMutableArray *projectIds = [NSMutableArray array];
+    for (SPRProject *project in projects) {
+        [projectIds addObject:@(project.project_id)];
+    }
+    [SPRProgressHUD showHUDAddedTo:self.window.rootViewController.view animated:YES];
+    [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
+                    parameters:@{@"project_id": projectIds}
+                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [SPRProgressHUD hideHUDForView:strongSelf.window.rootViewController.view animated:YES];
+                               NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                               if (apis.count != 0) {
+                                   [SPRCacheManager cacheApis:apis];
+                                   [SPRToast showWithMessage:@"刷新数据成功" from:strongSelf.window.rootViewController.view];
+                                   [[NSNotificationCenter defaultCenter] postNotificationName:kSPRnotificationNeedRefreshData object:nil];
+                               }
+                           }
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           SPRLog(@"%@", error);
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [SPRProgressHUD hideHUDForView:strongSelf.window.rootViewController.view animated:YES];
+                               [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.window.rootViewController.view];
+                           }
+                       }];
+}
+
 - (UIWindow *)window {
     if (_window == nil) {
-        _window = [[SPRFloatBallWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+        _window = [[SPRWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
         _window.windowLevel = CGFLOAT_MAX;
 
         UIViewController *rootVC = [UIViewController new];

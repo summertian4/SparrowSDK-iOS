@@ -7,7 +7,7 @@
 
 #import "SPRHTTPSessionManager.h"
 #import "SPRCommonData.h"
-#import "SPRFloatBallWindowManager.h"
+#import "SPRManager.h"
 
 @implementation SPRHTTPSessionManager
 
@@ -90,7 +90,7 @@ static SPRHTTPSessionManager *manager;
                                                     code:(NSInteger)responseObject[@"code"]
                                                 userInfo:@{}];
         // 跳转登录
-        [SPRFloatBallWindowManager jumpToLoginVC];
+        [SPRManager jumpToLoginVC];
         failure(task, error);
     } else {
         NSString *domain = responseObject[@"message"];

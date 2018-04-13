@@ -7,6 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SPRFloatBallWindow : UIWindow
+@interface SPRWindow : UIWindow
 
 @end

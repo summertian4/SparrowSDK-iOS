@@ -8,6 +8,7 @@
 #import "SPRSettingViewController.h"
 #import "SPRHTTPSessionManager.h"
 #import "SPRCacheManager.h"
+#import "SPRManager.h"
 
 @interface SPRSettingViewController ()
 @property (nonatomic, strong) UILabel *hostTitleLabel;
@@ -69,6 +70,7 @@
         if (strongSelf) {
             [strongSelf dismissHUD];
             [SPRToast showWithMessage:error.domain from:strongSelf.view];
+            [SPRManager jumpToLoginVC];
         }
     }];
 }
