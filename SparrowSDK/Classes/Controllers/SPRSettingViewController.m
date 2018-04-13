@@ -11,10 +11,15 @@
 #import "SPRManager.h"
 
 @interface SPRSettingViewController ()
+#pragma mark - Host Setting
 @property (nonatomic, strong) UILabel *hostTitleLabel;
 @property (nonatomic, strong) UITextField *hostTextField;
 @property (nonatomic, strong) UIButton *hostConfirmButton;
 @property (nonatomic, strong) UIView *hostContentView;
+#pragma mark - SyncWithShake
+@property (nonatomic, strong) UIView *syncWithShakeContentView;
+@property (nonatomic, strong) UISwitch *syncWithShakeSwitch;
+#pragma mark - Logout Button
 @property (nonatomic, strong) UIButton *logoutButton;
 @end
 
@@ -36,6 +41,7 @@
     [self hostTextField];
     [self hostConfirmButton];
     [self logoutButton];
+    [self syncWithShakeContentView];
 }
 
 - (void)hostConfirmButtonClicked {
@@ -79,6 +85,10 @@
 
 - (void)logoutButtonClicked {
     [self requestLogout];
+}
+
+- (void)syncWithShakeSwitchChanged:(UISwitch *)sender {
+    [[NSUserDefaults standardUserDefaults] setObject:@(sender.isOn) forKey:kSPRUDSyncWithShakeSwitch];
 }
 
 #pragma mark - Getter Setter
@@ -173,13 +183,65 @@
                 forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:_logoutButton];
         [_logoutButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(self.hostContentView.mas_bottom).offset(30);
+            make.top.equalTo(self.syncWithShakeContentView.mas_bottom).offset(30);
             make.left.equalTo(self.view).offset(15);
             make.right.equalTo(self.view).offset(-15);
             make.height.equalTo(@(45));
         }];
     }
     return _logoutButton;
+}
+
+- (UIView *)syncWithShakeContentView {
+    if (_syncWithShakeContentView == nil) {
+        _syncWithShakeContentView = [[UIView alloc] init];
+        [self.view addSubview:_syncWithShakeContentView];
+        [_syncWithShakeContentView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.height.equalTo(self.hostContentView);
+            make.top.equalTo(self.hostContentView.mas_bottom);
+        }];
+
+        UILabel *label = [[UILabel alloc] init];
+        label.text = @"摇一摇同步";
+        label.font = [UIFont systemFontOfSize:17];
+        label.textColor = [UIColor colorWithHexString:@"4B4B4B"];
+        label.textAlignment = NSTextAlignmentLeft;
+        [_syncWithShakeContentView addSubview:label];
+        __weak __typeof(UIView *)w_syncWithShakeContentView = _syncWithShakeContentView;
+        [label mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(w_syncWithShakeContentView).offset(8);
+            make.bottom.equalTo(w_syncWithShakeContentView).offset(-6);
+        }];
+
+        [self syncWithShakeSwitch];
+
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = [UIColor colorWithHexString:@"EEECEC"];
+        [_syncWithShakeContentView addSubview:lineView];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.left.right.equalTo(w_syncWithShakeContentView);
+            make.height.equalTo(@(1));
+        }];
+    }
+    return _syncWithShakeContentView;
+}
+
+- (UISwitch *)syncWithShakeSwitch {
+    if (_syncWithShakeSwitch == nil) {
+        _syncWithShakeSwitch = [[UISwitch alloc] init];
+        _syncWithShakeSwitch.onTintColor = SPRThemeColor;
+        _syncWithShakeSwitch.on = [[[NSUserDefaults standardUserDefaults]
+                                    objectForKey:kSPRUDSyncWithShakeSwitch] boolValue];
+        [_syncWithShakeSwitch addTarget:self
+                                 action:@selector(syncWithShakeSwitchChanged:)
+                       forControlEvents:UIControlEventValueChanged];
+        [self.syncWithShakeContentView addSubview:_syncWithShakeSwitch];
+        [_syncWithShakeSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.equalTo(self.syncWithShakeContentView).offset(-8);
+            make.bottom.equalTo(self.syncWithShakeContentView).offset(-6);
+        }];
+    }
+    return _syncWithShakeSwitch;
 }
 
 @end

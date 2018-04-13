@@ -11,6 +11,8 @@ NSString * const kSPRnotificationLoginSuccess = @"kSPRnotificationLoginSuccess";
 NSString * const kSPRnotificationMotionEvent = @"kSPRnotificationMotionEvent";
 NSString * const kSPRnotificationNeedRefreshData = @"kSPRnotificationNeedRefreshData";
 
+NSString * const kSPRUDSyncWithShakeSwitch = @"kSPRUDSyncWithShakeSwitch";
+
 NSString * const SparrowHostKey = @"SparrowHostKey";
 
 @implementation SPRCommonData

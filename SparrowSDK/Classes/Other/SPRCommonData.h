@@ -23,6 +23,8 @@ extern NSString * const kSPRnotificationLoginSuccess;
 extern NSString * const kSPRnotificationMotionEvent;
 extern NSString * const kSPRnotificationNeedRefreshData;
 
+extern NSString * const kSPRUDSyncWithShakeSwitch;
+
 @interface SPRCommonData : NSObject
 
 + (NSBundle *)bundle;
