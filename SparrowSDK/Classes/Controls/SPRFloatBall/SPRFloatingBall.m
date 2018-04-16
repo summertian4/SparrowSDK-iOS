@@ -8,6 +8,7 @@
 #import "SPRFloatingBall.h"
 #import "SPRCommonData.h"
 #import <Masonry/Masonry.h>
+#import "SPRCacheManager.h"
 
 typedef void (^BallClickedCallback)(void);
 @interface SPRFloatingBall ()
@@ -50,6 +51,12 @@ typedef void (^BallClickedCallback)(void);
     return self;
 }
 
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGPoint coordinate = [SPRCacheManager getFloatingBallCoordinate];
+    self.frame = CGRectMake(coordinate.x, coordinate.y, self.frame.size.width, self.frame.size.height);
+}
+
 - (void)handleSingleTap:(UIGestureRecognizer *)sender {
     if (self.ballClickedCustomCallback) {
         self.ballClickedCustomCallback();
@@ -79,6 +86,7 @@ typedef void (^BallClickedCallback)(void);
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [SPRCacheManager cacheFloatingBallCoordinate:self.frame.origin];
 }
 
 - (void)click {
