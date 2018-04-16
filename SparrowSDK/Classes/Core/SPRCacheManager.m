@@ -285,6 +285,84 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
     [self clearProjectsFromCache];
 }
 
+#pragma mark - Coordinate
+
++ (void)cacheFloatingBallCoordinate:(CGPoint)offset {
+    [[self sharedInstance] cacheFloatingBallCoordinate:offset];
+}
+
+- (void)cacheFloatingBallCoordinate:(CGPoint)offset {
+    __weak __typeof(self)weakSelf = self;
+    dispatch_sync(_queue, ^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            NSDictionary *dic = @{@"x": @(offset.x), @"y": @(offset.y)};
+            NSData *data = [NSKeyedArchiver archivedDataWithRootObject:dic];
+            BOOL result = [data writeToFile:[SPRCacheManager floatingBallCoordinate] atomically:YES];
+
+            if (result == NO) {
+                SPRLog(@"Caching floatingBall coordinate failed");
+                return;
+            }
+            strongSelf.floatingBallCoordinate = offset;
+        }
+    });
+}
+
++ (CGPoint)getFloatingBallCoordinate {
+    __block CGPoint block_coordinate = CGPointZero;
+    dispatch_semaphore_t sema = dispatch_semaphore_create(0);
+    [[SPRCacheManager sharedInstance] getFloatingBallCoordinate:^(CGPoint coordinate) {
+        block_coordinate = coordinate;
+        dispatch_semaphore_signal(sema);
+    }];
+    dispatch_semaphore_wait(sema, DISPATCH_TIME_FOREVER);
+    return block_coordinate;
+}
+
+- (void)getFloatingBallCoordinate:(void (^)(CGPoint coordinate))callback {
+    __weak __typeof(self)weakSelf = self;
+    dispatch_sync(_queue, ^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            NSData *data = [[NSData alloc]initWithContentsOfFile:[SPRCacheManager floatingBallCoordinate]];
+            NSDictionary *dic = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            CGFloat x = [dic[@"x"] floatValue];
+            CGFloat y = [dic[@"y"] floatValue];
+            callback(CGPointMake(x, y));
+        }
+    });
+}
+
++ (void)clearFloatingBallCoordinate {
+    [[self sharedInstance] clearFloatingBallCoordinate];
+}
+
+- (void)clearFloatingBallCoordinate {
+    __weak __typeof(self)weakSelf = self;
+    dispatch_sync(_queue, ^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            NSFileManager *fileMger = [NSFileManager defaultManager];
+            NSString *path = [SPRCacheManager floatingBallCoordinate];
+
+            BOOL exist = [fileMger fileExistsAtPath:path];
+            if (exist) {
+                NSError *err;
+                [fileMger removeItemAtPath:path error:&err];
+                if (err) {
+                    SPRLog(@"Delete floating ball coordinate cache failed");
+                } else {
+                    strongSelf.floatingBallCoordinate = CGPointZero;
+                }
+            }
+        }
+    });
+}
+
+
+#pragma mark - Path
+
 + (NSString *)apisPath {
     return [[self cacheDir] stringByAppendingString:@"/apis"];
 }
@@ -295,6 +373,10 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
 
 + (NSString *)accountPath {
     return [[self cacheDir] stringByAppendingString:@"/account"];
+}
+
++ (NSString *)floatingBallCoordinate {
+    return [[self cacheDir] stringByAppendingString:@"/floating_ball_coordinate"];
 }
 
 @end

@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @class SPRApi;
 @class SPRProject;
@@ -15,6 +16,7 @@
 @property (nonatomic, strong) NSArray<SPRApi *> *apis;
 @property (nonatomic, strong) NSSet<SPRProject *> *projects;
 @property (nonatomic, strong) SPRAccount *account;
+@property (nonatomic, assign) CGPoint floatingBallCoordinate;
 
 + (instancetype)sharedInstance;
 
@@ -29,6 +31,10 @@
 + (void)cacheAccount:(SPRAccount *)account;
 + (SPRAccount *)getAccountFromCache;
 + (void)clearAccountFromCache;
+
++ (void)cacheFloatingBallCoordinate:(CGPoint)coordinate;
++ (CGPoint)getFloatingBallCoordinate;
++ (void)clearFloatingBallCoordinate;
 
 + (void)clearAllCache;
 
