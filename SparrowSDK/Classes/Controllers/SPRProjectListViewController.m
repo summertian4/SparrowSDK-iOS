@@ -38,11 +38,18 @@
         make.edges.equalTo(self.view);
     }];
     [self fetchProjects];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginSuccess:)
+                                                 name:kSPRnotificationLoginSuccess
+                                               object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+#pragma mark - Private
 
 - (void)startSelect {
     self.isSelecting = !self.isSelecting;
@@ -92,6 +99,10 @@
     }];
 }
 
+- (void)refreshProjects {
+    [self fetchProjects];
+}
+
 - (void)fetchApis {
     __weak __typeof(self)weakSelf = self;
 
@@ -122,6 +133,12 @@
                  [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.view];
              }
          }];
+}
+
+#pragma mark - Action
+
+- (void)loginSuccess:(NSNotification *)notification {
+    [self refreshProjects];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource

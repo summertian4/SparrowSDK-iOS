@@ -283,6 +283,7 @@ static char *QueueName = "com.zhoulingyu.sparrow.queue";
     [self clearAccountFromCache];
     [self clearApisFromCache];
     [self clearProjectsFromCache];
+    [self clearFloatingBallCoordinate];
 }
 
 #pragma mark - Coordinate
