@@ -45,9 +45,15 @@
     } else if ([[model.method uppercaseString] isEqualToString:@"PUT"]) {
         self.methodLabel.backgroundColor = [UIColor colorWithHexString:@"FADD6E"];
         self.methodLabel.text = @"PUT";
-    } else {
+    } else if ([[model.method uppercaseString] isEqualToString:@"DELETE"]) {
         self.methodLabel.backgroundColor = [UIColor colorWithHexString:@"EB4C64"];
         self.methodLabel.text = @"DEL";
+    } else if ([[model.method uppercaseString] isEqualToString:@"PATCH"]) {
+        self.methodLabel.backgroundColor = [UIColor colorWithHexString:@"6EB9DA"];
+        self.methodLabel.text = @"PAT";
+    } else {
+        self.methodLabel.backgroundColor = [UIColor colorWithHexString:@"6EB9DA"];
+        self.methodLabel.text = @"UNK";
     }
     self.nameLabel.text = model.name;
     self.urlLabel.text = [NSString stringWithFormat:@"/%@", model.path];
