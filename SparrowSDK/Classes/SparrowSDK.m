@@ -7,7 +7,7 @@
 
 #import "SparrowSDK.h"
 #import "SPRURLProtocol.h"
-#import "SPRFloatBallWindowManager.h"
+#import "SPRManager.h"
 #import "SPRCommonData.h"
 #import "SPRControlCenterViewController.h"
 
@@ -18,7 +18,7 @@
         [SPRCommonData setSparrowHost:options.hostURL];
     }
     [SPRURLProtocol start];
-    [SPRFloatBallWindowManager showWindow:options.ballClickedCallback];
+    [SPRManager showWindow:options.ballClickedCallback];
 }
 
 + (UIViewController *)controlCenter {

@@ -13,6 +13,9 @@
 #import "SPRProjectListViewController.h"
 #import "SPRHTTPSessionManager.h"
 #import "SPRSettingViewController.h"
+#import "SPRLoginViewController.h"
+#import "SPRAccount.h"
+#import "SPRManager.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -32,6 +35,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"Sparrow";
     self.automaticallyAdjustsScrollViewInsets = NO;
+
     [self initSubviews];
 
     UIImage *leftImage = [UIImage imageNamed:@"sparrow_setting"
@@ -42,18 +46,15 @@
                compatibleWithTraitCollection:nil];
     [self setRightBarWithImage:leftImage action:@selector(jumpToSettingVC)];
     [self setLeftBarWithImage:rightImage action:@selector(leftBarButtonClicked)];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshData:)
+                                                 name:kSPRnotificationNeedRefreshData
+                                               object:nil];
 }
 
-- (void)initData {
-    [self apis];
-    [self.mainTable reloadData];
-}
-
-- (void)initSubviews {
-    [self mainTable];
-    [self syncButton];
-    [self clearCacheButton];
-    [self reselectButton];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Action
@@ -75,50 +76,71 @@
     [self fetchApis];
 }
 
+- (void)refreshData:(NSNotification *)notification {
+    [self refreshDataFromCache];
+}
+
+#pragma mark - Private
+
+- (void)initData {
+    [self apis];
+    [self.mainTable reloadData];
+}
+
+- (void)initSubviews {
+    [self mainTable];
+    [self syncButton];
+    [self clearCacheButton];
+    [self reselectButton];
+}
+
 - (void)jumpToSettingVC {
     [self.navigationController pushViewController:[SPRSettingViewController new] animated:YES];
 }
 
 - (void)leftBarButtonClicked {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [SPRManager clickBall];
 }
 
 - (void)fetchApis {
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
-    __weak __typeof(self)weakSelf = self;
-
     NSSet *projects = [SPRCacheManager getProjectsFromCache];
     if (projects == nil || projects.count == 0) {
         [SPRToast showWithMessage:@"请先选择项目" from:self.view];
         return;
     }
-
     NSMutableArray *projectIds = [NSMutableArray array];
     for (SPRProject *project in projects) {
         [projectIds addObject:@(project.project_id)];
     }
     [self showHUD];
-    [manager GET:@"/frontend/api/fetch"
-      parameters:@{@"project_id": projectIds}
-         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 [strongSelf dismissHUD];
-                 NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
-                 if (apis.count != 0) {
-                     [SPRCacheManager cacheApis:apis];
-                     strongSelf.apis = apis;
-                     [strongSelf.mainTable reloadData];
-                 }
-             }
-         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             SPRLog(@"%@", error);
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 [strongSelf dismissHUD];
-                 [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.view];
-             }
-         }];
+    __weak __typeof(self)weakSelf = self;
+    [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
+                    parameters:@{@"project_id": projectIds}
+                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                               strongSelf.apis = apis;
+                               [strongSelf.mainTable reloadData];
+                               [SPRCacheManager cacheApis:apis];
+                               [SPRToast showWithMessage:@"刷新数据成功" from:strongSelf.view];
+                           }
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           SPRLog(@"%@", error);
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.view];
+                           }
+                       }];
+    [self.mainTable reloadData];
+}
+
+- (void)refreshDataFromCache {
+    self.apis = [SPRCacheManager getApisFromCache];
+    [self.mainTable reloadData];
 }
 
 - (void)clearCacheButtonClicked {
@@ -131,11 +153,10 @@
 
 - (void)didApiSwitchChangedWithApi: (SPRApi *)api isOn:(BOOL) isOn {
     // 请求 Mock 开关
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     NSString *urlString = [NSString stringWithFormat:@"/frontend/project/%ld/api/%ld/update_status",
                            api.project_id, api.api_id];
     __weak __typeof(self)weakSelf = self;
-    [manager GET:urlString
+    [SPRHTTPSessionManager GET:urlString
       parameters:@{@"status": @(isOn)}
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;

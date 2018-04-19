@@ -16,9 +16,10 @@
     [toast setMode:SPRProgressHUDModeText];
     toast.label.text = message;
     [toast showAnimated:YES];
+    __weak __typeof(SPRProgressHUD *)weak_toast = toast;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
                    dispatch_get_main_queue(), ^{
-                       [toast hideAnimated:YES];
+                       [weak_toast hideAnimated:YES];
                    });
 
 
