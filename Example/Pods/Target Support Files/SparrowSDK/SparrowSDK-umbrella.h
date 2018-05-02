@@ -35,6 +35,7 @@
 #import "SPRProjectsData.h"
 #import "SPRCommonData.h"
 #import "SPRHTTPSessionManager.h"
+#import "SPRResponse.h"
 #import "UIColor+SPRAddtion.h"
 #import "SparrowSDK.h"
 #import "SPROptions.h"

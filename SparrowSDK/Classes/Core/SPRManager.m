@@ -145,11 +145,11 @@
     [SPRProgressHUD showHUDAddedTo:self.window.rootViewController.view animated:YES];
     [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
                     parameters:@{@"project_id": projectIds}
-                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                       success:^(NSURLSessionDataTask *task, SPRResponse *response) {
                            __strong __typeof(weakSelf)strongSelf = weakSelf;
                            if (strongSelf) {
                                [SPRProgressHUD hideHUDForView:strongSelf.window.rootViewController.view animated:YES];
-                               NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                               NSMutableArray *apis = [SPRApi apisWithDictArray:response.data];
                                if (apis.count != 0) {
                                    [SPRCacheManager cacheApis:apis];
                                    [SPRToast showWithMessage:@"刷新数据成功" from:strongSelf.window.rootViewController.view];
