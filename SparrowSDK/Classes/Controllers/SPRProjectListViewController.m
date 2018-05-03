@@ -74,29 +74,29 @@
 
     [self showHUD];
     [SPRHTTPSessionManager GET:@"/frontend/project/list"
-      parameters:@{@"current_page": @(self.projectsData.currentPage + 1), @"limit": @(self.projectsData.limit)}
-         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 [strongSelf dismissHUD];
-                 SPRProjectsData *newPorjectsData = [[SPRProjectsData alloc] initWithDict:responseObject[@"projects_data"]];
-                 if (newPorjectsData == nil || newPorjectsData.projects == nil) {
-                     strongSelf.projectsData.currentPage = 0;
-                     [strongSelf.tableView reloadData];
-                     return;
-                 }
-                 [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
-                 strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
-                 [strongSelf.tableView reloadData];
-             }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        SPRLog(@"%@", error);
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (strongSelf) {
-            [strongSelf dismissHUD];
-            [SPRToast showWithMessage:error.domain from:strongSelf.view];
-        }
-    }];
+                    parameters:@{@"current_page": @(self.projectsData.currentPage + 1), @"limit": @(self.projectsData.limit)}
+                       success:^(NSURLSessionDataTask *task, SPRResponse *response) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               SPRProjectsData *newPorjectsData = [[SPRProjectsData alloc] initWithDict:response.data];
+                               if (newPorjectsData == nil || newPorjectsData.projects == nil) {
+                                   strongSelf.projectsData.currentPage = 0;
+                                   [strongSelf.tableView reloadData];
+                                   return;
+                               }
+                               [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
+                               strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
+                               [strongSelf.tableView reloadData];
+                           }
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           SPRLog(@"%@", error);
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               [SPRToast showWithMessage:error.domain from:strongSelf.view];
+                           }
+                       }];
 }
 
 - (void)refreshProjects {
@@ -113,11 +113,11 @@
     [self showHUD];
     [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
-         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         success:^(NSURLSessionDataTask *task, SPRResponse *response) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
                  [strongSelf dismissHUD];
-                 NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                 NSMutableArray *apis = [SPRApi apisWithDictArray:response.data];
                  if (apis.count != 0) {
                      [SPRCacheManager cacheProjects:[NSSet setWithSet:strongSelf.seletedProjects]];
                      [SPRCacheManager cacheApis:apis];

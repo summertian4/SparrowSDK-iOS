@@ -117,11 +117,11 @@
     __weak __typeof(self)weakSelf = self;
     [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
                     parameters:@{@"project_id": projectIds}
-                       success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                       success:^(NSURLSessionDataTask *task, SPRResponse *response) {
                            __strong __typeof(weakSelf)strongSelf = weakSelf;
                            if (strongSelf) {
                                [strongSelf dismissHUD];
-                               NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                               NSMutableArray *apis = [SPRApi apisWithDictArray:response.data];
                                strongSelf.apis = apis;
                                [strongSelf.mainTable reloadData];
                                [SPRCacheManager cacheApis:apis];
@@ -158,7 +158,7 @@
     __weak __typeof(self)weakSelf = self;
     [SPRHTTPSessionManager GET:urlString
       parameters:@{@"status": @(isOn)}
-         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         success:^(NSURLSessionDataTask *task, SPRResponse *response) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
                  NSString *message = isOn? @"打开 Mock 成功" : @"关闭 Mock 成功";

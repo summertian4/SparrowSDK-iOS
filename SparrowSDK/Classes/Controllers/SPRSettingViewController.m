@@ -56,29 +56,27 @@
 }
 
 - (void)requestLogout {
-    SPRHTTPSessionManager *manager = [[SPRHTTPSessionManager defaultManager] copy];
     __weak __typeof(self)weakSelf = self;
     [self showHUD];
-    [manager POST:@"/frontend/account/logout"
-       parameters:nil
-         progress:nil
-          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (strongSelf) {
-            [strongSelf dismissHUD];
-            [SPRToast showWithMessage:@"登出成功" from:strongSelf.view];
-            [SPRCacheManager clearAccountFromCache];
-            [strongSelf.navigationController popToRootViewControllerAnimated:YES];
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        SPRLog(@"%@", error);
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (strongSelf) {
-            [strongSelf dismissHUD];
-            [SPRToast showWithMessage:error.domain from:strongSelf.view];
-            [SPRManager jumpToLoginVC];
-        }
-    }];
+    [SPRHTTPSessionManager POST:@"/frontend/account/logout"
+                     parameters:nil
+                        success:^(NSURLSessionDataTask *task, SPRResponse *response) {
+                            __strong __typeof(weakSelf)strongSelf = weakSelf;
+                            if (strongSelf) {
+                                [strongSelf dismissHUD];
+                                [SPRToast showWithMessage:@"登出成功" from:strongSelf.view];
+                                [SPRCacheManager clearAccountFromCache];
+                                [strongSelf.navigationController popToRootViewControllerAnimated:YES];
+                            }
+                        } failure:^(NSURLSessionDataTask *task, NSError *error) {
+                            SPRLog(@"%@", error);
+                            __strong __typeof(weakSelf)strongSelf = weakSelf;
+                            if (strongSelf) {
+                                [strongSelf dismissHUD];
+                                [SPRToast showWithMessage:error.domain from:strongSelf.view];
+                                [SPRManager jumpToLoginVC];
+                            }
+                        }];
 }
 
 #pragma mark - Action

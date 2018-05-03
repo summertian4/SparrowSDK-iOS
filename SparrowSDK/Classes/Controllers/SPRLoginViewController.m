@@ -92,12 +92,12 @@
                                     name:@"username"];
         [formData appendPartWithFormData:[password dataUsingEncoding:NSUTF8StringEncoding]
                                     name:@"password"];
-    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+    } progress:nil success:^(NSURLSessionDataTask *task, SPRResponse *response) {
         __strong __typeof(weakSelf)strongSelf = weakSelf;
         if (strongSelf) {
             [strongSelf dismissHUD];
             [SPRToast showWithMessage:@"登录成功" from:strongSelf.view];
-            SPRAccount *account = [[SPRAccount alloc] initWithDict:responseObject[@"accountInfo"]];
+            SPRAccount *account = [[SPRAccount alloc] initWithDict:response.data];
             [SPRCacheManager cacheAccount:account];
             [strongSelf dismissVCCompletion:^{
                 [[NSNotificationCenter defaultCenter] postNotificationName:kSPRnotificationLoginSuccess object:nil];
