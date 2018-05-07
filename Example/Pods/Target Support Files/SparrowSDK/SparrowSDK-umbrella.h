@@ -25,6 +25,7 @@
 #import "SPRToast.h"
 #import "SPRCacheManager.h"
 #import "SPRManager.h"
+#import "SPROptions.h"
 #import "SPRRequestFilter.h"
 #import "SPRURLProtocol.h"
 #import "SPRURLSessionConfiguration.h"
@@ -38,7 +39,6 @@
 #import "SPRResponse.h"
 #import "UIColor+SPRAddtion.h"
 #import "SparrowSDK.h"
-#import "SPROptions.h"
 
 FOUNDATION_EXPORT double SparrowSDKVersionNumber;
 FOUNDATION_EXPORT const unsigned char SparrowSDKVersionString[];
