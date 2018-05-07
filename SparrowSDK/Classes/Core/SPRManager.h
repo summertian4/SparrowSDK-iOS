@@ -9,19 +9,17 @@
 
 @class SPRWindow;
 @class SPRControlCenterViewController;
+@class SPROptions;
 
-typedef void (^BallClickedCustomCallback)(void);
 @interface SPRManager : NSObject
 
 @property (nonatomic, strong) SPRWindow *window;
 @property (nonatomic, strong) SPRControlCenterViewController *controlCenterVC;
 
 + (instancetype)sharedInstance;
-+ (void)showWindow:(BallClickedCustomCallback)ballClickedCustomCallback;
-+ (void)dismissWindow;
-
-+ (void)clickBall;
-
-+ (void)jumpToLoginVC;
++ (void)showLoginPage;
++ (void)showControlPage;
++ (void)dismissControlPage;
++ (void)startWithOption:(SPROptions *)options;
 
 @end

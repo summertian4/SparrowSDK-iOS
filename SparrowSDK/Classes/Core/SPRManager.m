@@ -17,10 +17,12 @@
 #import "SPRProgressHUD.h"
 #import "SPRHTTPSessionManager.h"
 #import "SPRApi.h"
+#import "SPROptions.h"
+#import "SPRURLProtocol.h"
 
 @interface SPRManager ()
 
-@property (nonatomic, copy) BallClickedCustomCallback ballClickedCustomCallback;
+@property (nonatomic, copy) void (^ballClickedCustomCallback)(void);
 @property (nonatomic, assign) BOOL showedManagerVC;
 @property (nonatomic, strong) SPRFloatingBall *floatingBall;
 @end
@@ -56,70 +58,47 @@
 
 #pragma mark - Public
 
-+ (void)showWindow:(BallClickedCallback)ballClickedCallback {
-    [[self sharedInstance] setBallClickedCustomCallback:ballClickedCallback];
-    [[self sharedInstance] window].hidden = NO;
-    [[self sharedInstance] window].rootViewController.view.userInteractionEnabled = YES;
-}
-
-+ (void)dismissWindow {
-    [[self sharedInstance] window].hidden = YES;
-}
-
-+ (void)clickBall {
-    [[[self sharedInstance] floatingBall] click];
-}
-
-- (void)addFloatBall {
-    __weak __typeof(self)weakSelf = self;
-    self.floatingBall = [[SPRFloatingBall alloc] initWithCallBack:^{
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (strongSelf) {
-            if (strongSelf.ballClickedCustomCallback) {
-                strongSelf.ballClickedCustomCallback();
-                return;
-            }
-            if (strongSelf.showedManagerVC == NO) {
-                SPRControlCenterViewController *vc = [[SPRControlCenterViewController alloc] init];
-                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-                strongSelf.controlCenterVC = vc;
-                [strongSelf.window.rootViewController
-                 presentViewController:nav
-                 animated:YES
-                 completion:nil];
-            } else {
-                [strongSelf.window.rootViewController.presentedViewController
-                 dismissViewControllerAnimated:YES
-                 completion:^{
-                     [strongSelf.window.rootViewController
-                      dismissViewControllerAnimated:YES
-                      completion:nil];
-                 }];
-            }
-            self.showedManagerVC = !strongSelf.showedManagerVC;
-        }
-    }];
-    self.floatingBall.frame = CGRectMake(0, 20, 50, 50);
-    [self.window.rootViewController.view addSubview:self.floatingBall];
-}
-
-+ (void)jumpToLoginVC {
-    [[SPRManager sharedInstance] jumpToLoginVC];
-}
-
-- (void)jumpToLoginVC {
-    UIViewController *vc = [[SPRLoginViewController alloc] init];
-    UIViewController *rootVC = [SPRManager sharedInstance].window.rootViewController;
-    UIViewController *presentationVC;
-    if (rootVC.presentedViewController) {
-        presentationVC = rootVC.presentedViewController;
-    } else {
-        presentationVC = rootVC;
++ (void)startWithOption:(SPROptions *)options {
+    // 设置 Host
+    if (options.hostURL != nil) {
+        [SPRCommonData setSparrowHost:options.hostURL];
     }
-    [presentationVC presentViewController:vc animated:YES completion:nil];
+    // 启动过滤器
+    [SPRURLProtocol start];
+
+    [self showFloatingBallWindow];
+    if (options.sytle == SPROptionsSytleFloatingBall) {
+        [[self sharedInstance] addFloatBall];
+    }
+}
+
++ (void)showLoginPage {
+    [[SPRManager sharedInstance] showLoginPage];
+}
+
++ (void)showControlPage {
+    [[SPRManager sharedInstance] showControlPage];
+}
+
++ (void)dismissControlPage {
+    [[SPRManager sharedInstance] dismissControlPage];
 }
 
 #pragma mark - Private
+
+- (void)showControlPage {
+    SPRControlCenterViewController *vc = [[SPRControlCenterViewController alloc] init];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    self.controlCenterVC = vc;
+    [self.window.rootViewController
+     presentViewController:nav
+     animated:YES
+     completion:nil];
+}
+
+- (void)dismissControlPage {
+    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
 
 -(void)loginSuccess:(NSNotification *)notification {
     
@@ -127,6 +106,11 @@
 
 -(void)motionEnd:(NSNotification *)notification {
     [self refreshApis];
+}
+
++ (void)showFloatingBallWindow {
+    [[self sharedInstance] window].hidden = NO;
+    [[self sharedInstance] window].rootViewController.view.userInteractionEnabled = YES;
 }
 
 - (void)refreshApis {
@@ -166,6 +150,53 @@
                        }];
 }
 
+- (void)showLoginPage {
+    UIViewController *vc = [[SPRLoginViewController alloc] init];
+    UIViewController *rootVC = [SPRManager sharedInstance].window.rootViewController;
+    UIViewController *presentationVC;
+    if (rootVC.presentedViewController) {
+        presentationVC = rootVC.presentedViewController;
+    } else {
+        presentationVC = rootVC;
+    }
+    [presentationVC presentViewController:vc animated:YES completion:nil];
+}
+
+- (void)addFloatBall {
+    __weak __typeof(self)weakSelf = self;
+    self.floatingBall = [[SPRFloatingBall alloc] initWithCallBack:^{
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            if (strongSelf.ballClickedCustomCallback) {
+                strongSelf.ballClickedCustomCallback();
+                return;
+            }
+            if (strongSelf.showedManagerVC == NO) {
+                SPRControlCenterViewController *vc = [[SPRControlCenterViewController alloc] init];
+                UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
+                strongSelf.controlCenterVC = vc;
+                [strongSelf.window.rootViewController
+                 presentViewController:nav
+                 animated:YES
+                 completion:nil];
+            } else {
+                [strongSelf.window.rootViewController.presentedViewController
+                 dismissViewControllerAnimated:YES
+                 completion:^{
+                     [strongSelf.window.rootViewController
+                      dismissViewControllerAnimated:YES
+                      completion:nil];
+                 }];
+            }
+            self.showedManagerVC = !strongSelf.showedManagerVC;
+        }
+    }];
+    self.floatingBall.frame = CGRectMake(0, 20, 50, 50);
+    [self.window.rootViewController.view addSubview:self.floatingBall];
+}
+
+#pragma mark - Getter Setter
+
 - (UIWindow *)window {
     if (_window == nil) {
         _window = [[SPRWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
@@ -178,8 +209,6 @@
         _window.rootViewController.view.userInteractionEnabled = NO;
         _window.hidden = YES;
         _window.userInteractionEnabled = YES;
-
-        [self addFloatBall];
     }
     return _window;
 }

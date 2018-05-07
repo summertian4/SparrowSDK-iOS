@@ -14,17 +14,15 @@
 @implementation SparrowSDK
 
 + (void)startWithOption:(SPROptions *)options {
-    if (options.hostURL != nil) {
-        [SPRCommonData setSparrowHost:options.hostURL];
-    }
-    [SPRURLProtocol start];
-    [SPRManager showWindow:options.ballClickedCallback];
+    [SPRManager startWithOption:options];
 }
 
-+ (UIViewController *)controlCenter {
-    UIViewController *vc = [[SPRControlCenterViewController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-    return nav;
++ (void)showControlPage {
+    [SPRManager showControlPage];
+}
+
++ (void)dismissControlPage {
+    [SPRManager dismissControlPage];
 }
 
 @end

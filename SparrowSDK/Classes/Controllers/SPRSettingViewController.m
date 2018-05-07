@@ -74,7 +74,6 @@
                             if (strongSelf) {
                                 [strongSelf dismissHUD];
                                 [SPRToast showWithMessage:error.domain from:strongSelf.view];
-                                [SPRManager jumpToLoginVC];
                             }
                         }];
 }

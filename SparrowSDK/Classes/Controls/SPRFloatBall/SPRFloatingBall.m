@@ -35,22 +35,6 @@ typedef void (^BallClickedCallback)(void);
     return self;
 }
 
-- (instancetype)initWithCustomCallBack:(BallClickedCustomCallback)callback {
-    if (self = [super init]) {
-        self.ballClickedCustomCallback = [callback copy];;
-        self.frame = CGRectMake(0, 0, 50, 50);
-        self.backgroundColor = [UIColor clearColor];
-        self.alpha = 0.8;
-        [self ballImageView];
-
-        UITapGestureRecognizer *singleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(handleSingleTap:)];
-        singleTapGesture.numberOfTapsRequired = 1;
-        singleTapGesture.numberOfTouchesRequired  = 1;
-        [self addGestureRecognizer:singleTapGesture];
-    }
-    return self;
-}
-
 - (void)layoutSubviews {
     [super layoutSubviews];
     CGPoint coordinate = [SPRCacheManager getFloatingBallCoordinate];
@@ -58,18 +42,10 @@ typedef void (^BallClickedCallback)(void);
 }
 
 - (void)handleSingleTap:(UIGestureRecognizer *)sender {
-    if (self.ballClickedCustomCallback) {
-        self.ballClickedCustomCallback();
-        return;
-    }
     if (self.ballClickedCallback) {
         self.ballClickedCallback();
         return;
     }
-}
-
-+ (void)dismiss {
-    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {

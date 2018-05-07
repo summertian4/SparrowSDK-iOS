@@ -100,7 +100,6 @@
 
 - (void)leftBarButtonClicked {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-    [SPRManager clickBall];
 }
 
 - (void)fetchApis {
