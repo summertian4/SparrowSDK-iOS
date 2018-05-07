@@ -93,7 +93,7 @@ static SPRHTTPSessionManager *manager;
                                                     code:responseObject.code
                                                 userInfo:@{}];
         // 跳转登录
-        [SPRManager jumpToLoginVC];
+        [SPRManager showLoginPage];
         failure(task, error);
     } else {
         NSString *domain = responseObject.message;

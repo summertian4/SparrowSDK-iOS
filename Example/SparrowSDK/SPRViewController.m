@@ -8,6 +8,7 @@
 
 #import "SPRViewController.h"
 #import <AFNetworking/AFNetworking.h>
+#import <SparrowSDK/SparrowSDK.h>
 
 @interface SPRViewController ()
 
@@ -15,9 +16,17 @@
 
 @implementation SPRViewController
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+//    [SparrowSDK showControlPage];
+//
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [SparrowSDK dismissControlPage];
+//    });
 }
 
 - (IBAction)getRequest {
