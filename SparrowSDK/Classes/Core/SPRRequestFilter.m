@@ -20,7 +20,7 @@
 
     NSArray<SPRApi *> *apis = [SPRCacheManager sharedInstance].apis;
     for (SPRApi *api in apis) {
-        if ([request.URL.absoluteString hasSuffix:api.path]) {
+        if ([request.URL.absoluteString hasSuffix:api.path] && api.status == SPRApiStatusMock) {
             mutableRequest.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/mock/%ld/%@",
                                                        [SPRCommonData sparrowHost], api.project_id, api.path]];
             break;
