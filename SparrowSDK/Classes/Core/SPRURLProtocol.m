@@ -135,14 +135,6 @@ static NSString *const SPRHTTP = @"SPRHTTP";
     return YES;
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge{
-    [self.client URLProtocol:self didReceiveAuthenticationChallenge:challenge];
-}
-
-- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    [self.client URLProtocol:self didCancelAuthenticationChallenge:challenge];
-}
-
 #pragma mark - NSURLConnectionDataDelegate
 
 -(NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)response {
