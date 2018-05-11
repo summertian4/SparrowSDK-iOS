@@ -72,6 +72,12 @@
     }
 }
 
++ (void)stop {
+    // 关闭过滤器
+    [SPRURLProtocol end];
+    [[self sharedInstance] dismissFloatingBallWindow];
+}
+
 + (void)showLoginPage {
     [[SPRManager sharedInstance] showLoginPage];
 }
@@ -111,6 +117,10 @@
 + (void)showFloatingBallWindow {
     [[self sharedInstance] window].hidden = NO;
     [[self sharedInstance] window].rootViewController.view.userInteractionEnabled = YES;
+}
+
+- (void)dismissFloatingBallWindow {
+    self.window = nil;
 }
 
 - (void)refreshApis {
