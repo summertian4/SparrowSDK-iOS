@@ -27,6 +27,16 @@
 //    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //        [SparrowSDK dismissControlPage];
 //    });
+
+
+//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        [SparrowSDK stop];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            SPROptions *options = [SPROptions new];
+//            options.hostURL = @"http://alta1-lpd-talaris-team-app-download-1.vm.elenet.me";
+//            [SparrowSDK startWithOption:options];
+//        });
+//    });
 }
 
 - (IBAction)getRequest {

@@ -15,6 +15,10 @@
  */
 + (void)startWithOption:(SPROptions *)options;
 /**
+ * 停止 Sparrow（停止网络监控，取消悬浮层）
+ */
++ (void)stop;
+/**
  * 显示 Sparrow 控制中心
  */
 + (void)showControlPage;

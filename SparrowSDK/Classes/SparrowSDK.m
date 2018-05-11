@@ -17,6 +17,10 @@
     [SPRManager startWithOption:options];
 }
 
++ (void)stop {
+    [SPRManager stop];
+}
+
 + (void)showControlPage {
     [SPRManager showControlPage];
 }

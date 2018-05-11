@@ -21,5 +21,6 @@
 + (void)showControlPage;
 + (void)dismissControlPage;
 + (void)startWithOption:(SPROptions *)options;
++ (void)stop;
 
 @end
