@@ -1,6 +1,6 @@
 //
 //  SPRLoginViewController.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/4/8.
 //
@@ -9,6 +9,8 @@
 #import "SPRHTTPSessionManager.h"
 #import "SPRAccount.h"
 #import "SPRCacheManager.h"
+#import "SPRRCodeScanningViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface SPRLoginViewController () <UITextFieldDelegate>
 @property (nonatomic, strong) UIView *frontBlockView;
@@ -21,6 +23,8 @@
 @property (nonatomic, strong) UIButton *loginButton;
 @property (nonatomic, strong) UIImageView *catImageView;
 @property (nonatomic, strong) UIButton *dismissButton;
+
+@property (nonatomic, strong) UIButton *quickLoginButton;
 @end
 
 @implementation SPRLoginViewController
@@ -46,6 +50,7 @@
     [self passwordTextField];
     [self loginButton];
     [self catImageView];
+    [self quickLoginButton];
     [self dismissButton];
 }
 
@@ -113,6 +118,34 @@
     }];
 }
 
+- (void)requestQuickLogin:(NSString *)url {
+    __weak __typeof(self)weakSelf = self;
+    [self showHUD];
+    [SPRHTTPSessionManager GET:url
+                isAbsolutePath:YES
+                    parameters:nil
+                       success:^(NSURLSessionDataTask *task, SPRResponse *response) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               [SPRToast showWithMessage:@"登录成功" from:strongSelf.view];
+                               SPRAccount *account = [[SPRAccount alloc] initWithDict:response.data];
+                               [SPRCacheManager cacheAccount:account];
+                               [strongSelf dismissVCCompletion:^{
+                                   [[NSNotificationCenter defaultCenter] postNotificationName:kSPRnotificationLoginSuccess object:nil];
+                               }];
+                           }
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               SPRLog(@"%@", error);
+                               [strongSelf dismissHUD];
+                               [SPRToast showWithMessage:error.domain from:strongSelf.view];
+                           }
+
+                       }];
+}
+
 #pragma mark - Action
 
 - (void)dismissButtonClicked {
@@ -125,6 +158,70 @@
 
 - (void)loginButtonClicked {
     [self requestLogin];
+}
+
+- (void)quickLoginButtonClicked {
+    SPRRCodeScanningViewController *vc = [[SPRRCodeScanningViewController alloc] init];
+    __weak __typeof(self)weakSelf = self;
+    vc.didScanedQRCodeCallBack = ^(NSString *content) {
+        __strong __typeof(weakSelf)strongSelf = weakSelf;
+        if (strongSelf) {
+            [strongSelf requestQuickLogin:content];
+        }
+    };
+    [self QRCodeScanVC:vc];
+}
+
+- (void)QRCodeScanVC:(UIViewController *)scanVC {
+    AVCaptureDevice *device = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    if (device) {
+        AVAuthorizationStatus status = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+        switch (status) {
+            case AVAuthorizationStatusNotDetermined: {
+                [AVCaptureDevice requestAccessForMediaType:AVMediaTypeVideo completionHandler:^(BOOL granted) {
+                    if (granted) {
+                        dispatch_sync(dispatch_get_main_queue(), ^{
+                            [self presentViewController:scanVC animated:YES completion:nil];
+                        });
+                        NSLog(@"用户第一次同意了访问相机权限 - - %@", [NSThread currentThread]);
+                    } else {
+                        NSLog(@"用户第一次拒绝了访问相机权限 - - %@", [NSThread currentThread]);
+                    }
+                }];
+                break;
+            }
+            case AVAuthorizationStatusAuthorized: {
+                [self presentViewController:scanVC animated:YES completion:nil];
+                break;
+            }
+            case AVAuthorizationStatusDenied: {
+                UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"请去-> [设置 - 隐私 - 相机 - SGQRCodeExample] 打开访问开关" preferredStyle:(UIAlertControllerStyleAlert)];
+                UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+
+                }];
+
+                [alertC addAction:alertA];
+                [self presentViewController:alertC animated:YES completion:nil];
+                break;
+            }
+            case AVAuthorizationStatusRestricted: {
+                NSLog(@"因为系统原因, 无法访问相册");
+                break;
+            }
+
+            default:
+                break;
+        }
+        return;
+    }
+
+    UIAlertController *alertC = [UIAlertController alertControllerWithTitle:@"温馨提示" message:@"未检测到您的摄像头" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *alertA = [UIAlertAction actionWithTitle:@"确定" style:(UIAlertActionStyleDefault) handler:^(UIAlertAction * _Nonnull action) {
+
+    }];
+
+    [alertC addAction:alertA];
+    [self presentViewController:alertC animated:YES completion:nil];
 }
 
 #pragma mark - UITextFieldDelegate
@@ -314,6 +411,18 @@
         }];
     }
     return _catImageView;
+}
+
+- (UIButton *)quickLoginButton {
+    if (_quickLoginButton == nil) {
+        _quickLoginButton = [[UIButton alloc] init];
+        [_quickLoginButton addTarget:self action:@selector(quickLoginButtonClicked) forControlEvents:UIControlEventTouchUpInside];
+        [self.backBlockView addSubview:_quickLoginButton];
+        [_quickLoginButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.equalTo(self.catImageView);
+        }];
+    }
+    return _quickLoginButton;
 }
 
 - (UIButton *)dismissButton {

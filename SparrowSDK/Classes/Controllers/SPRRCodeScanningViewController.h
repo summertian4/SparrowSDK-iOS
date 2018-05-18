@@ -7,6 +7,10 @@
 
 #import "SPRBaseViewController.h"
 
+typedef void (^DidScanedQRCodeCallBack)(NSString *content);
+
 @interface SPRRCodeScanningViewController : SPRBaseViewController
+
+@property (nonatomic, copy, nullable) DidScanedQRCodeCallBack didScanedQRCodeCallBack;
 
 @end

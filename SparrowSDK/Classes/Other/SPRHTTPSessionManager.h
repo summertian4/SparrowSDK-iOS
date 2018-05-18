@@ -18,6 +18,12 @@
     success:(void (^ _Nullable)(NSURLSessionDataTask *task, SPRResponse *response))success
     failure:(void (^ _Nullable)(NSURLSessionDataTask *task, NSError *error))failure;
 
++ (void)GET:(NSString * _Nullable)URLString
+isAbsolutePath:(BOOL)isAbsolutePath
+ parameters:(id _Nullable)parameters
+    success:(void (^ _Nullable)(NSURLSessionDataTask *task, SPRResponse *response))success
+    failure:(void (^ _Nullable)(NSURLSessionDataTask *task, NSError *error))failure;
+
 + (void)POST:(NSString *)URLString
   parameters:(id)parameters
      success:(void (^)(NSURLSessionDataTask *task, SPRResponse *response))success
