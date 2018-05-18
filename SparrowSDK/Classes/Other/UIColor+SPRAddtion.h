@@ -1,6 +1,6 @@
 //
 //  UIColor+SPRAddtion.h
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/15.
 //

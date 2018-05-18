@@ -1,6 +1,6 @@
 //
 //  SPRFloatBallWindow.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/8.
 //
@@ -19,6 +19,7 @@
 #import "SPRApi.h"
 #import "SPROptions.h"
 #import "SPRURLProtocol.h"
+#import "SPRAccount.h"
 
 @interface SPRManager ()
 
@@ -79,6 +80,23 @@
 }
 
 + (void)showLoginPage {
+//    __weak __typeof(self)weakSelf = self;
+//    [SPRHTTPSessionManager POST:@"/frontend/account/quick_login" parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+//        [formData appendPartWithFormData:[@"2" dataUsingEncoding:NSUTF8StringEncoding]
+//                                    name:@"user_id"];
+//    } progress:nil success:^(NSURLSessionDataTask *task, SPRResponse *response) {
+//        __strong __typeof(weakSelf)strongSelf = weakSelf;
+//        if (strongSelf) {
+//            SPRAccount *account = [[SPRAccount alloc] initWithDict:response.data];
+//            [SPRCacheManager cacheAccount:account];
+//            [[NSNotificationCenter defaultCenter] postNotificationName:kSPRnotificationLoginSuccess object:nil];
+//        }
+//    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//        SPRLog(@"%@", error);
+//        __strong __typeof(weakSelf)strongSelf = weakSelf;
+//        if (strongSelf) {
+//        }
+//    }];
     [[SPRManager sharedInstance] showLoginPage];
 }
 
