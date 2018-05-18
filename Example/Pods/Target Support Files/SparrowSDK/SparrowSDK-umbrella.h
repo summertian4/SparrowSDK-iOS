@@ -15,6 +15,7 @@
 #import "SPRLoginViewController.h"
 #import "SPRProjectDetailViewController.h"
 #import "SPRProjectListViewController.h"
+#import "SPRRCodeScanningViewController.h"
 #import "SPRSettingViewController.h"
 #import "SPRApiCell.h"
 #import "SPRProjectCell.h"

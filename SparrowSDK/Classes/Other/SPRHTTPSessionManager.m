@@ -1,6 +1,6 @@
 //
 //  SPRHTTPSessionManager.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/9.
 //
@@ -42,6 +42,30 @@ static SPRHTTPSessionManager *manager;
          } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
              failure(task, error);
          }];
+}
+
++ (void)GET:(NSString * _Nullable)URLString
+isAbsolutePath:(BOOL)isAbsolutePath
+ parameters:(id _Nullable)parameters
+    success:(void (^ _Nullable)(NSURLSessionDataTask *task, SPRResponse *response))success
+    failure:(void (^ _Nullable)(NSURLSessionDataTask *task, NSError *error))failure {
+    if (isAbsolutePath) {
+        SPRHTTPSessionManager *manager = [[SPRHTTPSessionManager alloc] init];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager GET:URLString
+          parameters:parameters
+            progress:nil
+             success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+                 SPRResponse *response = [[SPRResponse alloc] initWithDictionary:responseObject];
+                 [SPRHTTPSessionManager handleSuccessBlock:success
+                                                   failure:failure
+                                                      task:task responseObject:response];
+             } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                 failure(task, error);
+             }];
+    } else {
+        [self GET:URLString parameters:parameters success:success failure:failure];
+    }
 }
 
 + (void)POST:(NSString *)URLString
