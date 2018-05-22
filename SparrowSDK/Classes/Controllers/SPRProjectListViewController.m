@@ -37,6 +37,7 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
+    self.seletedProjects = [[SPRCacheManager getProjectsFromCache] mutableCopy];
     [self fetchProjects];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -168,7 +169,11 @@
         cell = [[SPRProjectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SPRProjectCell"];
         cell.backgroundColor = self.view.backgroundColor;
     }
-    cell.model = self.projectsData.projects[indexPath.row];
+    SPRProject *model = self.projectsData.projects[indexPath.row];
+    for (SPRProject *project in self.seletedProjects) {
+        model.isSelected = project.project_id == model.project_id;
+    }
+    cell.model = model;
     cell.isSelecting = self.isSelecting;
     return cell;
 }
