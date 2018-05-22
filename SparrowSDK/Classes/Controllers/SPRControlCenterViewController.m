@@ -16,6 +16,7 @@
 #import "SPRLoginViewController.h"
 #import "SPRAccount.h"
 #import "SPRManager.h"
+#import "ApiListHeaderView.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -196,8 +197,10 @@
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"API List";
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    ApiListHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:
+                                 NSStringFromClass([ApiListHeaderView class])];
+    return header;
 }
 
 #pragma mark - Getter Setter
@@ -296,6 +299,9 @@
         _mainTable.dataSource = self;
         _mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _mainTable.sectionHeaderHeight = 30;
+
+        [_mainTable registerClass:[ApiListHeaderView class]
+forHeaderFooterViewReuseIdentifier:NSStringFromClass([ApiListHeaderView class])];
 
         [self.view addSubview:_mainTable];
         [_mainTable mas_makeConstraints:^(MASConstraintMaker *make) {

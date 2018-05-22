@@ -29,7 +29,7 @@ DEPENDENCIES:
   - SparrowSDK (from `../`)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - AFNetworking
     - IQKeyboardManager
     - Masonry
@@ -50,4 +50,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 45446534c93f3843d2ecd89580d848a19c2a639a
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.2
