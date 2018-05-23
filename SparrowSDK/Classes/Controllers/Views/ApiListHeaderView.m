@@ -33,6 +33,14 @@
     return self;
 }
 
+- (void)buttonClicked:(UIButton *)button {
+    if (self.didClickedButtonCallback) {
+        SPRApiStatus status = button.isSelected ? SPRApiStatusMock : SPRApiStatusDisabled;
+        self.didClickedButtonCallback(status);
+    }
+    button.selected = !button.isSelected;
+}
+
 - (UILabel *)titleLabel {
     if (_titleLabel == nil) {
         _titleLabel = [[UILabel alloc] init];
@@ -51,11 +59,12 @@
 - (UIButton *)button {
     if (_button == nil) {
         _button = [[UIButton alloc] init];
-        [_button setTitle:@"打开全部" forState:UIControlStateNormal];
-        [_button setTitle:@"关闭全部" forState:UIControlStateSelected];
+        [_button setTitle:@"打开全部" forState:UIControlStateSelected];
+        [_button setTitle:@"关闭全部" forState:UIControlStateNormal];
         [_button setTitleColor:[UIColor colorWithHexString:@"545454"] forState:UIControlStateNormal];
         _button.titleLabel.font = [UIFont systemFontOfSize:14];
         [self.contentView addSubview:_button];
+        [_button addTarget:self action:@selector(buttonClicked:) forControlEvents:UIControlEventTouchUpInside];
         [_button mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView).offset(-15);
             make.centerY.equalTo(self.contentView);

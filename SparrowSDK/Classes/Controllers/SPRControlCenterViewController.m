@@ -74,36 +74,17 @@
 }
 
 - (void)syncButtonClicked {
-    [self fetchApis];
+    [self requestFetchApis];
 }
 
 - (void)refreshData:(NSNotification *)notification {
     [self refreshDataFromCache];
 }
 
-#pragma mark - Private
 
-- (void)initData {
-    [self apis];
-    [self.mainTable reloadData];
-}
+#pragma mark - Network
 
-- (void)initSubviews {
-    [self mainTable];
-    [self syncButton];
-    [self clearCacheButton];
-    [self reselectButton];
-}
-
-- (void)jumpToSettingVC {
-    [self.navigationController pushViewController:[SPRSettingViewController new] animated:YES];
-}
-
-- (void)leftBarButtonClicked {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)fetchApis {
+- (void)requestFetchApis {
     NSSet *projects = [SPRCacheManager getProjectsFromCache];
     if (projects == nil || projects.count == 0) {
         [SPRToast showWithMessage:@"请先选择项目" from:self.view];
@@ -135,7 +116,55 @@
                                [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.view];
                            }
                        }];
+}
+
+- (void)requestBatchUpdateUpdateStatus:(SPRApiStatus)status {
+    NSMutableArray *apiIds = [NSMutableArray array];
+    for (SPRApi *api in self.apis) {
+        [apiIds addObject:@(api.api_id)];
+    }
+
+    __weak __typeof(self)weakSelf = self;
+    [SPRHTTPSessionManager GET:@"/frontend/api/batch_update_status"
+                    parameters:@{@"api_ids": apiIds,
+                                 @"status": @(status)
+                                 }
+                       success:^(NSURLSessionDataTask *task, SPRResponse *response) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               [strongSelf requestFetchApis];
+                           }
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           SPRLog(@"%@", error);
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               [SPRToast showWithMessage:@"网络错误" from:strongSelf.view];
+                           }
+                       }];
+}
+
+#pragma mark - Private
+
+- (void)initData {
+    [self apis];
     [self.mainTable reloadData];
+}
+
+- (void)initSubviews {
+    [self mainTable];
+    [self syncButton];
+    [self clearCacheButton];
+    [self reselectButton];
+}
+
+- (void)jumpToSettingVC {
+    [self.navigationController pushViewController:[SPRSettingViewController new] animated:YES];
+}
+
+- (void)leftBarButtonClicked {
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)refreshDataFromCache {
@@ -200,6 +229,10 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     ApiListHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:
                                  NSStringFromClass([ApiListHeaderView class])];
+    __weak __typeof(self)weakSelf = self;
+    header.didClickedButtonCallback = ^(SPRApiStatus status) {
+        [weakSelf requestBatchUpdateUpdateStatus:status];
+    };
     return header;
 }
 

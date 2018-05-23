@@ -6,7 +6,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SPRApi.h"
 
 @interface ApiListHeaderView : UITableViewHeaderFooterView
+
+@property (nonatomic, copy) void (^didClickedButtonCallback)(SPRApiStatus status);
 
 @end
