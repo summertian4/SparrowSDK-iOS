@@ -325,7 +325,7 @@
 
 - (UITableView *)mainTable {
     if (_mainTable == nil) {
-        _mainTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _mainTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _mainTable.backgroundColor = self.view.backgroundColor;
         _mainTable.rowHeight = 57;
         _mainTable.delegate = self;

@@ -35,7 +35,8 @@
 
     [self.view addSubview:[self tableView]];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.bottom.left.right.equalTo(self.view);
+        make.top.equalTo(self.mas_topLayoutGuide);
     }];
 
     [self fetchProjects];
@@ -215,7 +216,7 @@
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _tableView.backgroundColor = self.view.backgroundColor;
         _tableView.rowHeight = 100;
         _tableView.delegate = self;

@@ -22,6 +22,7 @@
     self.navigationController.navigationBar.tintColor = SPRThemeColor;
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)setRightBarWithTitle:(NSString *)title action:(nullable SEL)action {
