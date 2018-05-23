@@ -37,7 +37,7 @@
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.edges.equalTo(self.view);
     }];
-    self.seletedProjects = [[SPRCacheManager getProjectsFromCache] mutableCopy];
+
     [self fetchProjects];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -87,6 +87,17 @@
                                    return;
                                }
                                [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
+
+                               NSSet<SPRProject *> *seletedProjectsFromCache = [SPRCacheManager getProjectsFromCache];
+                               for (SPRProject *seletedProject in seletedProjectsFromCache) {
+                                   for (SPRProject *project in newPorjectsData.projects) {
+                                       if (project.project_id == seletedProject.project_id) {
+                                           project.isSelected = YES;
+                                           [strongSelf.seletedProjects addObject:project];
+                                       }
+                                   }
+                               }
+
                                strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
                                [strongSelf.tableView reloadData];
                            }
@@ -170,9 +181,6 @@
         cell.backgroundColor = self.view.backgroundColor;
     }
     SPRProject *model = self.projectsData.projects[indexPath.row];
-    for (SPRProject *project in self.seletedProjects) {
-        model.isSelected = project.project_id == model.project_id;
-    }
     cell.model = model;
     cell.isSelecting = self.isSelecting;
     return cell;
