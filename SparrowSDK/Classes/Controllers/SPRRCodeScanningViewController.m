@@ -7,6 +7,8 @@
 
 #import "SPRRCodeScanningViewController.h"
 #import "SGQRCode.h"
+#import "SPRManager.h"
+#import "SPROptions.h"
 
 @interface SPRRCodeScanningViewController () <SGQRCodeScanManagerDelegate, SGQRCodeAlbumManagerDelegate>
 @property (nonatomic, strong) SGQRCodeScanManager *manager;
@@ -92,17 +94,22 @@
 - (void)QRCodeScanManager:(SGQRCodeScanManager *)scanManager didOutputMetadataObjects:(NSArray *)metadataObjects {
     SPRLog(@"metadataObjects - - %@", metadataObjects);
     if (metadataObjects != nil && metadataObjects.count > 0) {
-        [scanManager stopRunning];
         AVMetadataMachineReadableCodeObject *obj = metadataObjects[0];
-        __weak __typeof(self)weakSelf = self;
-        [self dismissViewControllerAnimated:YES completion:^{
-            __strong __typeof(weakSelf)strongSelf = weakSelf;
-            if (strongSelf) {
-                if (strongSelf.didScanedQRCodeCallBack) {
-                    strongSelf.didScanedQRCodeCallBack([obj stringValue]);
+        NSString *url = [obj stringValue];
+        if ([url hasPrefix:[SPRManager sharedInstance].options.hostURL]) {
+            [scanManager stopRunning];
+            __weak __typeof(self)weakSelf = self;
+            [self dismissViewControllerAnimated:YES completion:^{
+                __strong __typeof(weakSelf)strongSelf = weakSelf;
+                if (strongSelf) {
+                    if (strongSelf.didScanedQRCodeCallBack) {
+                        strongSelf.didScanedQRCodeCallBack([obj stringValue]);
+                    }
                 }
-            }
-        }];
+            }];
+        } else {
+            [SPRToast showWithMessage:@"请扫描正确的二维码" from:self.view];
+        }
     } else {
         SPRLog(@"暂未识别出扫描的二维码");
     }
@@ -115,7 +122,7 @@
         _scanningView = [[SGQRCodeScanningView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
         _scanningView.scanningImageName = @"SGQRCode.bundle/QRCodeScanningLineGrid";
         _scanningView.scanningAnimationStyle = ScanningAnimationStyleGrid;
-        _scanningView.cornerColor = [UIColor orangeColor];
+        _scanningView.cornerColor = [UIColor colorWithHexString:@"50E3C2"];
     }
     return _scanningView;
 }
@@ -140,12 +147,15 @@
 - (UIButton *)closeButton {
     if (_closeButton == nil) {
         _closeButton = [[UIButton alloc] init];
-        _closeButton.backgroundColor = [UIColor blueColor];
+        UIImage *image = [UIImage imageNamed:@"sparrow_close"
+                                    inBundle:[SPRCommonData bundle]
+               compatibleWithTraitCollection:nil];
+        [_closeButton setImage:image forState:UIControlStateNormal];
         [_closeButton addTarget:self action:@selector(closeButtonClicked) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview: _closeButton];
         [_closeButton mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.top.equalTo(@(30));
-            make.width.height.equalTo(@(45));
+            make.width.height.equalTo(@(35));
         }];
     }
     return _closeButton;
