@@ -216,7 +216,7 @@
 
 - (UITableView *)tableView {
     if (_tableView == nil) {
-        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
+        _tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
         _tableView.backgroundColor = self.view.backgroundColor;
         _tableView.rowHeight = 100;
         _tableView.delegate = self;
