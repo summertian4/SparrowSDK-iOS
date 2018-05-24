@@ -35,7 +35,8 @@
 
     [self.view addSubview:[self tableView]];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.bottom.left.right.equalTo(self.view);
+        make.top.equalTo(self.mas_topLayoutGuide);
     }];
 
     [self fetchProjects];

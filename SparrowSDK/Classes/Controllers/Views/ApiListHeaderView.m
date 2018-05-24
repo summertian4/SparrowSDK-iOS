@@ -20,13 +20,20 @@
 
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.contentView.backgroundColor = [UIColor whiteColor];
+        self.backgroundView.backgroundColor = [UIColor whiteColor];
         [self titleLabel];
+        [self button];
     }
     return self;
 }
 
 - (instancetype)initWithReuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithReuseIdentifier:reuseIdentifier]) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.contentView.backgroundColor = [UIColor whiteColor];
+        self.backgroundView.backgroundColor = [UIColor whiteColor];
         [self titleLabel];
         [self button];
     }

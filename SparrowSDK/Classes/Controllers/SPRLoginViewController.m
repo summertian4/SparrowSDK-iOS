@@ -12,7 +12,7 @@
 #import "SPRRCodeScanningViewController.h"
 #import <AVFoundation/AVFoundation.h>
 
-@interface SPRLoginViewController () <UITextFieldDelegate>
+@interface SPRLoginViewController ()
 @property (nonatomic, strong) UIView *frontBlockView;
 @property (nonatomic, strong) UIView *backBlockView;
 @property (nonatomic, strong) UILabel *titleLabel;
@@ -21,10 +21,14 @@
 @property (nonatomic, strong) UITextField *passwordTextField;
 @property (nonatomic, strong) UIView *passwordLineView;
 @property (nonatomic, strong) UIButton *loginButton;
-@property (nonatomic, strong) UIImageView *catImageView;
 @property (nonatomic, strong) UIButton *dismissButton;
 
 @property (nonatomic, strong) UIButton *quickLoginButton;
+
+
+@property (nonatomic, strong) UIView *scanQRCodeView;
+@property (nonatomic, strong) UIImageView *scanQRCodeImageView;
+@property (nonatomic, strong) UILabel *scanQRCodeLabel;
 @end
 
 @implementation SPRLoginViewController
@@ -49,9 +53,9 @@
     [self passwordLineView];
     [self passwordTextField];
     [self loginButton];
-    [self catImageView];
     [self quickLoginButton];
     [self dismissButton];
+    [self scanQRCodeView];
 }
 
 - (UIImageView *)cornerLogo {
@@ -224,22 +228,6 @@
     [self presentViewController:alertC animated:YES completion:nil];
 }
 
-#pragma mark - UITextFieldDelegate
-
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    UIImage *image = [UIImage imageNamed:@"sparrow_cat_with_closed_eyes"
-                                inBundle:[SPRCommonData bundle]
-           compatibleWithTraitCollection:nil];
-    self.catImageView.image = image;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    UIImage *image = [UIImage imageNamed:@"sparrow_cat_with_openi_eyes"
-                                inBundle:[SPRCommonData bundle]
-           compatibleWithTraitCollection:nil];
-    self.catImageView.image = image;
-}
-
 #pragma mark - Getter Setter
 
 - (UIView *)backBlockView {
@@ -349,7 +337,6 @@
         _passwordTextField.placeholder = @"password";
         _passwordTextField.font = [UIFont systemFontOfSize:14];
         _passwordTextField.secureTextEntry = YES;
-        _passwordTextField.delegate = self;
         [self.frontBlockView addSubview:_passwordTextField];
         [_passwordTextField mas_makeConstraints:^(MASConstraintMaker *make) {
             make.bottom.equalTo(self.passwordLineView.mas_top);
@@ -390,36 +377,34 @@
             make.bottom.equalTo(self.frontBlockView).offset(-25);
         }];
         [shadowView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(_loginButton);
+            make.edges.equalTo(self->_loginButton);
         }];
     }
     return _loginButton;
 }
 
-- (UIImageView *)catImageView {
-    if (_catImageView == nil) {
-        UIImage *image = [UIImage imageNamed:@"sparrow_cat_with_openi_eyes"
+- (UIImageView *)scanQRCodeImageView {
+    if (_scanQRCodeImageView == nil) {
+        UIImage *image = [UIImage imageNamed:@"sparrow_scan_qr_code"
                                     inBundle:[SPRCommonData bundle]
                compatibleWithTraitCollection:nil];
-        _catImageView = [[UIImageView alloc] initWithImage:image];
-        [self.backBlockView addSubview:_catImageView];
-        [_catImageView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.centerX.equalTo(self.backBlockView);
-            make.bottom.equalTo(self.backBlockView);
-            make.width.equalTo(@(50));
-            make.height.equalTo(@(28));
+        _scanQRCodeImageView = [[UIImageView alloc] initWithImage:image];
+        [self.scanQRCodeView addSubview:_scanQRCodeImageView];
+        [_scanQRCodeImageView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.centerY.equalTo(self.scanQRCodeView);
+            make.width.height.equalTo(@(35));
         }];
     }
-    return _catImageView;
+    return _scanQRCodeImageView;
 }
 
 - (UIButton *)quickLoginButton {
     if (_quickLoginButton == nil) {
         _quickLoginButton = [[UIButton alloc] init];
         [_quickLoginButton addTarget:self action:@selector(quickLoginButtonClicked) forControlEvents:UIControlEventTouchUpInside];
-        [self.backBlockView addSubview:_quickLoginButton];
+        [self.scanQRCodeView addSubview:_quickLoginButton];
         [_quickLoginButton mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.edges.equalTo(self.catImageView);
+            make.edges.equalTo(self.scanQRCodeView);
         }];
     }
     return _quickLoginButton;
@@ -444,6 +429,37 @@
         }];
     }
     return _dismissButton;
+}
+
+- (UIView *)scanQRCodeView {
+    if (_scanQRCodeView == nil) {
+        _scanQRCodeView = [[UIView alloc] init];
+        [self.backBlockView addSubview:_scanQRCodeView];
+        [self scanQRCodeImageView];
+        [self scanQRCodeLabel];
+        [_scanQRCodeView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.centerX.equalTo(self.backBlockView);
+            make.bottom.equalTo(self.backBlockView).offset(-6);
+            make.width.equalTo(@(110));
+            make.height.equalTo(@(35));
+        }];
+    }
+    return _scanQRCodeView;
+}
+
+- (UILabel *)scanQRCodeLabel {
+    if (_scanQRCodeLabel == nil) {
+        _scanQRCodeLabel = [[UILabel alloc] init];
+        _scanQRCodeLabel.text = @"扫码登录";
+        _scanQRCodeLabel.font = [UIFont boldSystemFontOfSize:17];
+        _scanQRCodeLabel.textColor = [UIColor colorWithHexString:@"9B9B9B"];
+
+        [self.scanQRCodeView addSubview:_scanQRCodeLabel];
+        [_scanQRCodeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.right.top.bottom.equalTo(self.scanQRCodeView);
+        }];
+    }
+    return _scanQRCodeLabel;
 }
 
 @end

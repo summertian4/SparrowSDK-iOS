@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) SPRWindow *window;
 @property (nonatomic, strong) SPRControlCenterViewController *controlCenterVC;
+@property (nonatomic, strong, readonly) SPROptions *options;
 
 + (instancetype)sharedInstance;
 + (void)showLoginPage;
