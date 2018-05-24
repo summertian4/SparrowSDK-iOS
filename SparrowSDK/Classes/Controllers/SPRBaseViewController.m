@@ -1,6 +1,6 @@
 //
 //  SPRBaseViewController.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/16.
 //
@@ -22,6 +22,7 @@
     self.navigationController.navigationBar.tintColor = SPRThemeColor;
     [self.navigationController.navigationBar
      setTitleTextAttributes:@{NSForegroundColorAttributeName:[UIColor blackColor]}];
+    self.automaticallyAdjustsScrollViewInsets = NO;
 }
 
 - (void)setRightBarWithTitle:(NSString *)title action:(nullable SEL)action {

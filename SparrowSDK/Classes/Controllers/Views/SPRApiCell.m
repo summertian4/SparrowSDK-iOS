@@ -1,6 +1,6 @@
 //
 //  SPRApiCell.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/15.
 //
@@ -122,6 +122,7 @@
         [self.contentView addSubview:_urlLabel];
         [_urlLabel mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.nameLabel);
+            make.right.equalTo(self.mockSwitch.mas_left);
             make.top.equalTo(self.nameLabel.mas_bottom).offset(5);
         }];
     }
@@ -135,12 +136,12 @@
 
         [_mockSwitch addTarget:self action:@selector(mockSwitchChanged:)
               forControlEvents:UIControlEventValueChanged];
-
         [self.contentView addSubview:_mockSwitch];
         [_mockSwitch mas_makeConstraints:^(MASConstraintMaker *make) {
             make.right.equalTo(self.contentView).offset(-10);
-            make.left.equalTo(self.urlLabel.mas_right).offset(5);
+
             make.centerY.equalTo(self.contentView);
+            make.width.equalTo(@(47));
         }];
     }
     return _mockSwitch;

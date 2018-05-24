@@ -1,6 +1,6 @@
 //
 //  SPRFloatBallWindow.h
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/8.
 //
@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) SPRWindow *window;
 @property (nonatomic, strong) SPRControlCenterViewController *controlCenterVC;
+@property (nonatomic, strong, readonly) SPROptions *options;
 
 + (instancetype)sharedInstance;
 + (void)showLoginPage;

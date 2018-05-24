@@ -1,6 +1,6 @@
 //
 //  SPRFloatBallWindow.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/8.
 //
@@ -19,12 +19,14 @@
 #import "SPRApi.h"
 #import "SPROptions.h"
 #import "SPRURLProtocol.h"
+#import "SPRAccount.h"
 
 @interface SPRManager ()
 
 @property (nonatomic, copy) void (^ballClickedCustomCallback)(void);
 @property (nonatomic, assign) BOOL showedManagerVC;
 @property (nonatomic, strong) SPRFloatingBall *floatingBall;
+@property (nonatomic, strong) SPROptions *options;
 @end
 
 @implementation SPRManager
@@ -59,6 +61,7 @@
 #pragma mark - Public
 
 + (void)startWithOption:(SPROptions *)options {
+    [[self sharedInstance] setOptions:options];
     // 设置 Host
     if (options.hostURL != nil) {
         [SPRCommonData setSparrowHost:options.hostURL];

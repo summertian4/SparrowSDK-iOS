@@ -1,6 +1,6 @@
 //
 //  SPRManagerViewController.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/8.
 //
@@ -35,8 +35,10 @@
 
     [self.view addSubview:[self tableView]];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.bottom.left.right.equalTo(self.view);
+        make.top.equalTo(self.mas_topLayoutGuide);
     }];
+
     [self fetchProjects];
 
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -86,6 +88,17 @@
                                    return;
                                }
                                [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
+
+                               NSSet<SPRProject *> *seletedProjectsFromCache = [SPRCacheManager getProjectsFromCache];
+                               for (SPRProject *seletedProject in seletedProjectsFromCache) {
+                                   for (SPRProject *project in newPorjectsData.projects) {
+                                       if (project.project_id == seletedProject.project_id) {
+                                           project.isSelected = YES;
+                                           [strongSelf.seletedProjects addObject:project];
+                                       }
+                                   }
+                               }
+
                                strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
                                [strongSelf.tableView reloadData];
                            }
@@ -168,7 +181,8 @@
         cell = [[SPRProjectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SPRProjectCell"];
         cell.backgroundColor = self.view.backgroundColor;
     }
-    cell.model = self.projectsData.projects[indexPath.row];
+    SPRProject *model = self.projectsData.projects[indexPath.row];
+    cell.model = model;
     cell.isSelecting = self.isSelecting;
     return cell;
 }
