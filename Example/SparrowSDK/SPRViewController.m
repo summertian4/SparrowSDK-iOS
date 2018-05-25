@@ -43,7 +43,7 @@
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     __weak __typeof(self)weakSelf = self;
-    [manager GET:@"https://book.douban.com/ithil_j/activity/book_annual2017/widget/0"
+    [manager GET:@"http://xxx.com/airticle/list"
       parameters:nil
         progress:nil
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -59,7 +59,7 @@
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     __weak __typeof(self)weakSelf = self;
-    [manager POST:@"https://www.zhihu.com/api/v4/home/sidebar"
+    [manager POST:@"http://xxx.com/home/sidebar"
       parameters:nil
         progress:nil
          success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
@@ -75,7 +75,7 @@
     AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     __weak __typeof(self)weakSelf = self;
-    [manager PUT:@"https://www.baidu.com/s"
+    [manager PUT:@"https://xxx.com/s"
       parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
           NSData *unicodedStringData = [[responseObject description] dataUsingEncoding:NSUTF8StringEncoding];
           NSString *stringValue =  [[NSString alloc] initWithData:unicodedStringData encoding:NSNonLossyASCIIStringEncoding];
