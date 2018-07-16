@@ -57,7 +57,7 @@
     }
     self.nameLabel.text = model.name;
     self.urlLabel.text = [NSString stringWithFormat:@"/%@", model.path];
-    self.mockSwitch.on = model.status != SPRApiStatusDisabled;
+    self.mockSwitch.on = !model.isStoped;
 }
 
 - (UILabel *)methodLabel {
