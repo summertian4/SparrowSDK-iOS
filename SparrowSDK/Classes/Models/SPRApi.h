@@ -23,6 +23,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) SPRApiStatus status;
 @property (nonatomic, assign) long project_id;
 
+@property (nonatomic, assign) BOOL isStoped;
+
 - (instancetype)initWithDict:(NSDictionary *)dict;
 + (NSMutableArray *)apisWithDictArray:(NSArray *)dictArr;
 

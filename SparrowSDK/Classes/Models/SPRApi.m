@@ -30,6 +30,7 @@
             default:
                 break;
         }
+        _isStoped = [dict[@"isStoped"] boolValue];
     }
     return self;
 }
@@ -51,6 +52,7 @@
     [coder encodeObject:self.note forKey:@"note"];
     [coder encodeObject:@(self.status) forKey:@"status"];
     [coder encodeObject:@(self.project_id) forKey:@"project_id"];
+    [coder encodeObject:@(self.isStoped) forKey:@"isStoped"];
 }
 
 - (id)initWithCoder:(NSCoder *)coder {
@@ -61,6 +63,7 @@
     self.note = [coder decodeObjectForKey:@"note"];
     self.status = [[coder decodeObjectForKey:@"status"] intValue];
     self.project_id = [[coder decodeObjectForKey:@"project_id"] longValue];
+    self.isStoped = [[coder decodeObjectForKey:@"isStoped"] boolValue];
     return self;
 }
 
