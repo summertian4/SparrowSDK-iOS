@@ -17,7 +17,7 @@ PODS:
   - IQKeyboardManager (5.0.8)
   - Masonry (1.1.0)
   - SGQRCode (2.2.0)
-  - SparrowSDK (1.1.4):
+  - SparrowSDK (1.4.0):
     - AFNetworking
     - Masonry
     - SGQRCode
@@ -45,7 +45,7 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 266cb7b1d11f94a3e71229d77f960f9a1b538e5b
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   SGQRCode: 6cd7f03ea6b74d1267820d427b07d1451b387c79
-  SparrowSDK: a74df99a827b29f5068ea13eddbebda73707c736
+  SparrowSDK: eacf40f2e36e07df4e84d60957f6dce68314a2ac
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
 PODFILE CHECKSUM: 45446534c93f3843d2ecd89580d848a19c2a639a
