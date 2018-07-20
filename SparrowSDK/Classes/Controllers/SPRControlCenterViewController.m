@@ -181,29 +181,31 @@
 }
 
 - (void)didApiSwitchChangedWithApi: (SPRApi *)api isOn:(BOOL) isOn {
-    // 请求 Mock 开关
-    NSString *urlString = [NSString stringWithFormat:@"/frontend/project/%ld/api/%ld/update_status",
-                           api.project_id, api.api_id];
-    __weak __typeof(self)weakSelf = self;
-    [SPRHTTPSessionManager GET:urlString
-      parameters:@{@"status": @(isOn)}
-         success:^(NSURLSessionDataTask *task, SPRResponse *response) {
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 NSString *message = isOn? @"打开 Mock 成功" : @"关闭 Mock 成功";
-                 [SPRToast showWithMessage:message from:weakSelf.view];
-                 api.status = isOn ? SPRApiStatusMock : SPRApiStatusDisabled;
-                 [strongSelf.mainTable reloadData];
-                 [SPRCacheManager cacheApis:strongSelf.apis];
-             }
-         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 NSString *message = isOn? @"打开 Mock 失败" : @"关闭 Mock 失败";
-                 [SPRToast showWithMessage:message from:weakSelf.view];
-                 [strongSelf.mainTable reloadData];
-             }
-         }];
+    api.isStoped = !isOn;
+    [SPRCacheManager cacheApis:self.apis];
+
+//    NSString *urlString = [NSString stringWithFormat:@"/frontend/project/%ld/api/%ld/update_status",
+//                           api.project_id, api.api_id];
+//    __weak __typeof(self)weakSelf = self;
+//    [SPRHTTPSessionManager GET:urlString
+//      parameters:@{@"status": @(isOn)}
+//         success:^(NSURLSessionDataTask *task, SPRResponse *response) {
+//             __strong __typeof(weakSelf)strongSelf = weakSelf;
+//             if (strongSelf) {
+//                 NSString *message = isOn? @"打开 Mock 成功" : @"关闭 Mock 成功";
+//                 [SPRToast showWithMessage:message from:weakSelf.view];
+//                 api.status = isOn ? SPRApiStatusMock : SPRApiStatusDisabled;
+//                 [strongSelf.mainTable reloadData];
+//                 [SPRCacheManager cacheApis:strongSelf.apis];
+//             }
+//         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+//             __strong __typeof(weakSelf)strongSelf = weakSelf;
+//             if (strongSelf) {
+//                 NSString *message = isOn? @"打开 Mock 失败" : @"关闭 Mock 失败";
+//                 [SPRToast showWithMessage:message from:weakSelf.view];
+//                 [strongSelf.mainTable reloadData];
+//             }
+//         }];
 }
 
 
