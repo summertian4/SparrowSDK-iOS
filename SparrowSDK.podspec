@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SparrowSDK'
-  s.version          = '1.4.0'
+  s.version          = '1.4.1'
   s.summary          = 'A Mock Tool'
 
 # This description is used to generate tags and improve search results.
