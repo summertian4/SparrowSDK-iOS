@@ -119,30 +119,11 @@
 }
 
 - (void)requestBatchUpdateUpdateStatus:(SPRApiStatus)status {
-    NSMutableArray *apiIds = [NSMutableArray array];
     for (SPRApi *api in self.apis) {
-        [apiIds addObject:@(api.api_id)];
+        api.isStoped = (status == SPRApiStatusDisabled);
     }
-
-    __weak __typeof(self)weakSelf = self;
-    [SPRHTTPSessionManager GET:@"/frontend/api/batch_update_status"
-                    parameters:@{@"api_ids": apiIds,
-                                 @"status": @(status)
-                                 }
-                       success:^(NSURLSessionDataTask *task, SPRResponse *response) {
-                           __strong __typeof(weakSelf)strongSelf = weakSelf;
-                           if (strongSelf) {
-                               [strongSelf dismissHUD];
-                               [strongSelf requestFetchApis];
-                           }
-                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-                           SPRLog(@"%@", error);
-                           __strong __typeof(weakSelf)strongSelf = weakSelf;
-                           if (strongSelf) {
-                               [strongSelf dismissHUD];
-                               [SPRToast showWithMessage:@"网络错误" from:strongSelf.view];
-                           }
-                       }];
+    [SPRCacheManager cacheApis:self.apis];
+    [self.mainTable reloadData];
 }
 
 #pragma mark - Private
@@ -183,29 +164,6 @@
 - (void)didApiSwitchChangedWithApi: (SPRApi *)api isOn:(BOOL) isOn {
     api.isStoped = !isOn;
     [SPRCacheManager cacheApis:self.apis];
-
-//    NSString *urlString = [NSString stringWithFormat:@"/frontend/project/%ld/api/%ld/update_status",
-//                           api.project_id, api.api_id];
-//    __weak __typeof(self)weakSelf = self;
-//    [SPRHTTPSessionManager GET:urlString
-//      parameters:@{@"status": @(isOn)}
-//         success:^(NSURLSessionDataTask *task, SPRResponse *response) {
-//             __strong __typeof(weakSelf)strongSelf = weakSelf;
-//             if (strongSelf) {
-//                 NSString *message = isOn? @"打开 Mock 成功" : @"关闭 Mock 成功";
-//                 [SPRToast showWithMessage:message from:weakSelf.view];
-//                 api.status = isOn ? SPRApiStatusMock : SPRApiStatusDisabled;
-//                 [strongSelf.mainTable reloadData];
-//                 [SPRCacheManager cacheApis:strongSelf.apis];
-//             }
-//         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-//             __strong __typeof(weakSelf)strongSelf = weakSelf;
-//             if (strongSelf) {
-//                 NSString *message = isOn? @"打开 Mock 失败" : @"关闭 Mock 失败";
-//                 [SPRToast showWithMessage:message from:weakSelf.view];
-//                 [strongSelf.mainTable reloadData];
-//             }
-//         }];
 }
 
 
