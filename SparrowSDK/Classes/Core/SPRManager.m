@@ -106,7 +106,12 @@
 }
 
 - (void)dismissControlPage {
-    [self.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+    __weak __typeof(self)weakSelf = self;
+    [self.window.rootViewController.presentedViewController
+     dismissViewControllerAnimated:YES
+     completion:^{
+         weakSelf.controlCenterVC = nil;
+     }];
 }
 
 -(void)loginSuccess:(NSNotification *)notification {
@@ -193,12 +198,16 @@
                  animated:YES
                  completion:nil];
             } else {
+                __weak __typeof(self)weakSelf = self;
                 [strongSelf.window.rootViewController.presentedViewController
                  dismissViewControllerAnimated:YES
                  completion:^{
-                     [strongSelf.window.rootViewController
-                      dismissViewControllerAnimated:YES
-                      completion:nil];
+                     __strong __typeof(weakSelf)strongSelf = weakSelf;
+                     if (strongSelf) {
+                         [strongSelf.window.rootViewController
+                          dismissViewControllerAnimated:YES
+                          completion:nil];
+                     }
                  }];
             }
             self.showedManagerVC = !strongSelf.showedManagerVC;
