@@ -1,6 +1,6 @@
 //
 //  SPRRequestFilter.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/13.
 //
@@ -20,7 +20,8 @@
 
     NSArray<SPRApi *> *apis = [SPRCacheManager sharedInstance].apis;
     for (SPRApi *api in apis) {
-        if ([request.URL.absoluteString hasSuffix:api.path]) {
+        NSString *apiPath = [NSString stringWithFormat:@"/%@", api.path];
+        if ([request.URL.path isEqualToString:apiPath] && !api.isStoped) {
             mutableRequest.URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/mock/%ld/%@",
                                                        [SPRCommonData sparrowHost], api.project_id, api.path]];
             break;

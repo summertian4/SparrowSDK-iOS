@@ -15,25 +15,35 @@ PODS:
   - AFNetworking/UIKit (3.2.0):
     - AFNetworking/NSURLSession
   - Masonry (1.1.0)
-  - SparrowSDK (1.0.0):
+  - SGQRCode (2.2.0)
+  - SparrowSDK (1.4.2):
     - AFNetworking
     - Masonry
+    - SGQRCode (~> 2.2.0)
     - SVProgressHUD
   - SVProgressHUD (2.2.5)
 
 DEPENDENCIES:
   - SparrowSDK (from `../`)
 
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - AFNetworking
+    - Masonry
+    - SGQRCode
+    - SVProgressHUD
+
 EXTERNAL SOURCES:
   SparrowSDK:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   AFNetworking: 8ac6017b94ea105479f7776e5288e48ae9c59bb4
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
-  SparrowSDK: 3ae38e1939f11ad7ff63f434071c5190f3c95975
+  SGQRCode: 6cd7f03ea6b74d1267820d427b07d1451b387c79
+  SparrowSDK: 1afa85443616692afeab8cd990a9f045ce00bba3
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
 PODFILE CHECKSUM: 5a6f3d2d678ba7a03dd97999857de5ac0c328045
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.5.3

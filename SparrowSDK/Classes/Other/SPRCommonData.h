@@ -1,6 +1,6 @@
 //
 //  SPRCommonData.h
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/12.
 //
@@ -19,7 +19,15 @@ NSLog(@"--------");
 # define SPRLog(...);
 #endif
 
+extern NSString * const kSPRnotificationLoginSuccess;
+extern NSString * const kSPRnotificationMotionEvent;
+extern NSString * const kSPRnotificationNeedRefreshData;
+
 @interface SPRCommonData : NSObject
+
+@property (nonatomic, assign) BOOL shouldSyncWithShake;
+
++ (SPRCommonData *)defaultData;
 
 + (NSBundle *)bundle;
 + (NSString *)sparrowHost;

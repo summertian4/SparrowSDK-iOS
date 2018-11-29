@@ -1,6 +1,6 @@
 //
 //  SPRControlCenterViewController.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/15.
 //
@@ -13,6 +13,11 @@
 #import "SPRProjectListViewController.h"
 #import "SPRHTTPSessionManager.h"
 #import "SPRSettingViewController.h"
+#import "SPRLoginViewController.h"
+#import "SPRAccount.h"
+#import "SPRManager.h"
+#import "ApiListHeaderView.h"
+#import "SPRManager.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -32,6 +37,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.title = @"Sparrow";
     self.automaticallyAdjustsScrollViewInsets = NO;
+
     [self initSubviews];
 
     UIImage *leftImage = [UIImage imageNamed:@"sparrow_setting"
@@ -42,18 +48,15 @@
                compatibleWithTraitCollection:nil];
     [self setRightBarWithImage:leftImage action:@selector(jumpToSettingVC)];
     [self setLeftBarWithImage:rightImage action:@selector(leftBarButtonClicked)];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(refreshData:)
+                                                 name:kSPRnotificationNeedRefreshData
+                                               object:nil];
 }
 
-- (void)initData {
-    [self apis];
-    [self.mainTable reloadData];
-}
-
-- (void)initSubviews {
-    [self mainTable];
-    [self syncButton];
-    [self clearCacheButton];
-    [self reselectButton];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Action
@@ -72,7 +75,70 @@
 }
 
 - (void)syncButtonClicked {
-    [self fetchApis];
+    [self requestFetchApis];
+}
+
+- (void)refreshData:(NSNotification *)notification {
+    [self refreshDataFromCache];
+}
+
+
+#pragma mark - Network
+
+- (void)requestFetchApis {
+    NSSet *projects = [SPRCacheManager getProjectsFromCache];
+    if (projects == nil || projects.count == 0) {
+        [SPRToast showWithMessage:@"请先选择项目" from:self.view];
+        return;
+    }
+    NSMutableArray *projectIds = [NSMutableArray array];
+    for (SPRProject *project in projects) {
+        [projectIds addObject:@(project.project_id)];
+    }
+    [self showHUD];
+    __weak __typeof(self)weakSelf = self;
+    [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
+                    parameters:@{@"project_id": projectIds}
+                       success:^(NSURLSessionDataTask *task, SPRResponse *response) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               NSMutableArray *apis = [SPRApi apisWithDictArray:response.data];
+                               strongSelf.apis = apis;
+                               [strongSelf.mainTable reloadData];
+                               [SPRCacheManager cacheApis:apis];
+                               [SPRToast showWithMessage:@"刷新数据成功" from:strongSelf.view];
+                           }
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           SPRLog(@"%@", error);
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.view];
+                           }
+                       }];
+}
+
+- (void)requestBatchUpdateUpdateStatus:(SPRApiStatus)status {
+    for (SPRApi *api in self.apis) {
+        api.isStoped = (status == SPRApiStatusDisabled);
+    }
+    [SPRCacheManager cacheApis:self.apis];
+    [self.mainTable reloadData];
+}
+
+#pragma mark - Private
+
+- (void)initData {
+    [self apis];
+    [self.mainTable reloadData];
+}
+
+- (void)initSubviews {
+    [self mainTable];
+    [self syncButton];
+    [self clearCacheButton];
+    [self reselectButton];
 }
 
 - (void)jumpToSettingVC {
@@ -80,45 +146,12 @@
 }
 
 - (void)leftBarButtonClicked {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [SPRManager dismissControlPage];
 }
 
-- (void)fetchApis {
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
-    __weak __typeof(self)weakSelf = self;
-
-    NSSet *projects = [SPRCacheManager getProjectsFromCache];
-    if (projects == nil || projects.count == 0) {
-        [SPRToast showWithMessage:@"请先选择项目" from:self.view];
-        return;
-    }
-
-    NSMutableArray *projectIds = [NSMutableArray array];
-    for (SPRProject *project in projects) {
-        [projectIds addObject:@(project.project_id)];
-    }
-    [self showHUD];
-    [manager GET:@"/frontend/api/fetch"
-      parameters:@{@"project_id": projectIds}
-         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 [strongSelf dismissHUD];
-                 NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
-                 if (apis.count != 0) {
-                     [SPRCacheManager cacheApis:apis];
-                     strongSelf.apis = apis;
-                     [strongSelf.mainTable reloadData];
-                 }
-             }
-         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             SPRLog(@"%@", error);
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 [strongSelf dismissHUD];
-                 [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.view];
-             }
-         }];
+- (void)refreshDataFromCache {
+    self.apis = [SPRCacheManager getApisFromCache];
+    [self.mainTable reloadData];
 }
 
 - (void)clearCacheButtonClicked {
@@ -130,30 +163,8 @@
 }
 
 - (void)didApiSwitchChangedWithApi: (SPRApi *)api isOn:(BOOL) isOn {
-    // 请求 Mock 开关
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
-    NSString *urlString = [NSString stringWithFormat:@"/frontend/project/%ld/api/%ld/update_status",
-                           api.project_id, api.api_id];
-    __weak __typeof(self)weakSelf = self;
-    [manager GET:urlString
-      parameters:@{@"status": @(isOn)}
-         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 NSString *message = isOn? @"打开 Mock 成功" : @"关闭 Mock 成功";
-                 [SPRToast showWithMessage:message from:weakSelf.view];
-                 api.status = isOn ? SPRApiStatusMock : SPRApiStatusDisabled;
-                 [strongSelf.mainTable reloadData];
-                 [SPRCacheManager cacheApis:strongSelf.apis];
-             }
-         } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 NSString *message = isOn? @"打开 Mock 失败" : @"关闭 Mock 失败";
-                 [SPRToast showWithMessage:message from:weakSelf.view];
-                 [strongSelf.mainTable reloadData];
-             }
-         }];
+    api.isStoped = !isOn;
+    [SPRCacheManager cacheApis:self.apis];
 }
 
 
@@ -176,8 +187,14 @@
     return cell;
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return @"API List";
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    ApiListHeaderView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:
+                                 NSStringFromClass([ApiListHeaderView class])];
+    __weak __typeof(self)weakSelf = self;
+    header.didClickedButtonCallback = ^(SPRApiStatus status) {
+        [weakSelf requestBatchUpdateUpdateStatus:status];
+    };
+    return header;
 }
 
 #pragma mark - Getter Setter
@@ -269,13 +286,16 @@
 
 - (UITableView *)mainTable {
     if (_mainTable == nil) {
-        _mainTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
+        _mainTable = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
         _mainTable.backgroundColor = self.view.backgroundColor;
         _mainTable.rowHeight = 57;
         _mainTable.delegate = self;
         _mainTable.dataSource = self;
         _mainTable.separatorStyle = UITableViewCellSeparatorStyleNone;
         _mainTable.sectionHeaderHeight = 30;
+
+        [_mainTable registerClass:[ApiListHeaderView class]
+forHeaderFooterViewReuseIdentifier:NSStringFromClass([ApiListHeaderView class])];
 
         [self.view addSubview:_mainTable];
         [_mainTable mas_makeConstraints:^(MASConstraintMaker *make) {

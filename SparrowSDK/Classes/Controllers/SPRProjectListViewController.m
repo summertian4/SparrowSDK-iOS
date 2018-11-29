@@ -1,6 +1,6 @@
 //
 //  SPRManagerViewController.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/8.
 //
@@ -35,14 +35,23 @@
 
     [self.view addSubview:[self tableView]];
     [self.tableView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.edges.equalTo(self.view);
+        make.bottom.left.right.equalTo(self.view);
+        make.top.equalTo(self.mas_topLayoutGuide);
     }];
+
     [self fetchProjects];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(loginSuccess:)
+                                                 name:kSPRnotificationLoginSuccess
+                                               object:nil];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
+#pragma mark - Private
 
 - (void)startSelect {
     self.isSelecting = !self.isSelecting;
@@ -63,38 +72,51 @@
 }
 
 - (void)fetchProjects {
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
     [self showHUD];
-    [manager GET:@"/frontend/project/list"
-      parameters:@{@"current_page": @(self.projectsData.currentPage + 1), @"limit": @(self.projectsData.limit)}
-         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-             __strong __typeof(weakSelf)strongSelf = weakSelf;
-             if (strongSelf) {
-                 [strongSelf dismissHUD];
-                 SPRProjectsData *newPorjectsData = [[SPRProjectsData alloc] initWithDict:responseObject[@"projects_data"]];
-                 if (newPorjectsData == nil || newPorjectsData.projects == nil) {
-                     strongSelf.projectsData.currentPage = 0;
-                     [strongSelf.tableView reloadData];
-                     return;
-                 }
-                 [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
-                 strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
-                 [strongSelf.tableView reloadData];
-             }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        SPRLog(@"%@", error);
-        __strong __typeof(weakSelf)strongSelf = weakSelf;
-        if (strongSelf) {
-            [strongSelf dismissHUD];
-            [SPRToast showWithMessage:error.domain from:strongSelf.view];
-        }
-    }];
+    [SPRHTTPSessionManager GET:@"/frontend/project/list"
+                    parameters:@{@"current_page": @(self.projectsData.currentPage + 1), @"limit": @(self.projectsData.limit)}
+                       success:^(NSURLSessionDataTask *task, SPRResponse *response) {
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               SPRProjectsData *newPorjectsData = [[SPRProjectsData alloc] initWithDict:response.data];
+                               if (newPorjectsData == nil || newPorjectsData.projects == nil) {
+                                   strongSelf.projectsData.currentPage = 0;
+                                   [strongSelf.tableView reloadData];
+                                   return;
+                               }
+                               [strongSelf.projectsData.projects addObjectsFromArray:newPorjectsData.projects];
+
+                               NSSet<SPRProject *> *seletedProjectsFromCache = [SPRCacheManager getProjectsFromCache];
+                               for (SPRProject *seletedProject in seletedProjectsFromCache) {
+                                   for (SPRProject *project in newPorjectsData.projects) {
+                                       if (project.project_id == seletedProject.project_id) {
+                                           project.isSelected = YES;
+                                           [strongSelf.seletedProjects addObject:project];
+                                       }
+                                   }
+                               }
+
+                               strongSelf.projectsData.currentPage = newPorjectsData.currentPage;
+                               [strongSelf.tableView reloadData];
+                           }
+                       } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+                           SPRLog(@"%@", error);
+                           __strong __typeof(weakSelf)strongSelf = weakSelf;
+                           if (strongSelf) {
+                               [strongSelf dismissHUD];
+                               [SPRToast showWithMessage:error.domain from:strongSelf.view];
+                           }
+                       }];
+}
+
+- (void)refreshProjects {
+    [self fetchProjects];
 }
 
 - (void)fetchApis {
-    SPRHTTPSessionManager *manager = [SPRHTTPSessionManager defaultManager];
     __weak __typeof(self)weakSelf = self;
 
     NSMutableArray *projectIds = [NSMutableArray array];
@@ -102,13 +124,13 @@
         [projectIds addObject:@(project.project_id)];
     }
     [self showHUD];
-    [manager GET:@"/frontend/api/fetch"
+    [SPRHTTPSessionManager GET:@"/frontend/api/fetch"
       parameters:@{@"project_id": projectIds}
-         success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+         success:^(NSURLSessionDataTask *task, SPRResponse *response) {
              __strong __typeof(weakSelf)strongSelf = weakSelf;
              if (strongSelf) {
                  [strongSelf dismissHUD];
-                 NSMutableArray *apis = [SPRApi apisWithDictArray:responseObject[@"apis"]];
+                 NSMutableArray *apis = [SPRApi apisWithDictArray:response.data];
                  if (apis.count != 0) {
                      [SPRCacheManager cacheProjects:[NSSet setWithSet:strongSelf.seletedProjects]];
                      [SPRCacheManager cacheApis:apis];
@@ -124,6 +146,12 @@
                  [SPRToast showWithMessage:@"拉取 API 失败" from:strongSelf.view];
              }
          }];
+}
+
+#pragma mark - Action
+
+- (void)loginSuccess:(NSNotification *)notification {
+    [self refreshProjects];
 }
 
 #pragma mark - UITableViewDelegate & UITableViewDataSource
@@ -153,7 +181,8 @@
         cell = [[SPRProjectCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"SPRProjectCell"];
         cell.backgroundColor = self.view.backgroundColor;
     }
-    cell.model = self.projectsData.projects[indexPath.row];
+    SPRProject *model = self.projectsData.projects[indexPath.row];
+    cell.model = model;
     cell.isSelecting = self.isSelecting;
     return cell;
 }
