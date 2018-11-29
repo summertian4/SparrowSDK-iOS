@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'SparrowSDK'
-  s.version          = '1.4.1'
+  s.version          = '1.4.2'
   s.summary          = 'A Mock Tool'
 
 # This description is used to generate tags and improve search results.
@@ -41,6 +41,6 @@ TODO: Add long description of the pod here.
   s.dependency 'AFNetworking'
   s.dependency 'Masonry'
   s.dependency 'SVProgressHUD'
-  s.dependency 'SGQRCode'
+  s.dependency 'SGQRCode', '~> 2.2.0'
 
 end
