@@ -17,6 +17,7 @@
 #import "SPRAccount.h"
 #import "SPRManager.h"
 #import "ApiListHeaderView.h"
+#import "SPRManager.h"
 
 @interface SPRControlCenterViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UIButton *syncButton;
@@ -145,7 +146,7 @@
 }
 
 - (void)leftBarButtonClicked {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [SPRManager dismissControlPage];
 }
 
 - (void)refreshDataFromCache {

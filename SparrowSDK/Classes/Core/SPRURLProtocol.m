@@ -12,7 +12,7 @@
 
 static NSString *const SPRHTTP = @"SPRHTTP";
 
-@interface SPRURLProtocol() <NSURLConnectionDelegate,NSURLConnectionDataDelegate>
+@interface SPRURLProtocol() <NSURLConnectionDelegate, NSURLConnectionDataDelegate>
 
 @property (nonatomic, strong) NSURLConnection *connection;
 @property (nonatomic, strong) NSURLRequest *spr_request;
@@ -101,8 +101,7 @@ static NSString *const SPRHTTP = @"SPRHTTP";
 }
 
 /**
- 设置我们自己的自定义请求
- 可以在这里统一加上头之类的
+ 设置自定义请求
  
  @param request 应用的此次请求
  @return 我们自定义的请求
