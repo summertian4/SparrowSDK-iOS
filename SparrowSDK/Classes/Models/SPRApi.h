@@ -1,6 +1,6 @@
 //
 //  SPRApi.h
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/12.
 //
@@ -22,6 +22,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, copy) NSString *note;
 @property (nonatomic, assign) SPRApiStatus status;
 @property (nonatomic, assign) long project_id;
+
+@property (nonatomic, assign) BOOL isStoped;
 
 - (instancetype)initWithDict:(NSDictionary *)dict;
 + (NSMutableArray *)apisWithDictArray:(NSArray *)dictArr;

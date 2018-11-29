@@ -239,8 +239,9 @@ static const CGFloat SPRDefaultDetailsLabelFontSize = 12.f;
 
     if (animated && self.showStarted) {
         self.showStarted = nil;
+        __weak __typeof(self)weakSelf = self;
         [self animateIn:NO withType:self.animationType completion:^(BOOL finished) {
-            [self done];
+            [weakSelf done];
         }];
     } else {
         self.showStarted = nil;
@@ -268,6 +269,7 @@ static const CGFloat SPRDefaultDetailsLabelFontSize = 12.f;
     }
 
     // Perform animations
+    __weak __typeof(self)weakSelf = self;
     dispatch_block_t animations = ^{
         if (animatingIn) {
             bezelView.transform = CGAffineTransformIdentity;
@@ -278,7 +280,7 @@ static const CGFloat SPRDefaultDetailsLabelFontSize = 12.f;
         }
         CGFloat alpha = animatingIn ? 1.f : 0.f;
         bezelView.alpha = alpha;
-        self.backgroundView.alpha = alpha;
+        weakSelf.backgroundView.alpha = alpha;
     };
 
     // Spring animations are nicer, but only available on iOS 7+

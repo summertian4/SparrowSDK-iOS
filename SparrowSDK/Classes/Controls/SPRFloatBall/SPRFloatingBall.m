@@ -1,18 +1,19 @@
 //
 //  SPRFloatBall.m
-//  AFNetworking
+//  SparrowSDK
 //
 //  Created by 周凌宇 on 2018/3/8.
 //
 
 #import "SPRFloatingBall.h"
-#import "SPRControlCenterViewController.h"
+#import "SPRCommonData.h"
+#import <Masonry/Masonry.h>
+#import "SPRCacheManager.h"
 
+typedef void (^BallClickedCallback)(void);
 @interface SPRFloatingBall ()
 
 @property (nonatomic, strong) UIWindow *window;
-@property (nonatomic, assign) BOOL showedManagerVC;
-
 @property (nonatomic, strong) UIImageView *ballImageView;
 @end
 
@@ -20,7 +21,7 @@
 
 - (instancetype)initWithCallBack:(BallClickedCallback)callback {
     if (self = [super init]) {
-        self.ballClickedCallback = [callback copy];;
+        _ballClickedCallback = [callback copy];;
         self.frame = CGRectMake(0, 0, 50, 50);
         self.backgroundColor = [UIColor clearColor];
         self.alpha = 0.8;
@@ -34,28 +35,17 @@
     return self;
 }
 
--(void)handleSingleTap:(UIGestureRecognizer *)sender {
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    CGPoint coordinate = [SPRCacheManager getFloatingBallCoordinate];
+    self.frame = CGRectMake(coordinate.x, coordinate.y, self.frame.size.width, self.frame.size.height);
+}
+
+- (void)handleSingleTap:(UIGestureRecognizer *)sender {
     if (self.ballClickedCallback) {
         self.ballClickedCallback();
         return;
     }
-    if (self.showedManagerVC == NO) {
-        UIViewController *vc = [[SPRControlCenterViewController alloc] init];
-        UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:vc];
-        [[UIApplication sharedApplication].keyWindow.rootViewController
-         presentViewController:nav
-         animated:YES
-         completion:nil];
-    } else {
-        [[UIApplication sharedApplication].keyWindow.rootViewController
-         dismissViewControllerAnimated:YES
-         completion:nil];
-    }
-    self.showedManagerVC = !self.showedManagerVC;
-}
-
-+ (void)dismiss {
-    
 }
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
@@ -72,6 +62,11 @@
 }
 
 - (void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [SPRCacheManager cacheFloatingBallCoordinate:self.frame.origin];
+}
+
+- (void)click {
+    [self handleSingleTap:nil];
 }
 
 - (UIImageView *)ballImageView {
